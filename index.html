@@ -1324,6 +1324,103 @@ body.edit-mode .fill-field {
     <div class="coaching-tip">Listen carefully here. Their answers become your closing ammo later when they say "I want to think about it." Remember what matters to them.</div>
   </div>
 
+  <!-- FINAL EXPENSE SECTION 3: NEEDS ANALYSIS -->
+  <div class="script-section" id="fe-sec-needs">
+    <span class="stage-badge">Stage 3 of 10</span>
+    <div class="section-title">Needs Analysis</div>
+    <div class="section-subtitle">This is where you get ammo for "I want to think about it"</div>
+
+    <div id="fe-needs-burial" style="display:none;">
+      <div class="card">
+        <div class="card-header">Burial Planning</div>
+        <div class="script-text">
+          So you mentioned you want to be buried &mdash; do you already have a plot picked out or is that something your family would need to take care of?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          And have you looked into any prepaid funeral plans or is this going to be something that comes entirely out of the life insurance?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          Now as far as the service itself &mdash; are you thinking a full traditional funeral with a viewing and everything, or more of a basic graveside burial to keep the costs down?
+        </div>
+        <div class="direction mt-8">
+          Basic graveside burial = ~$3,000&ndash;$5,000<br>
+          Traditional funeral with viewing = ~$8,000&ndash;$15,000+<br>
+          Full service with vault &amp; headstone = $15,000&ndash;$20,000+
+        </div>
+      </div>
+      <div class="coaching-tip">The more specific you get here, the more real it becomes for them &mdash; and the harder it is to say "I want to think about it" later. These numbers are your closing ammo.</div>
+    </div>
+
+    <div id="fe-needs-cremation" style="display:none;">
+      <div class="card">
+        <div class="card-header">Cremation Planning</div>
+        <div class="script-text">
+          So you mentioned you want to be cremated &mdash; have you already made any arrangements for that, or is that something your family would need to handle?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          And when it comes to the cremation itself, are you thinking something simple &mdash; just get your ashes back in a bag and a little cardboard box &mdash; or are you wanting an urn, a memorial service, something a little more for the family?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          Do you have a prepaid cremation plan set up already or would that need to come out of the coverage as well?
+        </div>
+        <div class="direction mt-8">
+          Basic direct cremation (ashes in bag/box) = ~$1,000&ndash;$3,000<br>
+          Cremation with urn &amp; memorial = ~$3,000&ndash;$6,000<br>
+          Full service with viewing before cremation = ~$5,000&ndash;$8,000+
+        </div>
+      </div>
+      <div class="coaching-tip">Even cremation adds up fast once they start thinking about urns, memorial services, and what the family wants. Paint the picture so they understand why coverage matters.</div>
+    </div>
+
+    <div id="fe-needs-noselection">
+      <div class="card">
+        <div class="card-header">Burial vs Cremation</div>
+        <div class="script-text">
+          Do you want to be buried or cremated?
+        </div>
+      </div>
+      <div class="coverage-toggle-group">
+        <button class="coverage-toggle" id="fe-needs-btn-burial" onclick="feNeedsSelect('burial')">Burial</button>
+        <button class="coverage-toggle" id="fe-needs-btn-cremation" onclick="feNeedsSelect('cremation')">Cremation</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Mortgage</div>
+      <div class="script-text">
+        Do you have a mortgage?
+      </div>
+      <div class="direction mt-8">If yes: How much is left on the home?</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Current Coverage</div>
+      <div class="script-text">
+        Do you have any current life insurance? Whole life or term?
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">If They HAVE Coverage</div>
+      <div class="script-text">
+        Did something happen that you felt like you didn't have enough coverage for your family?
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">If They DON'T Have Coverage</div>
+      <div class="script-text">
+        Have you ran into any road blocks that prevented you from getting life insurance?
+      </div>
+    </div>
+
+    <div class="coaching-tip">Listen carefully here. Their answers become your closing ammo later when they say "I want to think about it." Remember what matters to them.</div>
+  </div>
+
   <!-- SECTION 4: OCCUPATION / FINANCES -->
   <div class="script-section" id="sec-finances">
     <span class="stage-badge">Stage 4 of 10</span>
@@ -1810,7 +1907,7 @@ const AGED_STAGES = [
 const FE_STAGES = [
   { id: 'fe-sec-intro', label: 'Intro', title: 'Intro' },
   { id: 'sec-health', label: 'Health', title: 'Health Questions' },
-  { id: 'sec-needs', label: 'Needs', title: 'Needs Analysis' },
+  { id: 'fe-sec-needs', label: 'Needs', title: 'Needs Analysis' },
   { id: 'sec-finances', label: 'Finance', title: 'Occupation & Finances' },
   { id: 'sec-product', label: 'Product', title: 'Product Explanation' },
   { id: 'sec-quote', label: 'Quote', title: 'Quote & Pitch' },
@@ -1920,6 +2017,11 @@ function goToStage(index) {
     nextBtn.style.display = '';
   }
 
+  // Auto-apply FE burial/cremation choice on needs section
+  if (STAGES[index].id === 'fe-sec-needs') {
+    applyFeNeedsChoice(feCoverageChoice);
+  }
+
   // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1965,6 +2067,14 @@ function resetCall() {
   document.getElementById('fe-burial').style.display = 'none';
   document.getElementById('fe-btn-cremation').classList.remove('active');
   document.getElementById('fe-btn-burial').classList.remove('active');
+  feCoverageChoice = '';
+
+  // Reset FE needs
+  document.getElementById('fe-needs-burial').style.display = 'none';
+  document.getElementById('fe-needs-cremation').style.display = 'none';
+  document.getElementById('fe-needs-noselection').style.display = 'block';
+  document.getElementById('fe-needs-btn-burial').classList.remove('active');
+  document.getElementById('fe-needs-btn-cremation').classList.remove('active');
 
   // Reset script choice UI
   selectedScript = 'veterans';
@@ -2066,11 +2176,29 @@ function showAgedCoverage(type) {
 // ============================================================
 // FE COVERAGE TOGGLE
 // ============================================================
+let feCoverageChoice = '';
+
 function showFeCoverage(type) {
+  feCoverageChoice = type;
   document.getElementById('fe-cremation').style.display = type === 'cremation' ? 'block' : 'none';
   document.getElementById('fe-burial').style.display = type === 'burial' ? 'block' : 'none';
   document.getElementById('fe-btn-cremation').classList.toggle('active', type === 'cremation');
   document.getElementById('fe-btn-burial').classList.toggle('active', type === 'burial');
+}
+
+function applyFeNeedsChoice(type) {
+  document.getElementById('fe-needs-burial').style.display = type === 'burial' ? 'block' : 'none';
+  document.getElementById('fe-needs-cremation').style.display = type === 'cremation' ? 'block' : 'none';
+  document.getElementById('fe-needs-noselection').style.display = type ? 'none' : 'block';
+  if (type) {
+    document.getElementById('fe-needs-btn-burial').classList.toggle('active', type === 'burial');
+    document.getElementById('fe-needs-btn-cremation').classList.toggle('active', type === 'cremation');
+  }
+}
+
+function feNeedsSelect(type) {
+  feCoverageChoice = type;
+  applyFeNeedsChoice(type);
 }
 
 // ============================================================
