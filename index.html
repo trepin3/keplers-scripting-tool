@@ -2582,7 +2582,7 @@ async function exportScript() {
   btn.disabled = true;
   try {
     const owner = localStorage.getItem('ffl-github-owner') || 'trepin3';
-    const repo = localStorage.getItem('ffl-github-repo') || 'ffl-sales-script';
+    const repo = localStorage.getItem('ffl-github-repo') || 'keplers-scripting-tool';
     const path = localStorage.getItem('ffl-github-path') || 'index.html';
     await doPush(token, owner, repo, path);
     btn.innerHTML = '&#10003; Live in ~1 min!';
@@ -2622,7 +2622,7 @@ function updateExportBtn() {
 function showGitHubSetup() {
   document.getElementById('ghToken').value = localStorage.getItem('ffl-github-token') || '';
   document.getElementById('ghOwner').value = localStorage.getItem('ffl-github-owner') || 'trepin3';
-  document.getElementById('ghRepo').value = localStorage.getItem('ffl-github-repo') || 'ffl-sales-script';
+  document.getElementById('ghRepo').value = localStorage.getItem('ffl-github-repo') || 'keplers-scripting-tool';
   document.getElementById('ghPath').value = localStorage.getItem('ffl-github-path') || 'index.html';
   document.getElementById('ghError').style.display = 'none';
   document.getElementById('ghStatus').style.display = 'none';
@@ -2740,7 +2740,7 @@ init();
       </div>
       <div style="flex:1.5;">
         <label style="font-size:13px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Repository</label>
-        <input type="text" id="ghRepo" value="ffl-sales-script" autocomplete="off"
+        <input type="text" id="ghRepo" value="keplers-scripting-tool" autocomplete="off"
           style="width:100%;padding:12px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:15px;background:var(--input-bg);color:var(--text);outline:none;transition:border-color 0.2s;">
       </div>
     </div>
