@@ -906,6 +906,10 @@ body.edit-mode .fill-field {
           <div class="script-choice-icon">🛡️</div>
           <div class="script-choice-label">Final Expense</div>
         </div>
+        <div class="script-choice" id="choice-kepfe" onclick="chooseKepFe()">
+          <div class="script-choice-icon">🔒</div>
+          <div class="script-choice-label">Kep's Proprietary FE</div>
+        </div>
       </div>
       <button class="start-btn" onclick="startCall()">Start Call</button>
 
@@ -1421,6 +1425,201 @@ body.edit-mode .fill-field {
     <div class="coaching-tip">Listen carefully here. Their answers become your closing ammo later when they say "I want to think about it." Remember what matters to them.</div>
   </div>
 
+  <!-- KEP'S PROPRIETARY FE SECTION 1: INTRO -->
+  <div class="script-section" id="kepfe-sec-intro">
+    <span class="stage-badge">Stage 1 of 10</span>
+    <div class="section-title">Intro</div>
+    <div class="section-subtitle">Open the call and establish who you are</div>
+
+    <div class="card">
+      <div class="card-header">Opening Line</div>
+      <div class="script-text">
+        Hey <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>.
+        <br><br>
+        How's it going, this is ______. I'm the underwriter assigned to help you out with your life insurance quote today. How are you doing?
+      </div>
+    </div>
+
+    <div class="coaching-tip">Match their energy. If they're upbeat, be upbeat. If they're calm, slow it down. Mirror them.</div>
+
+    <div class="card">
+      <div class="card-header">Confirm Details</div>
+      <div class="script-text">
+        That's good I see that you're in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span> is that right?
+        <br><br>
+        Yeah? Perfect, perfect.
+        <br><br>
+        And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+        <br><br>
+        Yeah. Okay, now last thing just to make sure it's right. Your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
+      </div>
+    </div>
+
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>"How did you get my information?"</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">It was a request you made, but my job is really just to go over it. I just need a couple minutes of your time, most people request this because they just don't want to leave that burden off to their kids or loved ones, you know?</div>
+        <div class="coaching-tip">Stay calm and confident. Don't get defensive &mdash; reframe it as their request and pivot to the emotional reason they reached out.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Identify Beneficiary</div>
+      <div class="script-text">
+        You know, who are you thinking about?
+        <br><br>
+        Your <span class="fill-field" data-field="relationship" onclick="editField(this)">Son/Daughter/Spouse</span>? What's their name?
+        <br><br>
+        So <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, have you ever talked to <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span>? I mean, you know <span class="fill-field" data-field="relationship" onclick="editField(this)">kids/husbands/wives</span>, they don't even like to talk about this stuff.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Concierge &amp; Paperwork</div>
+      <div class="script-text">
+        Well, the beautiful part about our plans is that they all come with a 24/7 concierge that's going to make sure that <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> doesn't have to do anything but make a phone call. Okay?
+        <br><br>
+        Because when this plan gets here, when you get the paperwork, you're going to be able to put if you want to be buried or cremated.
+        <br><br>
+        By the way, have you talked to <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> about that? Do you prefer burial or cremation?
+      </div>
+    </div>
+
+    <div class="coverage-toggle-group">
+      <button class="coverage-toggle" id="kepfe-btn-cremation" onclick="showKepfeCoverage('cremation')">Cremation</button>
+      <button class="coverage-toggle" id="kepfe-btn-burial" onclick="showKepfeCoverage('burial')">Burial</button>
+    </div>
+
+    <div id="kepfe-cremation" style="display:none;">
+      <div class="card">
+        <div class="card-header">Cremation</div>
+        <div class="script-text">
+          So cremation costs around 2 to $8,000. It just depends on how much you have and how much you're going to leave behind as well and what you do.
+        </div>
+      </div>
+    </div>
+
+    <div id="kepfe-burial" style="display:none;">
+      <div class="card">
+        <div class="card-header">Burial</div>
+        <div class="script-text">
+          So burial costs around 10 to $20,000. It just depends on how much you have and how much you're going to leave behind as well and what you do.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Transition to Questions</div>
+      <div class="script-text">
+        So again, the plan is just going to do everything. They work with every funeral home in your area, every crematory. So do you understand that part?
+        <br><br>
+        Now the other part is just what you're going to leave behind for <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span>. So we're going to go over some options, but first I just want to ask you some questions and see how and what we can approve you for, okay?
+      </div>
+    </div>
+
+    <div class="coaching-tip">Pause after "okay?" &mdash; let them confirm. Don't rush past it.</div>
+  </div>
+
+  <!-- KEP'S PROPRIETARY FE SECTION 3: NEEDS ANALYSIS -->
+  <div class="script-section" id="kepfe-sec-needs">
+    <span class="stage-badge">Stage 3 of 10</span>
+    <div class="section-title">Needs Analysis</div>
+    <div class="section-subtitle">This is where you get ammo for "I want to think about it"</div>
+
+    <div id="kepfe-needs-burial" style="display:none;">
+      <div class="card">
+        <div class="card-header">Burial Planning</div>
+        <div class="script-text">
+          So you mentioned you want to be buried &mdash; do you already have a plot picked out or is that something your family would need to take care of?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          And have you looked into any prepaid funeral plans or is this going to be something that comes entirely out of the life insurance?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          Now as far as the service itself &mdash; are you thinking a full traditional funeral with a viewing and everything, or more of a basic graveside burial to keep the costs down?
+        </div>
+        <div class="direction mt-8">
+          Basic graveside burial = ~$3,000&ndash;$5,000<br>
+          Traditional funeral with viewing = ~$8,000&ndash;$15,000+<br>
+          Full service with vault &amp; headstone = $15,000&ndash;$20,000+
+        </div>
+      </div>
+      <div class="coaching-tip">The more specific you get here, the more real it becomes for them &mdash; and the harder it is to say "I want to think about it" later. These numbers are your closing ammo.</div>
+    </div>
+
+    <div id="kepfe-needs-cremation" style="display:none;">
+      <div class="card">
+        <div class="card-header">Cremation Planning</div>
+        <div class="script-text">
+          So you mentioned you want to be cremated &mdash; have you already made any arrangements for that, or is that something your family would need to handle?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          And when it comes to the cremation itself, are you thinking something simple &mdash; just get your ashes back in a bag and a little cardboard box &mdash; or are you wanting an urn, a memorial service, something a little more for the family?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="script-text mt-12">
+          Do you have a prepaid cremation plan set up already or would that need to come out of the coverage as well?
+        </div>
+        <div class="direction mt-8">
+          Basic direct cremation (ashes in bag/box) = ~$1,000&ndash;$3,000<br>
+          Cremation with urn &amp; memorial = ~$3,000&ndash;$6,000<br>
+          Full service with viewing before cremation = ~$5,000&ndash;$8,000+
+        </div>
+      </div>
+      <div class="coaching-tip">Even cremation adds up fast once they start thinking about urns, memorial services, and what the family wants. Paint the picture so they understand why coverage matters.</div>
+    </div>
+
+    <div id="kepfe-needs-noselection" style="display:none;">
+      <div class="card">
+        <div class="card-header">Burial vs Cremation</div>
+        <div class="script-text">
+          Do you want to be buried or cremated?
+        </div>
+      </div>
+      <div class="coverage-toggle-group">
+        <button class="coverage-toggle" id="kepfe-needs-btn-burial" onclick="kepfeNeedsSelect('burial')">Burial</button>
+        <button class="coverage-toggle" id="kepfe-needs-btn-cremation" onclick="kepfeNeedsSelect('cremation')">Cremation</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Mortgage</div>
+      <div class="script-text">
+        Do you have a mortgage?
+      </div>
+      <div class="direction mt-8">If yes: How much is left on the home?</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Current Coverage</div>
+      <div class="script-text">
+        Do you have any current life insurance? Whole life or term?
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">If They HAVE Coverage</div>
+      <div class="script-text">
+        Did something happen that you felt like you didn't have enough coverage for your family?
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">If They DON'T Have Coverage</div>
+      <div class="script-text">
+        Have you ran into any road blocks that prevented you from getting life insurance?
+      </div>
+    </div>
+
+    <div class="coaching-tip">Listen carefully here. Their answers become your closing ammo later when they say "I want to think about it." Remember what matters to them.</div>
+  </div>
+
   <!-- SECTION 4: OCCUPATION / FINANCES -->
   <div class="script-section" id="sec-finances">
     <span class="stage-badge">Stage 4 of 10</span>
@@ -1846,6 +2045,19 @@ body.edit-mode .fill-field {
 </div>
 
 
+<!-- KEP FE PASSWORD MODAL -->
+<div class="input-modal" id="kepfeModal" onclick="if(event.target===this){document.getElementById('kepfeModal').classList.remove('active');}">
+  <div class="input-card">
+    <label>Enter password to access Kep's Proprietary FE</label>
+    <input type="password" id="kepfePwField" autocomplete="off" placeholder="Password">
+    <div id="kepfePwError" style="display:none;color:var(--danger);font-size:13px;margin-top:6px;"></div>
+    <div class="input-actions">
+      <button class="secondary" style="background:var(--input-bg);color:var(--text);" onclick="document.getElementById('kepfeModal').classList.remove('active');">Cancel</button>
+      <button class="primary" style="background:var(--primary);color:white;" onclick="submitKepfePw()">Unlock</button>
+    </div>
+  </div>
+</div>
+
 <!-- INPUT MODAL -->
 <div class="input-modal" id="inputModal">
   <div class="input-card">
@@ -1917,6 +2129,19 @@ const FE_STAGES = [
   { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
 ];
 
+const KEPFE_STAGES = [
+  { id: 'kepfe-sec-intro', label: 'Intro', title: 'Intro' },
+  { id: 'sec-health', label: 'Health', title: 'Health Questions' },
+  { id: 'kepfe-sec-needs', label: 'Needs', title: 'Needs Analysis' },
+  { id: 'sec-finances', label: 'Finance', title: 'Occupation & Finances' },
+  { id: 'sec-product', label: 'Product', title: 'Product Explanation' },
+  { id: 'sec-quote', label: 'Quote', title: 'Quote & Pitch' },
+  { id: 'sec-info', label: 'Info', title: 'Collect Info' },
+  { id: 'sec-social', label: 'DL/SSN', title: 'DL & Social' },
+  { id: 'sec-bank', label: 'Bank', title: 'Bank Info' },
+  { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
+];
+
 let STAGES = VETERANS_STAGES;
 
 let currentStage = -1; // -1 = welcome
@@ -1972,12 +2197,12 @@ function startCall() {
   const nameInput = document.getElementById('prospectNameInput');
   const name = nameInput.value.trim() || 'Prospect';
   fieldData['name'] = name;
-  STAGES = selectedScript === 'aged' ? AGED_STAGES : selectedScript === 'fe' ? FE_STAGES : VETERANS_STAGES;
+  STAGES = selectedScript === 'aged' ? AGED_STAGES : selectedScript === 'fe' ? FE_STAGES : selectedScript === 'kepfe' ? KEPFE_STAGES : VETERANS_STAGES;
   buildProgressBar();
   updateAllFields();
   document.body.classList.remove('on-welcome');
   document.getElementById('welcome').classList.remove('active');
-  document.getElementById('scriptTypeBadge').textContent = selectedScript === 'aged' ? 'Aged Leads' : selectedScript === 'fe' ? 'Final Expense' : 'Veterans';
+  document.getElementById('scriptTypeBadge').textContent = selectedScript === 'aged' ? 'Aged Leads' : selectedScript === 'fe' ? 'Final Expense' : selectedScript === 'kepfe' ? "Kep's Proprietary FE" : 'Veterans';
   goToStage(0);
 }
 
@@ -2020,6 +2245,9 @@ function goToStage(index) {
   // Auto-apply FE burial/cremation choice on needs section
   if (STAGES[index].id === 'fe-sec-needs') {
     applyFeNeedsChoice(feCoverageChoice);
+  }
+  if (STAGES[index].id === 'kepfe-sec-needs') {
+    applyKepfeNeedsChoice(kepfeCoverageChoice);
   }
 
   // Scroll to top
@@ -2075,6 +2303,20 @@ function resetCall() {
   document.getElementById('fe-needs-noselection').style.display = 'block';
   document.getElementById('fe-needs-btn-burial').classList.remove('active');
   document.getElementById('fe-needs-btn-cremation').classList.remove('active');
+
+  // Reset Kep FE coverage toggle
+  document.getElementById('kepfe-cremation').style.display = 'none';
+  document.getElementById('kepfe-burial').style.display = 'none';
+  document.getElementById('kepfe-btn-cremation').classList.remove('active');
+  document.getElementById('kepfe-btn-burial').classList.remove('active');
+  kepfeCoverageChoice = '';
+
+  // Reset Kep FE needs
+  document.getElementById('kepfe-needs-burial').style.display = 'none';
+  document.getElementById('kepfe-needs-cremation').style.display = 'none';
+  document.getElementById('kepfe-needs-noselection').style.display = 'block';
+  document.getElementById('kepfe-needs-btn-burial').classList.remove('active');
+  document.getElementById('kepfe-needs-btn-cremation').classList.remove('active');
 
   // Reset script choice UI
   selectedScript = 'veterans';
@@ -2156,10 +2398,14 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && document.getElementById('pwModal').classList.contains('active')) {
     submitPwModal();
   }
+  if (e.key === 'Enter' && document.getElementById('kepfeModal').classList.contains('active')) {
+    submitKepfePw();
+  }
   if (e.key === 'Escape') {
     closeInput();
     closeQbModal();
     closeAllModals();
+    document.getElementById('kepfeModal').classList.remove('active');
   }
 });
 
@@ -2199,6 +2445,61 @@ function applyFeNeedsChoice(type) {
 function feNeedsSelect(type) {
   feCoverageChoice = type;
   applyFeNeedsChoice(type);
+}
+
+// ============================================================
+// KEP'S PROPRIETARY FE COVERAGE TOGGLE
+// ============================================================
+let kepfeCoverageChoice = '';
+let kepfeUnlocked = false;
+
+function chooseKepFe() {
+  if (kepfeUnlocked) {
+    chooseScript('kepfe');
+    return;
+  }
+  document.getElementById('kepfePwField').value = '';
+  document.getElementById('kepfePwError').style.display = 'none';
+  document.getElementById('kepfeModal').classList.add('active');
+  setTimeout(() => document.getElementById('kepfePwField').focus(), 100);
+}
+
+function submitKepfePw() {
+  const pw = document.getElementById('kepfePwField').value;
+  const errEl = document.getElementById('kepfePwError');
+  if (pw === '1derbread') {
+    kepfeUnlocked = true;
+    document.getElementById('kepfeModal').classList.remove('active');
+    chooseScript('kepfe');
+  } else {
+    errEl.textContent = 'Incorrect password.';
+    errEl.style.display = 'block';
+    document.getElementById('kepfePwField').value = '';
+    document.getElementById('kepfePwField').focus();
+  }
+}
+
+function showKepfeCoverage(type) {
+  kepfeCoverageChoice = type;
+  document.getElementById('kepfe-cremation').style.display = type === 'cremation' ? 'block' : 'none';
+  document.getElementById('kepfe-burial').style.display = type === 'burial' ? 'block' : 'none';
+  document.getElementById('kepfe-btn-cremation').classList.toggle('active', type === 'cremation');
+  document.getElementById('kepfe-btn-burial').classList.toggle('active', type === 'burial');
+}
+
+function applyKepfeNeedsChoice(type) {
+  document.getElementById('kepfe-needs-burial').style.display = type === 'burial' ? 'block' : 'none';
+  document.getElementById('kepfe-needs-cremation').style.display = type === 'cremation' ? 'block' : 'none';
+  document.getElementById('kepfe-needs-noselection').style.display = type ? 'none' : 'block';
+  if (type) {
+    document.getElementById('kepfe-needs-btn-burial').classList.toggle('active', type === 'burial');
+    document.getElementById('kepfe-needs-btn-cremation').classList.toggle('active', type === 'cremation');
+  }
+}
+
+function kepfeNeedsSelect(type) {
+  kepfeCoverageChoice = type;
+  applyKepfeNeedsChoice(type);
 }
 
 // ============================================================
