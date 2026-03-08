@@ -1514,10 +1514,22 @@ body.edit-mode .fill-field {
       <div class="script-text">
         <strong>Do you know how much that costs as of today?</strong>
       </div>
-      <div class="direction mt-8"><em>[Yes / No &mdash; note their answer]</em></div>
-      <div class="direction mt-8">
+      <div id="kepfe-cost-default" class="direction mt-8">
+        <em>[Yes / No &mdash; note their answer]</em><br>
         <strong>Price:</strong> _______________<br>
         (People are paying 3&ndash;9k for cremation and 12&ndash;15k for burial as of today)
+      </div>
+      <div id="kepfe-cost-cremation" style="display:none;margin-top:8px;">
+        <div class="card-header" style="font-size:12px;margin-bottom:4px;">Cremation</div>
+        <div class="script-text">
+          So cremation costs around 2 to $8,000. It just depends on how much you have and how much you're going to leave behind as well and what you do.
+        </div>
+      </div>
+      <div id="kepfe-cost-burial" style="display:none;margin-top:8px;">
+        <div class="card-header" style="font-size:12px;margin-bottom:4px;">Burial</div>
+        <div class="script-text">
+          So burial costs around 10 to $20,000. It just depends on how much you have and how much you're going to leave behind as well and what you do.
+        </div>
       </div>
     </div>
 
@@ -1574,24 +1586,6 @@ body.edit-mode .fill-field {
         Well, the beautiful part about our plans is that they all come with a 24/7 concierge that's going to make sure that <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> doesn't have to do anything but make a phone call. Okay?
         <br><br>
         Because when this plan gets here, when you get the paperwork, you're going to be able to put if you want to be buried or cremated.
-      </div>
-    </div>
-
-    <div id="kepfe-cremation" style="display:none;">
-      <div class="card">
-        <div class="card-header">Cremation</div>
-        <div class="script-text">
-          So cremation costs around 2 to $8,000. It just depends on how much you have and how much you're going to leave behind as well and what you do.
-        </div>
-      </div>
-    </div>
-
-    <div id="kepfe-burial" style="display:none;">
-      <div class="card">
-        <div class="card-header">Burial</div>
-        <div class="script-text">
-          So burial costs around 10 to $20,000. It just depends on how much you have and how much you're going to leave behind as well and what you do.
-        </div>
       </div>
     </div>
 
@@ -2389,8 +2383,9 @@ function resetCall() {
   document.getElementById('fe-needs-btn-cremation').classList.remove('active');
 
   // Reset Kep FE coverage toggle
-  document.getElementById('kepfe-cremation').style.display = 'none';
-  document.getElementById('kepfe-burial').style.display = 'none';
+  document.getElementById('kepfe-cost-default').style.display = '';
+  document.getElementById('kepfe-cost-cremation').style.display = 'none';
+  document.getElementById('kepfe-cost-burial').style.display = 'none';
   document.getElementById('kepfe-btn-cremation').classList.remove('active');
   document.getElementById('kepfe-btn-burial').classList.remove('active');
   kepfeCoverageChoice = '';
@@ -2565,8 +2560,9 @@ function submitKepfePw() {
 
 function showKepfeCoverage(type) {
   kepfeCoverageChoice = type;
-  document.getElementById('kepfe-cremation').style.display = type === 'cremation' ? 'block' : 'none';
-  document.getElementById('kepfe-burial').style.display = type === 'burial' ? 'block' : 'none';
+  document.getElementById('kepfe-cost-default').style.display = 'none';
+  document.getElementById('kepfe-cost-cremation').style.display = type === 'cremation' ? 'block' : 'none';
+  document.getElementById('kepfe-cost-burial').style.display = type === 'burial' ? 'block' : 'none';
   document.getElementById('kepfe-btn-cremation').classList.toggle('active', type === 'cremation');
   document.getElementById('kepfe-btn-burial').classList.toggle('active', type === 'burial');
 }
