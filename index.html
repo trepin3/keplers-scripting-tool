@@ -1691,9 +1691,33 @@ body.edit-mode .fill-field {
       <div class="script-text">
         Hey <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, how&rsquo;s it going?
         <br><br>
-        This is _______ with the state-regulated final expense division. I&rsquo;m the underwriter assigned to your file &mdash; my job today is just to walk you through your options and see if we can lock in something affordable while you still qualify. Should only take a few minutes.
+        This is _______ with the state-regulated final expense division. I&rsquo;m the underwriter assigned to your file, I&rsquo;m here to walk you through your options while you still qualify. Should only take a few minutes.
       </div>
       <div class="coaching-tip"><strong>Why this works:</strong> &ldquo;State-regulated&rdquo; triggers authority bias. &ldquo;Assigned to your file&rdquo; implies institutional process, not cold call. &ldquo;While you still qualify&rdquo; plants urgency seed early.</div>
+    </div>
+
+    <!-- Objection: I'm not interested -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;I&rsquo;m not interested&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">I completely understand, and I&rsquo;m not here to sell you anything you don&rsquo;t need. But let me ask you this &mdash; if something happened to you tomorrow, does <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>&rsquo;s family have $15,000 sitting in the bank ready to go? Because that&rsquo;s what the average funeral costs right now. I just want to make sure you have the information &mdash; what you do with it is totally up to you.</div>
+        <div class="coaching-tip"><strong>Pattern interrupt:</strong> Agree, then reframe with a specific dollar amount that triggers loss aversion. The concrete number ($15K) is more powerful than vague &ldquo;costs.&rdquo;</div>
+      </div>
+    </div>
+
+    <!-- Objection: I'm busy / call me back -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;I&rsquo;m busy / call me back&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">I totally get that. Here&rsquo;s the thing though &mdash; this literally takes about 5 minutes, and right now I have your file pulled up and ready to go. If we schedule for later, I can&rsquo;t guarantee the same rates will still be available because they change based on your health window. Can I just get the basics real quick while I have you?</div>
+        <div class="coaching-tip"><strong>Scarcity + convenience:</strong> &ldquo;File pulled up&rdquo; = sunk cost. &ldquo;Rates change&rdquo; = urgency. &ldquo;5 minutes&rdquo; = low commitment ask.</div>
+      </div>
     </div>
 
     <!-- 2. Confirm Details -->
@@ -1721,31 +1745,7 @@ body.edit-mode .fill-field {
       </div>
     </div>
 
-    <!-- 4. Objection: I'm not interested -->
-    <div class="objection-accordion" onclick="toggleAccordion(this)">
-      <button class="objection-accordion-trigger">
-        <span>&ldquo;I&rsquo;m not interested&rdquo;</span>
-        <span class="obj-arrow">&#9654;</span>
-      </button>
-      <div class="objection-accordion-body">
-        <div class="rebuttal">I completely understand, and I&rsquo;m not here to sell you anything you don&rsquo;t need. But let me ask you this &mdash; if something happened to you tomorrow, does <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>&rsquo;s family have $15,000 sitting in the bank ready to go? Because that&rsquo;s what the average funeral costs right now. I just want to make sure you have the information &mdash; what you do with it is totally up to you.</div>
-        <div class="coaching-tip"><strong>Pattern interrupt:</strong> Agree, then reframe with a specific dollar amount that triggers loss aversion. The concrete number ($15K) is more powerful than vague &ldquo;costs.&rdquo;</div>
-      </div>
-    </div>
-
-    <!-- 5. Objection: I'm busy / call me back -->
-    <div class="objection-accordion" onclick="toggleAccordion(this)">
-      <button class="objection-accordion-trigger">
-        <span>&ldquo;I&rsquo;m busy / call me back&rdquo;</span>
-        <span class="obj-arrow">&#9654;</span>
-      </button>
-      <div class="objection-accordion-body">
-        <div class="rebuttal">I totally get that. Here&rsquo;s the thing though &mdash; this literally takes about 5 minutes, and right now I have your file pulled up and ready to go. If we schedule for later, I can&rsquo;t guarantee the same rates will still be available because they change based on your health window. Can I just get the basics real quick while I have you?</div>
-        <div class="coaching-tip"><strong>Scarcity + convenience:</strong> &ldquo;File pulled up&rdquo; = sunk cost. &ldquo;Rates change&rdquo; = urgency. &ldquo;5 minutes&rdquo; = low commitment ask.</div>
-      </div>
-    </div>
-
-    <!-- 6. Decision-Maker Isolation -->
+    <!-- 4. Decision-Maker Isolation -->
     <div class="inoculation-card">
       <div class="card-header">Decision-Maker Isolation</div>
       <div class="script-text">
