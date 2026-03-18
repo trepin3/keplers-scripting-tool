@@ -623,6 +623,8 @@ body {
 }
 .script-version-toggle.v2-active { border-color: var(--success); color: var(--success); }
 .script-version-toggle.v2-active .toggle-dot { background: var(--success); }
+.script-version-toggle.v3-active { border-color: var(--primary); color: var(--primary); }
+.script-version-toggle.v3-active .toggle-dot { background: var(--primary); }
 
 /* INOCULATION CARD */
 .inoculation-card {
@@ -2011,6 +2013,340 @@ body.edit-mode .fill-field {
     <div class="coaching-tip">Pause after &ldquo;okay?&rdquo; &mdash; let them confirm. Don&rsquo;t rush past it. Every micro-commitment stacks.</div>
   </div>
 
+  <!-- ============================================================ -->
+  <!-- KEP'S PROPRIETARY FE — V3 INTRO (Request Memory Opener)      -->
+  <!-- ============================================================ -->
+  <div class="script-section" id="kepfe-sec-intro-v3">
+    <span class="stage-badge">Stage 1 of 10 (V3)</span>
+    <div class="section-title">Intro (V3 &mdash; Request Memory)</div>
+    <div class="section-subtitle">Authority opener that confirms their request</div>
+
+    <!-- 1. Authority Opener (V3) -->
+    <div class="inoculation-card">
+      <div class="card-header">Authority Opener</div>
+      <div class="script-text">
+        Hey <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, how&rsquo;s it going?
+        <br><br>
+        This is _______ with the state-regulated final expense division. I&rsquo;m the underwriter assigned to your file, do you remember sending in this request?
+      </div>
+      <div class="coaching-tip"><strong>Why this works:</strong> &ldquo;Do you remember sending in this request?&rdquo; forces a yes/no that immediately engages the prospect and confirms intent. Combines authority bias with a commitment micro-yes right out of the gate.</div>
+    </div>
+
+    <!-- Objection: I'm not interested -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;I&rsquo;m not interested&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">I completely understand, and I&rsquo;m not here to sell you anything you don&rsquo;t need. But let me ask you this &mdash; if something happened to you tomorrow, does <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>&rsquo;s family have $15,000 sitting in the bank ready to go? Because that&rsquo;s what the average funeral costs right now. I just want to make sure you have the information &mdash; what you do with it is totally up to you.</div>
+        <div class="coaching-tip"><strong>Pattern interrupt:</strong> Agree, then reframe with a specific dollar amount that triggers loss aversion. The concrete number ($15K) is more powerful than vague &ldquo;costs.&rdquo;</div>
+      </div>
+    </div>
+
+    <!-- Objection: I'm busy / call me back -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;I&rsquo;m busy / call me back&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">I totally get that. Here&rsquo;s the thing though &mdash; this literally takes about 5 minutes, and right now I have your file pulled up and ready to go. If we schedule for later, I can&rsquo;t guarantee the same rates will still be available because they change based on your health window. Can I just get the basics real quick while I have you?</div>
+        <div class="coaching-tip"><strong>Scarcity + convenience:</strong> &ldquo;File pulled up&rdquo; = sunk cost. &ldquo;Rates change&rdquo; = urgency. &ldquo;5 minutes&rdquo; = low commitment ask.</div>
+      </div>
+    </div>
+
+    <!-- 2. Confirm Details -->
+    <div class="card">
+      <div class="card-header">Confirm Details</div>
+      <div class="script-text">
+        I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
+        <br><br>
+        Perfect. And your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
+        <br><br>
+        Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+      </div>
+      <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
+    </div>
+
+    <!-- 3. Objection: How did you get my info -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;How did you get my information?&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">That&rsquo;s a great question &mdash; it came from a request that was made on your behalf. But honestly, my only job here is to make sure you have the information you need. Most folks I talk to just don&rsquo;t want to leave that burden on their kids, you know? That&rsquo;s really all this is about.</div>
+        <div class="coaching-tip"><strong>Pattern:</strong> Validate &rarr; Redirect &rarr; Emotional anchor. Never get defensive &mdash; reframe as <em>their</em> benefit.</div>
+      </div>
+    </div>
+
+    <!-- 4. Decision-Maker Isolation -->
+    <div class="inoculation-card">
+      <div class="card-header">Decision-Maker Isolation</div>
+      <div class="script-text">
+        Now <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, before we go any further &mdash; when it comes to making decisions about your own final arrangements, is that something you handle yourself, or do you usually talk it over with someone?
+      </div>
+      <div class="coverage-toggle-group">
+        <button class="coverage-toggle" id="v3-dm-btn-self" onclick="showDmResponse('self')">Decision Maker</button>
+        <button class="coverage-toggle" id="v3-dm-btn-others" onclick="showDmResponse('others')">Needs Others</button>
+      </div>
+      <div id="v3-dm-response-self" style="display:none;margin-top:8px;">
+        <div class="script-text">&ldquo;Perfect, that&rsquo;s exactly what I like to hear. Let&rsquo;s keep going.&rdquo;</div>
+      </div>
+      <div id="v3-dm-response-others" style="display:none;margin-top:8px;">
+        <div class="script-text">&ldquo;I totally get that. Now, would they be the ones paying for the funeral if something happened? <em>[Usually yes.]</em> Then this is really about protecting <em>them</em>, right? Let&rsquo;s at least get the information so you can share it with them. Fair enough?&rdquo;</div>
+      </div>
+      <div class="coaching-tip"><strong>Why early:</strong> This prevents &ldquo;I need to talk to my spouse/kids&rdquo; at the close. You&rsquo;re getting commitment now that <em>they</em> are the decision-maker, or reframing it as protecting the people they&rsquo;d consult.</div>
+    </div>
+
+    <!-- 7. Stated Interest & Discovery -->
+    <div class="card">
+      <div class="card-header">Stated Interest &amp; Discovery</div>
+      <div class="script-text">
+        So <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, I have to ask &mdash; what got you thinking about getting this handled?
+      </div>
+      <div class="direction mt-8"><em>[Listen carefully. Their answer becomes your closing ammunition.]</em></div>
+      <div class="coaching-tip">Whatever they say here, write it down. When they object later with &ldquo;I want to think about it,&rdquo; you mirror their own words back: &ldquo;You told me the reason you looked into this was because [X]. Has that changed?&rdquo;</div>
+    </div>
+
+    <!-- 8. The 4 Reasons (with affordability inoculation) -->
+    <div class="card">
+      <div class="card-header">The 4 Reasons (Affordability Inoculation)</div>
+      <div class="script-text">
+        So <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, I have to tell you &mdash; there are 4 reasons 90% of people leave this burden on their loved ones.
+        <br><br>
+        <strong>1. Fear &amp; Denial</strong> &mdash; Death is scary. We avoid it, but it doesn&rsquo;t go away.
+        <br><br>
+        <strong>2. Procrastination</strong> &mdash; &ldquo;I&rsquo;ll do it later.&rdquo; Later turns into never, and never turns into too late.
+        <br><br>
+        <strong>3. Uncertainty</strong> &mdash; Not knowing how to take the burden off your loved ones.
+        <br><br>
+        <strong>4. Affordability</strong> &mdash; Costs have gone through the roof. But there are still affordable plans, especially on a fixed income &mdash; that&rsquo;s what I specialize in. Would you say affordability is important to you?
+      </div>
+      <div class="coaching-tip"><strong>Inoculation:</strong> By naming affordability as a common concern and immediately providing the antidote (&ldquo;affordable plans exist&rdquo;), you weaken the &ldquo;I can&rsquo;t afford it&rdquo; objection before it ever comes up.</div>
+    </div>
+
+    <!-- 8b. Compliment Bridge -->
+    <div class="card">
+      <div class="script-text">
+        The fact that you&rsquo;re even on the phone with me right now tells me you&rsquo;re not like most people &mdash; you actually want to get this handled. That says a lot.
+      </div>
+    </div>
+
+    <!-- 9. Inoculation: "Think About It" -->
+    <div class="inoculation-card">
+      <div class="card-header">Inoculation Drop: &ldquo;Think About It&rdquo;</div>
+      <div class="script-text">
+        Now I should mention &mdash; every policy we offer comes with a <strong>30-day free look period</strong>. That means even after you&rsquo;re approved, you have a full 30 days to review everything, show it to your family, sleep on it &mdash; and if for <em>any</em> reason you change your mind, you get a complete refund, no questions asked.
+        <br><br>
+        So really, the only risk is not seeing what&rsquo;s available, you know?
+      </div>
+      <div class="coaching-tip"><strong>Inoculation theory:</strong> When they say &ldquo;I want to think about it&rdquo; later, you say: &ldquo;That&rsquo;s exactly what the 30-day free look is for &mdash; remember? You can think about it <em>with</em> the policy in hand, fully protected while you decide.&rdquo;</div>
+    </div>
+
+    <!-- 10. Beneficiary -->
+    <div class="card">
+      <div class="card-header">Who Is In Charge</div>
+      <div class="script-text">
+        <strong>Who is going to be in charge of your final arrangements?</strong>
+      </div>
+      <input type="text" id="kepfev3BeneficiaryInput" placeholder="Enter beneficiary name..." autocomplete="off"
+        style="width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--input-bg);color:var(--text);outline:none;margin-top:10px;"
+        oninput="kepfeSetBeneficiary(this.value)">
+    </div>
+
+    <!-- 11. Inoculation: "Talk to My Kids" -->
+    <div class="inoculation-card">
+      <div class="card-header">Inoculation Drop: &ldquo;Talk to My Kids&rdquo;</div>
+      <div class="script-text">
+        And just so you know &mdash; a lot of the folks I help actually end up telling their kids <em>after</em> everything is set up. Because really, this is <em>your</em> decision about <em>your</em> arrangements. Most families are just relieved to know it&rsquo;s handled. Makes sense, right?
+      </div>
+      <div class="coaching-tip"><strong>Pre-frame:</strong> Plants the idea that NOT involving family is the norm. When they try to use &ldquo;talk to my kids&rdquo; as a stall, you reference: &ldquo;Remember, most of my clients handle this themselves and just let the family know after &mdash; because it&rsquo;s really <em>your</em> gift to them.&rdquo;</div>
+    </div>
+
+    <!-- 12. Written Plans -->
+    <div class="card">
+      <div class="card-header">Written Plans</div>
+      <div class="script-text">
+        <strong>Do you have any written plans for <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> to follow one day?</strong>
+      </div>
+      <div class="direction mt-8"><em>[Yes / No &mdash; note their answer]</em></div>
+    </div>
+
+    <!-- 13. Burial or Cremation -->
+    <div class="card">
+      <div class="card-header">Burial or Cremation</div>
+      <div class="script-text">
+        <strong>And did you want a burial or a cremation?</strong>
+      </div>
+    </div>
+    <div class="coverage-toggle-group">
+      <button class="coverage-toggle" id="kepfev3-btn-burial" onclick="showKepfev3Coverage('burial')">Burial</button>
+      <button class="coverage-toggle" id="kepfev3-btn-cremation" onclick="showKepfev3Coverage('cremation')">Cremation</button>
+    </div>
+
+    <!-- 14. Cost Awareness with Contrast Principle -->
+    <div class="card">
+      <div class="card-header">Cost Awareness (Contrast Anchoring)</div>
+      <div class="script-text">
+        <strong>Do you know how much that costs as of today?</strong>
+      </div>
+      <div id="kepfev3-cost-default" class="direction mt-8">
+        <em>[Wait for their answer]</em><br>
+        <strong>Anchor high:</strong> &ldquo;Most people are shocked &mdash; the national average for a funeral right now is between $10,000 and $20,000. And that number goes up every year.&rdquo;
+      </div>
+      <div id="kepfev3-cost-cremation" style="display:none;margin-top:8px;">
+        <div class="card-header" style="font-size:12px;margin-bottom:4px;">Cremation Selected</div>
+        <div class="script-text">
+          Even with cremation, people are paying between $3,000 and $9,000 once you factor in the urn, memorial service, and everything the family wants to do. It adds up fast.
+        </div>
+      </div>
+      <div id="kepfev3-cost-burial" style="display:none;margin-top:8px;">
+        <div class="card-header" style="font-size:12px;margin-bottom:4px;">Burial Selected</div>
+        <div class="script-text">
+          With a burial, you&rsquo;re looking at $12,000 to $20,000 minimum &mdash; the plot, the casket, the headstone, the service, transportation. Most families don&rsquo;t realize how fast it adds up.
+        </div>
+      </div>
+      <div class="coaching-tip"><strong>Contrast principle:</strong> Anchor the high number first. When your quote comes in at $30-80/month later, it feels tiny by comparison.</div>
+    </div>
+
+    <!-- 15. Immediate Funds -->
+    <div class="card" style="border-left: 4px solid var(--danger);">
+      <div class="card-header">Immediate Funds</div>
+      <div class="script-text">
+        <strong>Now if something happened to you this morning &mdash; does <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> have $15,000 or more sitting in the bank, immediately available, to handle all of this?</strong>
+      </div>
+      <div class="direction mt-8"><em>[Almost always &ldquo;no.&rdquo; Let the silence sit.]</em></div>
+      <div class="coaching-tip"><strong>Loss aversion:</strong> Making the financial gap concrete and immediate. The specific dollar amount + &ldquo;this morning&rdquo; creates visceral urgency.</div>
+    </div>
+
+    <!-- 16. Difficulty Scale -->
+    <div class="card">
+      <div class="card-header">Difficulty Scale</div>
+      <div class="script-text">
+        On a scale of 1&ndash;5, five being extremely difficult, one being so easy they could do it in their sleep &mdash;
+        <br><br>
+        <strong>How difficult would it be for <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> to handle everything if something happened this morning?</strong>
+      </div>
+      <div style="display:flex;justify-content:center;gap:16px;margin-top:14px;">
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">1</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">2</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">3</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">4</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">5</span>
+      </div>
+    </div>
+
+    <!-- 17. Importance Scale -->
+    <div class="card">
+      <div class="card-header">Importance Scale</div>
+      <div class="script-text">
+        And on a scale of 1&ndash;5, one being you don&rsquo;t care at all, five being very important &mdash;
+        <br><br>
+        <strong>How important is it to you to make sure <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> never has to deal with any of this?</strong>
+      </div>
+      <div style="display:flex;justify-content:center;gap:16px;margin-top:14px;">
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">1</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">2</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">3</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">4</span>
+        <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">5</span>
+      </div>
+    </div>
+
+    <!-- 18. Trial Close -->
+    <div class="card" style="border-left: 4px solid var(--success);">
+      <div class="card-header">Trial Close</div>
+      <div class="script-text">
+        <strong><span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, based on everything you just told me &mdash; is there any reason you wouldn&rsquo;t want to at least see what&rsquo;s available to get this completely handled today?</strong>
+      </div>
+      <div class="coaching-tip"><strong>Commitment escalation:</strong> After giving you 4s and 5s on difficulty and importance, saying &ldquo;no&rdquo; here creates cognitive dissonance. They&rsquo;ve already told you this matters.</div>
+    </div>
+
+    <!-- 18b. Verify Me -->
+    <div class="inoculation-card">
+      <div class="card-header">Verify Me</div>
+      <div class="script-text">
+        Now before we go any further &mdash; grab a pen real quick. I want you to write down my name: _________, and my license number: <strong>21044153</strong>. You can verify me anytime with your state&rsquo;s Department of Insurance. I&rsquo;d never ask for your information without giving you mine first. Fair enough?
+      </div>
+      <div class="coaching-tip"><strong>Reciprocity principle:</strong> Giving your info first makes asking for theirs feel balanced. The pen creates physical investment. Placed right before the SSN pre-frame so &ldquo;I gave you mine&rdquo; is fresh when you mention needing theirs.</div>
+    </div>
+
+    <!-- 19. Pre-Frame SSN & Bank Info -->
+    <div class="inoculation-card">
+      <div class="card-header">Pre-Frame: SSN &amp; Bank Info</div>
+      <div class="script-text">
+        Perfect. So here&rsquo;s how this works &mdash; I&rsquo;m going to ask you some health questions to see which companies you qualify with. Then, just like any insurance application, I&rsquo;ll need your basic info &mdash; your Social Security number, driver&rsquo;s license, and banking info for the monthly premium.
+        <br><br>
+        Now I know that sounds like a lot, but remember &mdash; nothing is final today. You have that full 30-day free look period. We&rsquo;re just seeing what you qualify for. Sound fair?
+      </div>
+      <div class="coaching-tip"><strong>Why now:</strong> Normalizing SSN and bank info early prevents the shock-refusal at the close. By the time you actually ask for it, they&rsquo;ve already agreed it&rsquo;s part of the process. The 30-day free look is your safety net reference.</div>
+    </div>
+
+    <!-- 20. Transition -->
+    <div class="card" style="border-left: 4px solid var(--primary);">
+      <div class="card-header">Transition</div>
+      <div class="script-text">
+        So <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, now that we&rsquo;re on the same page &mdash; let me show you exactly how we take care of all of this.
+      </div>
+    </div>
+
+    <!-- 21. Who We Are / Taylored Legacy -->
+    <div class="card">
+      <div class="card-header">Who We Are</div>
+      <div class="script-text">
+        My name is _________, and I represent <strong>Taylored Legacy</strong>. We work with every top A and A+ rated carrier in the country &mdash; so I&rsquo;m not locked into one company. I shop all of them to get you the best coverage at the cheapest rate. Make sense?
+      </div>
+    </div>
+
+    <!-- 22. Funeral Funding & Planning -->
+    <div class="card">
+      <div class="card-header">Funeral Funding &amp; Planning</div>
+      <div class="script-text">
+        We handle the funding <em>and</em> the planning. We use whole life policies &mdash; so once you&rsquo;re locked in, your price <strong>never goes up</strong> and your coverage <strong>never goes down</strong>, no matter what happens to your health.
+      </div>
+    </div>
+
+    <!-- 23. Taylored Concierge -->
+    <div class="card">
+      <div class="card-header">Taylored Concierge</div>
+      <div class="script-text">
+        You also get our free <strong>Taylored Concierge</strong> service. When the time comes, <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> makes one phone call &mdash; and from there, they can lean on us as much or as little as they need. We handle pricing, logistics, death certificates, whatever they don&rsquo;t want to deal with. They never have to figure it out alone.
+      </div>
+    </div>
+
+    <!-- 24. Future Pace -->
+    <div class="inoculation-card">
+      <div class="card-header">Future Pace</div>
+      <div class="script-text">
+        So picture this &mdash; once everything is set up, you make one call today, I check in on you in about 48 hours to make sure everything looks good, and then <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> never has to worry about any of this. If the worst happens, they pick up the phone, call one number, and everything is taken care of. They can grieve in peace.
+        <br><br>
+        <strong>That&rsquo;s what we&rsquo;re setting up today.</strong>
+      </div>
+      <div class="coaching-tip"><strong>Future pacing (NLP):</strong> Walk them through the positive outcome as if it&rsquo;s already happening. This makes the decision feel like a foregone conclusion, not a choice.</div>
+    </div>
+
+    <!-- 25. Confirm Understanding -->
+    <div class="card">
+      <div class="card-header">Confirm Understanding</div>
+      <div class="script-text">
+        Does that all make sense? Can you see how this takes care of everything for you and <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span>?
+      </div>
+      <div class="direction mt-8"><em>[Wait for confirmation]</em></div>
+    </div>
+
+    <!-- 26. Transition to Health Questions -->
+    <div class="card">
+      <div class="card-header">Transition to Health Questions</div>
+      <div class="script-text">
+        Perfect! So like I mentioned earlier, I just need to run through a few quick health questions so we can see which plans you qualify for. Remember, nothing is final &mdash; you&rsquo;ve got that full 30-day free look. Ready?
+      </div>
+    </div>
+
+    <div class="coaching-tip">Pause after &ldquo;okay?&rdquo; &mdash; let them confirm. Don&rsquo;t rush past it. Every micro-commitment stacks.</div>
+  </div>
+
   <!-- KEP'S PROPRIETARY FE SECTION 3: NEEDS ANALYSIS -->
   <div class="script-section" id="kepfe-sec-needs">
     <span class="stage-badge">Stage 3 of 10</span>
@@ -2643,13 +2979,26 @@ const KEPFE_STAGES_V2 = [
   { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
 ];
 
+const KEPFE_STAGES_V3 = [
+  { id: 'kepfe-sec-intro-v3', label: 'Intro', title: 'Intro (V3)' },
+  { id: 'sec-health', label: 'Health', title: 'Health Questions' },
+  { id: 'kepfe-sec-needs', label: 'Needs', title: 'Needs Analysis' },
+  { id: 'sec-finances', label: 'Finance', title: 'Occupation & Finances' },
+  { id: 'sec-product', label: 'Product', title: 'Product Explanation' },
+  { id: 'sec-quote', label: 'Quote', title: 'Quote & Pitch' },
+  { id: 'sec-info', label: 'Info', title: 'Collect Info' },
+  { id: 'sec-social', label: 'DL/SSN', title: 'DL & Social' },
+  { id: 'sec-bank', label: 'Bank', title: 'Bank Info' },
+  { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
+];
+
 let STAGES = VETERANS_STAGES;
 
 let currentStage = -1; // -1 = welcome
 let fieldData = {};
 let activeFieldEl = null;
 let selectedScript = 'veterans';
-let kepfeV2Active = localStorage.getItem('kepfeV2Active') === 'true';
+let kepfeVersion = parseInt(localStorage.getItem('kepfeVersion')) || (localStorage.getItem('kepfeV2Active') === 'true' ? 2 : 1);
 
 // ============================================================
 // INIT
@@ -2699,8 +3048,10 @@ function startCall() {
   const nameInput = document.getElementById('prospectNameInput');
   const name = nameInput.value.trim() || 'Prospect';
   fieldData['name'] = name;
-  if (selectedScript === 'kepfe' && kepfeV2Active) {
+  if (selectedScript === 'kepfe' && kepfeVersion === 2) {
     STAGES = KEPFE_STAGES_V2;
+  } else if (selectedScript === 'kepfe' && kepfeVersion === 3) {
+    STAGES = KEPFE_STAGES_V3;
   } else {
     STAGES = selectedScript === 'aged' ? AGED_STAGES : selectedScript === 'fe' ? FE_STAGES : selectedScript === 'kepfe' ? KEPFE_STAGES : VETERANS_STAGES;
   }
@@ -2708,7 +3059,7 @@ function startCall() {
   updateAllFields();
   document.body.classList.remove('on-welcome');
   document.getElementById('welcome').classList.remove('active');
-  document.getElementById('scriptTypeBadge').textContent = selectedScript === 'aged' ? 'Aged Leads' : selectedScript === 'fe' ? 'Final Expense' : selectedScript === 'kepfe' ? (kepfeV2Active ? "Kep's Proprietary FE (V2)" : "Kep's Proprietary FE") : 'Veterans';
+  document.getElementById('scriptTypeBadge').textContent = selectedScript === 'aged' ? 'Aged Leads' : selectedScript === 'fe' ? 'Final Expense' : selectedScript === 'kepfe' ? (kepfeVersion > 1 ? "Kep's Proprietary FE (V" + kepfeVersion + ")" : "Kep's Proprietary FE") : 'Veterans';
   updateScriptVersionToggle();
   goToStage(0);
 }
@@ -3044,28 +3395,27 @@ function updateScriptVersionToggle() {
   const lbl = document.getElementById('scriptVersionLabel');
   if (selectedScript === 'kepfe') {
     btn.classList.add('active');
-    if (kepfeV2Active) {
+    btn.classList.remove('v2-active', 'v3-active');
+    if (kepfeVersion === 2) {
       btn.classList.add('v2-active');
-      lbl.textContent = 'V2';
-    } else {
-      btn.classList.remove('v2-active');
-      lbl.textContent = 'V1';
+    } else if (kepfeVersion === 3) {
+      btn.classList.add('v3-active');
     }
+    lbl.textContent = 'V' + kepfeVersion;
   } else {
-    btn.classList.remove('active');
-    btn.classList.remove('v2-active');
+    btn.classList.remove('active', 'v2-active', 'v3-active');
   }
 }
 
 function toggleScriptVersion() {
   if (selectedScript !== 'kepfe') return;
-  kepfeV2Active = !kepfeV2Active;
-  localStorage.setItem('kepfeV2Active', kepfeV2Active);
-  STAGES = kepfeV2Active ? KEPFE_STAGES_V2 : KEPFE_STAGES;
+  kepfeVersion = kepfeVersion >= 3 ? 1 : kepfeVersion + 1;
+  localStorage.setItem('kepfeVersion', kepfeVersion);
+  STAGES = kepfeVersion === 2 ? KEPFE_STAGES_V2 : kepfeVersion === 3 ? KEPFE_STAGES_V3 : KEPFE_STAGES;
   buildProgressBar();
   updateScriptVersionToggle();
   if (currentStage === 0) goToStage(0);
-  document.getElementById('scriptTypeBadge').textContent = kepfeV2Active ? "Kep's Proprietary FE (V2)" : "Kep's Proprietary FE";
+  document.getElementById('scriptTypeBadge').textContent = kepfeVersion > 1 ? "Kep's Proprietary FE (V" + kepfeVersion + ")" : "Kep's Proprietary FE";
 }
 
 function showKepfev2Coverage(type) {
@@ -3075,9 +3425,25 @@ function showKepfev2Coverage(type) {
   document.getElementById('kepfev2-cost-burial').style.display = type === 'burial' ? 'block' : 'none';
   document.getElementById('kepfev2-btn-cremation').classList.toggle('active', type === 'cremation');
   document.getElementById('kepfev2-btn-burial').classList.toggle('active', type === 'burial');
-  // Sync with V1 buttons too
+  // Sync with V1 and V3 buttons too
   document.getElementById('kepfe-btn-cremation').classList.toggle('active', type === 'cremation');
   document.getElementById('kepfe-btn-burial').classList.toggle('active', type === 'burial');
+  document.getElementById('kepfev3-btn-cremation').classList.toggle('active', type === 'cremation');
+  document.getElementById('kepfev3-btn-burial').classList.toggle('active', type === 'burial');
+}
+
+function showKepfev3Coverage(type) {
+  kepfeCoverageChoice = type;
+  document.getElementById('kepfev3-cost-default').style.display = 'none';
+  document.getElementById('kepfev3-cost-cremation').style.display = type === 'cremation' ? 'block' : 'none';
+  document.getElementById('kepfev3-cost-burial').style.display = type === 'burial' ? 'block' : 'none';
+  document.getElementById('kepfev3-btn-cremation').classList.toggle('active', type === 'cremation');
+  document.getElementById('kepfev3-btn-burial').classList.toggle('active', type === 'burial');
+  // Sync with V1 and V2 buttons too
+  document.getElementById('kepfe-btn-cremation').classList.toggle('active', type === 'cremation');
+  document.getElementById('kepfe-btn-burial').classList.toggle('active', type === 'burial');
+  document.getElementById('kepfev2-btn-cremation').classList.toggle('active', type === 'cremation');
+  document.getElementById('kepfev2-btn-burial').classList.toggle('active', type === 'burial');
 }
 
 function showDmResponse(type) {
@@ -3085,6 +3451,15 @@ function showDmResponse(type) {
   document.getElementById('dm-response-others').style.display = type === 'others' ? 'block' : 'none';
   document.getElementById('dm-btn-self').classList.toggle('active', type === 'self');
   document.getElementById('dm-btn-others').classList.toggle('active', type === 'others');
+  // V3 DM elements
+  var v3Self = document.getElementById('v3-dm-response-self');
+  var v3Others = document.getElementById('v3-dm-response-others');
+  if (v3Self) v3Self.style.display = type === 'self' ? 'block' : 'none';
+  if (v3Others) v3Others.style.display = type === 'others' ? 'block' : 'none';
+  var v3BtnSelf = document.getElementById('v3-dm-btn-self');
+  var v3BtnOthers = document.getElementById('v3-dm-btn-others');
+  if (v3BtnSelf) v3BtnSelf.classList.toggle('active', type === 'self');
+  if (v3BtnOthers) v3BtnOthers.classList.toggle('active', type === 'others');
 }
 
 // ============================================================
