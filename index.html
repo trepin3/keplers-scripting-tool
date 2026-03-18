@@ -2046,17 +2046,25 @@ body.edit-mode .fill-field {
       </div>
     </div>
 
-    <!-- No Response: Confirm Details (shown inline) -->
-    <div class="card" id="v3-request-no-card" style="display:none;">
-      <div class="card-header">Confirm Details</div>
-      <div class="script-text">
-        I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
-        <br><br>
-        Perfect. And your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
-        <br><br>
-        Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+    <!-- No Response: Confirm Details + Lock In Options (shown inline) -->
+    <div id="v3-request-no-card" style="display:none;">
+      <div class="card">
+        <div class="card-header">Confirm Details</div>
+        <div class="script-text">
+          I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
+          <br><br>
+          Perfect. And your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
+          <br><br>
+          Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+        </div>
+        <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
       </div>
-      <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
+      <div class="card">
+        <div class="card-header">Lock In Options</div>
+        <div class="script-text">
+          Great! My job today is just to walk you through your options to see if we can lock in something affordable while you still qualify, should only take a few minutes.
+        </div>
+      </div>
     </div>
 
     <!-- Objection: I'm not interested -->
