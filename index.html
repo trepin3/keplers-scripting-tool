@@ -625,6 +625,9 @@ body {
 .script-version-toggle.v2-active .toggle-dot { background: var(--success); }
 .script-version-toggle.v3-active { border-color: var(--primary); color: var(--primary); }
 .script-version-toggle.v3-active .toggle-dot { background: var(--primary); }
+.script-version-toggle.tips-active { border-color: var(--success); color: var(--success); }
+.script-version-toggle.tips-active .toggle-dot { background: var(--success); }
+.tips-hidden .coaching-tip { display: none !important; }
 
 /* INOCULATION CARD */
 .inoculation-card {
@@ -911,6 +914,7 @@ body.edit-mode .fill-field {
     </div>
     <div class="top-bar-actions">
       <button class="script-version-toggle" id="scriptVersionToggle" onclick="toggleScriptVersion()" title="Switch Intro Version"><span class="toggle-dot"></span><span id="scriptVersionLabel">V1</span></button>
+      <button class="script-version-toggle" id="tipsToggle" onclick="toggleTips()" title="Toggle Tips"><span class="toggle-dot"></span><span id="tipsToggleLabel">Tips</span></button>
       <button class="icon-btn" onclick="openQbModal()" title="Bank Lookup">&#127974;</button>
       <button class="icon-btn" onclick="toggleNotes()" title="Call Notes">&#128221;</button>
       <button class="icon-btn" onclick="toggleTheme()" title="Dark Mode" id="themeBtn">&#127769;</button>
@@ -3428,6 +3432,7 @@ function kepfeSetBeneficiary(val) {
 function updateScriptVersionToggle() {
   const btn = document.getElementById('scriptVersionToggle');
   const lbl = document.getElementById('scriptVersionLabel');
+  const tipsBtn = document.getElementById('tipsToggle');
   if (selectedScript === 'kepfe') {
     btn.classList.add('active');
     btn.classList.remove('v2-active', 'v3-active');
@@ -3437,8 +3442,14 @@ function updateScriptVersionToggle() {
       btn.classList.add('v3-active');
     }
     lbl.textContent = 'V' + kepfeVersion;
+    // Show tips toggle only on V3
+    tipsBtn.classList.toggle('active', kepfeVersion === 3);
+    if (kepfeVersion === 3) {
+      updateTipsToggle();
+    }
   } else {
     btn.classList.remove('active', 'v2-active', 'v3-active');
+    tipsBtn.classList.remove('active');
   }
 }
 
@@ -3451,6 +3462,19 @@ function toggleScriptVersion() {
   updateScriptVersionToggle();
   if (currentStage === 0) goToStage(0);
   document.getElementById('scriptTypeBadge').textContent = kepfeVersion > 1 ? "Kep's Proprietary FE (V" + kepfeVersion + ")" : "Kep's Proprietary FE";
+}
+
+let tipsVisible = true;
+
+function updateTipsToggle() {
+  const tipsBtn = document.getElementById('tipsToggle');
+  tipsBtn.classList.toggle('tips-active', tipsVisible);
+}
+
+function toggleTips() {
+  tipsVisible = !tipsVisible;
+  document.body.classList.toggle('tips-hidden', !tipsVisible);
+  updateTipsToggle();
 }
 
 function showKepfev2Coverage(type) {
