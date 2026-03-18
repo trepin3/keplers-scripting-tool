@@ -2032,6 +2032,33 @@ body.edit-mode .fill-field {
       <div class="coaching-tip"><strong>Why this works:</strong> &ldquo;Do you remember sending in this request?&rdquo; forces a yes/no that immediately engages the prospect and confirms intent. Combines authority bias with a commitment micro-yes right out of the gate.</div>
     </div>
 
+    <!-- Yes / No Response Buttons -->
+    <div class="coverage-toggle-group">
+      <button class="coverage-toggle" id="v3-request-btn-yes" onclick="handleV3RequestResponse('yes')">Yes</button>
+      <button class="coverage-toggle" id="v3-request-btn-no" onclick="handleV3RequestResponse('no')">No</button>
+    </div>
+
+    <!-- Yes Response Card -->
+    <div class="card" id="v3-request-yes-card" style="display:none;">
+      <div class="card-header">Lock In Options</div>
+      <div class="script-text">
+        Great! My job today is just to walk you through your options to see if we can lock in something affordable while you still qualify, should only take a few minutes.
+      </div>
+    </div>
+
+    <!-- No Response: Confirm Details (shown inline) -->
+    <div class="card" id="v3-request-no-card" style="display:none;">
+      <div class="card-header">Confirm Details</div>
+      <div class="script-text">
+        I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
+        <br><br>
+        Perfect. And your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
+        <br><br>
+        Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+      </div>
+      <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
+    </div>
+
     <!-- Objection: I'm not interested -->
     <div class="objection-accordion" onclick="toggleAccordion(this)">
       <button class="objection-accordion-trigger">
@@ -2057,7 +2084,7 @@ body.edit-mode .fill-field {
     </div>
 
     <!-- 2. Confirm Details -->
-    <div class="card">
+    <div class="card" id="v3-confirm-details">
       <div class="card-header">Confirm Details</div>
       <div class="script-text">
         I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
@@ -3444,6 +3471,14 @@ function showKepfev3Coverage(type) {
   document.getElementById('kepfe-btn-burial').classList.toggle('active', type === 'burial');
   document.getElementById('kepfev2-btn-cremation').classList.toggle('active', type === 'cremation');
   document.getElementById('kepfev2-btn-burial').classList.toggle('active', type === 'burial');
+}
+
+function handleV3RequestResponse(type) {
+  document.getElementById('v3-request-btn-yes').classList.toggle('active', type === 'yes');
+  document.getElementById('v3-request-btn-no').classList.toggle('active', type === 'no');
+  document.getElementById('v3-request-yes-card').style.display = type === 'yes' ? 'block' : 'none';
+  document.getElementById('v3-request-no-card').style.display = type === 'no' ? 'block' : 'none';
+  document.getElementById('v3-confirm-details').style.display = type === 'no' ? 'none' : '';
 }
 
 function showDmResponse(type) {
