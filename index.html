@@ -772,7 +772,7 @@ body.on-welcome .top-bar { display: none; }
 }
 
 .script-choice {
-  flex: 0 0 calc(25% - 9px);
+  flex: 0 0 calc(33.33% - 8px);
   min-width: 90px;
   padding: 16px 10px;
   border-radius: var(--radius);
@@ -956,6 +956,10 @@ body.edit-mode .fill-field {
         <div class="script-choice" id="choice-kepfe" onclick="chooseKepFe()">
           <div class="script-choice-icon">🔒</div>
           <div class="script-choice-label">Kep's Proprietary FE</div>
+        </div>
+        <div class="script-choice" id="choice-mp" onclick="chooseScript('mp')">
+          <div class="script-choice-icon">🏠</div>
+          <div class="script-choice-label">Mortgage Protection</div>
         </div>
       </div>
       <button class="start-btn" onclick="startCall()">Start Call</button>
@@ -2905,6 +2909,446 @@ body.edit-mode .fill-field {
     </div>
   </div>
 
+  <!-- ============================================================ -->
+  <!-- MORTGAGE PROTECTION — ONE-PAGER SCRIPT                       -->
+  <!-- ============================================================ -->
+  <div class="script-section" id="mp-sec-script">
+    <span class="stage-badge">Mortgage Protection Script</span>
+    <div class="section-title">Mortgage Protection</div>
+    <div class="section-subtitle">Request memory opener &rarr; discovery &rarr; health &rarr; recap &rarr; quote</div>
+
+    <!-- Voicemail Button -->
+    <div style="text-align:center;margin-bottom:16px;">
+      <button class="coverage-toggle active" style="max-width:260px;width:100%;padding:12px 20px;font-size:15px;" onclick="document.getElementById('mpVoicemailModal').classList.add('active')">&#9993; Voicemail Script</button>
+    </div>
+
+    <!-- ======== 1. AUTHORITY OPENER ======== -->
+    <div class="inoculation-card">
+      <div class="card-header">Authority Opener</div>
+      <div class="script-text">
+        Yeah <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>? Hey <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, this is Josh&hellip;
+        <br><br>
+        Just getting back to you about the request you mailed in from <span class="fill-field filled" data-field="address" onclick="editField(this)">Address</span>&hellip;
+        <br><br>
+        Back when you finalized the loan&hellip; with <span class="fill-field filled" data-field="lender" onclick="editField(this)">Lender</span>&hellip; an underwriter was assigned to help&hellip; with mortgage protection&hellip; where it pays off the loan for your family if you get sick&hellip; can&rsquo;t work&hellip; or pass away&hellip;
+        <br><br>
+        <strong>What do you remember about that?</strong>
+      </div>
+      <div class="direction mt-8"><em>[Genuine curious tone. Wait for response.]</em></div>
+      <div class="coaching-tip"><strong>AIM Framework:</strong> Handle their concern then &mdash; 1) Answer/Acknowledge &nbsp; 2) Why it&rsquo;s no big deal &nbsp; 3) Move on &rarr; Credential</div>
+    </div>
+
+    <!-- ======== 2. OBJECTION HANDLING ======== -->
+
+    <!-- Not interested / don't need it -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;Not interested / I don&rsquo;t need it&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">Perfect <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, totally understand&hellip; not everybody needs the protection, it&rsquo;s different for everybody&rsquo;s situation&hellip; let me ask you this, <strong>who all lives in the home there with you?</strong></div>
+        <div class="coaching-tip">Agree &rarr; normalize &rarr; pivot to discovery. The household question moves them past the objection and into the script flow.</div>
+      </div>
+    </div>
+
+    <!-- Have the money to pay it off -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;I have the money to pay it off&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">Well hey, <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, sounds like you got money&hellip; Could I share with you what my clients who have enough money to pay off the mortgage do? Instead of setting up a traditional mortgage protection plan that you would have to pay into every single month for the rest of your life, they get the mortgage protection coverage <strong>completely free of charge</strong>.</div>
+        <div class="coaching-tip"><strong>Young prospect &rarr;</strong> IUL (Indexed Universal Life) &nbsp;|&nbsp; <strong>Older prospect &rarr;</strong> Self-insure via annuity</div>
+      </div>
+    </div>
+
+    <!-- Already got it taken care of -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;Already got it taken care of&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">Perfect, that&rsquo;s exactly the reason for my call. Whoever helped you with the coverage forgot to update your policy information in the system so that the calls would stop. And no worries, this has been happening a lot recently; it&rsquo;s usually just a junior underwriter who might be new, so I&rsquo;ll make sure to help update that for you now&hellip;
+        <br><br>
+        <strong>Do you remember the name of the company they put you with?</strong></div>
+        <div class="coaching-tip">Once they name the company, run through verification: Was that the first place you looked? Any major medical conditions? Did you get the policy packet in the mail? How much coverage? Type of plan? How much are they paying? Any living benefits?</div>
+      </div>
+    </div>
+
+    <!-- Don't remember / Never talked to anybody -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;Don&rsquo;t remember / Never talked to anybody / Won&rsquo;t qualify&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">Ok perfect, that&rsquo;s exactly the reason for my call&hellip; I&rsquo;m the underwriter that&rsquo;s been assigned to help walk you through how it works&hellip;</div>
+        <div class="coaching-tip">Transition straight into Verify Me / Credentials below.</div>
+      </div>
+    </div>
+
+    <!-- ======== 3. REPLACEMENT (Already Has Coverage) ======== -->
+    <div class="card">
+      <div class="card-header">Replacement Script (If They Have Coverage)</div>
+      <div class="script-text">
+        Oh gotcha, that&rsquo;s exactly the reason for my call. Whoever helped you out with the coverage didn&rsquo;t put down any active policy on file so the calls would stop &mdash; no worries I&rsquo;ll help out with that now.
+        <br><br>
+        And this has been happening a lot recently, it&rsquo;s usually just a junior underwriter who might be new so as we put down the policy information I&rsquo;ll make sure they put you in the best position as well. <strong>I&rsquo;m the senior underwriter so I have access to all of the carriers here in the state.</strong>
+      </div>
+    </div>
+
+    <!-- ======== 4. VERIFY ME / CREDENTIALS ======== -->
+    <div class="inoculation-card">
+      <div class="card-header">Verify Me &mdash; Credentials</div>
+      <div class="script-text">
+        Before we dive in, state law requires that I provide my licensing info. I just sent over a text with my credentials. <strong>Did you get that ok?</strong>
+        <br><br>
+        Most importantly, on there you&rsquo;ll see my NPN number, which is kind of like my social here in the insurance world and your way of verifying that I&rsquo;m a state licensed broker.
+        <br><br>
+        Just so you know, we deal with final expense, mortgage protection, tax-free legacy and retirement strategies&hellip; but now that you have everything that you need from me&hellip;
+        <br><br>
+        I&rsquo;ll go ahead and gather a few basics on your situation here to see what might possibly be a good fit.
+        <br><br>
+        <strong>&ldquo;Sound Good?&rdquo;</strong>
+      </div>
+      <div class="coaching-tip"><strong>Reciprocity:</strong> You gave them your credentials first. Now asking for their info feels balanced and earned.</div>
+    </div>
+
+    <!-- ======== 5. HOUSEHOLD DISCOVERY ======== -->
+    <div class="card">
+      <div class="card-header">Household</div>
+      <div class="script-text">
+        <strong>Who lives in the home there with you?</strong>
+      </div>
+    </div>
+
+    <div class="coverage-toggle-group">
+      <button class="coverage-toggle" id="mp-hh-btn-somebody" onclick="mpShowHousehold('somebody')">Somebody</button>
+      <button class="coverage-toggle" id="mp-hh-btn-nobody" onclick="mpShowHousehold('nobody')">Nobody</button>
+    </div>
+
+    <!-- Somebody path -->
+    <div id="mp-hh-somebody" style="display:none;">
+      <div class="card">
+        <div class="card-header">Who Lives With Them?</div>
+        <div class="script-text">
+          <strong>Who is going to be affected if something happens to you?</strong>
+        </div>
+        <input type="text" id="mpBeneficiaryInput" placeholder="Enter name (spouse, partner, kids)..." autocomplete="off"
+          style="width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--input-bg);color:var(--text);outline:none;margin-top:10px;"
+          oninput="kepfeSetBeneficiary(this.value)">
+      </div>
+      <div class="card">
+        <div class="card-header">Somebody Lives With Them</div>
+        <div class="script-text">
+          So if anything were to happen to you, I&rsquo;m assuming you would want them to be able to stay there in the home right? They wouldn&rsquo;t want to sell or downsize would they? And as it stands right now, would they be able to afford the home if they were to lose your income?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="coverage-toggle-group" style="margin-top:12px;">
+          <button class="coverage-toggle" id="mp-scenario-stay" onclick="mpToggleScenario(this,'stay')">Stay in the Home</button>
+          <button class="coverage-toggle" id="mp-scenario-sell" onclick="mpToggleScenario(this,'sell')">Sell or Downsize</button>
+          <button class="coverage-toggle" id="mp-scenario-afford" onclick="mpToggleScenario(this,'afford')">Make it Affordable</button>
+        </div>
+      </div>
+      <div class="coverage-toggle-group">
+        <button class="coverage-toggle" id="mp-afford-btn-yes" onclick="mpShowAfford('yes')">Yes &mdash; Could Afford It</button>
+        <button class="coverage-toggle" id="mp-afford-btn-no" onclick="mpShowAfford('no')">No &mdash; Could Not Afford It</button>
+      </div>
+      <div id="mp-afford-yes" style="display:none;">
+        <div class="card">
+          <div class="script-text">Ok gotcha, I&rsquo;m assuming you were just looking for something that would make their transition to being the payor for the property comfortable, not be burdened by the mortgage, and guarantee the bank couldn&rsquo;t foreclose&hellip; right?</div>
+        </div>
+      </div>
+      <div id="mp-afford-no" style="display:none;">
+        <div class="card">
+          <div class="script-text">Gotcha, makes sense why you would be looking into this&hellip;</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nobody path -->
+    <div id="mp-hh-nobody" style="display:none;">
+      <div class="card">
+        <div class="card-header">Nobody &mdash; Inheritance Scenario</div>
+        <div class="script-text">
+          If anything were to happen to you, who would the home be going to?
+        </div>
+        <div class="script-text" style="margin-top:10px;">
+          <strong>And what&rsquo;s their name?</strong>
+        </div>
+        <input type="text" id="mpBeneficiaryInputNobody" placeholder="Enter their name..." autocomplete="off"
+          style="width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--input-bg);color:var(--text);outline:none;margin-top:10px;"
+          oninput="kepfeSetBeneficiary(this.value)">
+        <div class="script-text" style="margin-top:14px;">
+          Do they live nearby? I&rsquo;m assuming they&rsquo;re grown with their own family and mortgage?
+          <br><br>
+          Do you know if they would want to move in, or would they just want to get the home cleaned up, cleaned out, fixed up, listed and sold for a fair market value and just receive the equity as a blessing?
+        </div>
+        <div class="direction mt-8"><em>[Wait for response]</em></div>
+        <div class="coverage-toggle-group" style="margin-top:12px;">
+          <button class="coverage-toggle" id="mp-scenario-movein" onclick="mpToggleScenario(this,'movein')">Move In</button>
+          <button class="coverage-toggle" id="mp-scenario-equity" onclick="mpToggleScenario(this,'equity')">Sell for Equity</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== 6. MORTGAGE DETAILS ======== -->
+    <div class="card">
+      <div class="card-header">Mortgage Details</div>
+      <div class="script-text">
+        <strong>How much is the monthly mortgage bill &mdash; taxes, fees, everything included?</strong>
+      </div>
+      <input type="text" id="mpMortgagePayment" placeholder="e.g. $1,750" autocomplete="off"
+        style="width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--input-bg);color:var(--text);outline:none;margin-top:10px;"
+        oninput="mpSetField('mortgagePayment', this.value)">
+      <div class="script-text" style="margin-top:14px;">
+        Was that a 30-year term? <em>(back when)</em>
+      </div>
+      <div class="script-text" style="margin-top:14px;">
+        <strong>And what&rsquo;s the balance left on the loan?</strong>
+      </div>
+      <input type="text" id="mpLoanBalance" placeholder="e.g. $189,000" autocomplete="off"
+        style="width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--input-bg);color:var(--text);outline:none;margin-top:10px;"
+        oninput="mpSetField('loanBalance', this.value)">
+      <div class="script-text" style="margin-top:14px;">
+        <strong>And is this your forever home?</strong>
+      </div>
+    </div>
+
+    <!-- Forever Home follow-up -->
+    <div class="inoculation-card">
+      <div class="card-header">Forever Home &mdash; Coverage Portability</div>
+      <div class="script-text">
+        Ok got it, just so you know &mdash; the coverage is tied to yourself and your physical health, <strong>not the loan, lender, or property</strong>, so even if you do move or refinance, the coverage is going to stick with you unless you want to surrender it at that point. <strong>Are you with me?</strong>
+      </div>
+      <div class="coaching-tip">This removes the &ldquo;I might move&rdquo; objection before it comes up. Coverage follows the person, not the property.</div>
+    </div>
+
+    <!-- ======== 7. EMPLOYMENT & INCOME ======== -->
+    <div class="card">
+      <div class="card-header">Employment &amp; Income</div>
+      <div class="script-text">
+        Ok got it, and <strong>what do you do for work?</strong>
+        <br><br>
+        Oh great, how long have you been doing that? What were you doing before that? How long were you doing that?
+        <br><br>
+        <strong>What&rsquo;s your monthly income after taxes?</strong> <em>(What actually gets deposited)</em>
+        <br><br>
+        What about your spouse&rsquo;s income? Do they help pay with the bills?
+      </div>
+    </div>
+
+    <!-- ======== 8. EXISTING COVERAGE ======== -->
+    <div class="card">
+      <div class="card-header">Existing Coverage</div>
+      <div class="script-text">
+        <strong>Do you have any life insurance through your work?</strong>
+      </div>
+      <div class="coaching-tip">Tell all clients to take whatever they can through work &mdash; it&rsquo;s pennies on the dollar for the group plan. But it&rsquo;s like a company car: as soon as you leave, find a better opportunity, or get fired, you&rsquo;re stuck with no coverage.</div>
+      <div class="script-text" style="margin-top:12px;">
+        <strong>Do you have any private life insurance?</strong>
+        <br>
+        <em>Coverage with who? When did you get it? How much coverage? What benefits? Permanent or term? How much are they making you pay? Any living benefits included?</em>
+      </div>
+      <div class="script-text" style="margin-top:12px;">
+        <strong>What else do you have that could act like life insurance in case of an emergency?</strong> So 401k, IRAs, stocks, bonds, significant savings, anything like that?
+      </div>
+    </div>
+
+    <!-- Probing for assets -->
+    <div class="objection-accordion" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>If they say &ldquo;No&rdquo; to assets / If they won&rsquo;t share amounts</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal"><strong>If no assets:</strong> Really, nothing? <em>[shocked]</em> Usually my clients that are &lt;job type&gt; at least have a &lt;asset type&gt; through work&hellip;
+        <br><br>
+        <strong>If they have assets but won&rsquo;t share:</strong> It&rsquo;s my job to meet the maximum amount of your need with the least amount of coverage&hellip; so if you&rsquo;ve got 500k in the 401k and only 200k left on the loan, I&rsquo;d be the first to switch the conversation &mdash; you don&rsquo;t need a traditional mortgage protection plan. Just so I better understand how much coverage would make sense, about how much is in there?
+        <br><br>
+        <strong>Overshoot technique:</strong> Well, most of my clients that are &lt;engineers&gt; for &lt;20+ years&gt; &mdash; they have about 600K saved up. That sound about right?
+        <br><br>
+        <strong>If still resistant:</strong> Well <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, if you don&rsquo;t trust me with how much you&rsquo;ve been able to put to the side for a rainy day, then I&rsquo;m not sure how you could trust me to customize a plan that would pay your family on their worst day&hellip; just so I can best understand what would be a reasonable amount of coverage, about how much was in the &lt;asset&gt;?</div>
+        <div class="coaching-tip">The overshoot technique works because people correct you downward &mdash; which still gives you the number you need.</div>
+      </div>
+    </div>
+
+    <!-- ======== 9. HEALTH QUESTIONS ======== -->
+    <div class="card" style="border-left: 4px solid var(--primary);">
+      <div class="card-header">Health Questions</div>
+      <div class="script-text">
+        Ok that gives me a better understanding of the financial situation, now into a few health questions to see what you can qualify for.
+      </div>
+    </div>
+
+    <div class="card">
+      <ul class="checklist" id="mpHealthChecklist">
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">Are you a smoker, or a non-smoker?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">What&rsquo;s an approximate height/weight for ya?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">How old are you?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">And when was your birthday?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">Have you had any surgeries in the last 10 years?</div>
+            <div class="checklist-sub">If so, when? Any meds prescribed in relation to the surgery or the recovery?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">Any overnight hospital stays in the past 5 years?</div>
+            <div class="checklist-sub">Any meds prescribed in relation?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">Do you take any medications?</div>
+            <div class="checklist-sub">When first prescribed? Names, conditions, doses?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">Anything else that you might not take daily but could show up in a prescription history?</div>
+            <div class="checklist-sub">When were they prescribed?</div>
+          </div>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-circle"></div>
+          <div>
+            <div class="checklist-text">Any run-ins with the law, DUIs, reckless driving, etc.?</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bank Lookup -->
+    <div class="card" id="mpBankLookupCard">
+      <div class="card-header">Bank</div>
+      <div class="script-text" style="margin-bottom:12px;">
+        <strong>And finally, who do you bank with?</strong>
+        <br>
+        <em>Some of our carriers offer discounts depending on your bank.</em>
+      </div>
+      <div style="position:relative;">
+        <input type="text" id="mpStateInput" placeholder="Type or select state..." autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"
+          style="width:100%;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:17px;background:var(--input-bg);color:var(--text);outline:none;margin-bottom:10px;"
+          oninput="mpSearchState(this.value)" onfocus="mpSearchState(this.value)">
+        <input type="hidden" id="mpStateSelect" value="">
+        <div id="mpStateDropdown" style="display:none;position:absolute;left:0;right:0;top:calc(100% - 10px);background:var(--card);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);max-height:200px;overflow-y:auto;z-index:11;box-shadow:var(--shadow-lg);"></div>
+      </div>
+      <div style="position:relative;">
+        <input type="text" id="mpBankInput" placeholder="Type bank name..." autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"
+          style="width:100%;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:17px;background:var(--input-bg);color:var(--text);outline:none;"
+          oninput="mpSearchBank(this.value)" onfocus="mpSearchBank(this.value)" onblur="setTimeout(mpLookupRouting,200)" onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('mpBankDropdown').style.display='none';mpLookupRouting();}">
+        <div id="mpBankDropdown" style="display:none;position:absolute;left:0;right:0;top:100%;background:var(--card);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);max-height:200px;overflow-y:auto;z-index:10;box-shadow:var(--shadow-lg);"></div>
+      </div>
+      <div id="mpRoutingResult" style="display:none;margin-top:14px;padding:16px;background:rgba(48,209,88,0.1);border:1.5px solid var(--success);border-radius:var(--radius-sm);text-align:center;">
+        <div style="font-size:13px;font-weight:600;color:var(--success);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Routing Number</div>
+        <div id="mpRoutingNumber" style="font-size:28px;font-weight:800;letter-spacing:2px;color:var(--text);"></div>
+        <div id="mpRoutingBankName" style="font-size:13px;color:var(--text-secondary);margin-top:4px;"></div>
+      </div>
+      <div id="mpRoutingNotFound" style="display:none;margin-top:14px;padding:14px;background:rgba(255,69,58,0.1);border:1.5px solid var(--danger);border-radius:var(--radius-sm);text-align:center;font-size:14px;color:var(--text);">
+        Bank not found in database.
+      </div>
+    </div>
+
+    <!-- ======== 10. RECAP ======== -->
+    <div class="inoculation-card">
+      <div class="card-header">Recap</div>
+      <div class="script-text">
+        Alright <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, just to make sure I have everything right &mdash;
+        <br><br>
+        It&rsquo;s you and <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> there on <span class="fill-field filled" data-field="address" onclick="editField(this)">Address</span>,
+        <br><br>
+        Your mortgage is around <span class="fill-field" data-field="mortgagePayment" onclick="editField(this)">$_____</span> a month, taxes and insurance included, with about <span class="fill-field" data-field="loanBalance" onclick="editField(this)">$_____</span> left on the balance?
+        <br><br>
+        And you mentioned if something happened, <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> would most likely <span id="mp-recap-scenario" style="font-weight:600;color:var(--primary);">___</span> &mdash; right?
+        <br><br>
+        <strong>Does that all sound about right so far?</strong>
+      </div>
+      <div class="direction mt-8"><em>[Wait for confirmation before proceeding]</em></div>
+    </div>
+
+    <!-- ======== 11. PRESENTATION — TWO SIDES OF THE COIN ======== -->
+    <div class="card" style="border-left: 4px solid var(--success);">
+      <div class="card-header">Presentation &mdash; Two Sides of the Coin</div>
+      <div class="script-text">
+        Now, when we think about mortgage protection, I always tell clients to think of it like a coin &mdash; <strong>two sides.</strong>
+      </div>
+    </div>
+
+    <!-- Death Benefit -->
+    <div class="card">
+      <div class="card-header">Side 1 &mdash; Traditional Death Benefit</div>
+      <div class="script-text">
+        God forbid something happens, the insurance company writes a lump sum, <strong>tax-free check</strong> directly to <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> so the home could be paid off completely &mdash; or so they could have enough time to get the home sold.
+        <br><br>
+        God forbid something happens, the insurance company writes a lump sum, tax-free check directly to <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> so they can keep it, or sell it and keep the equity &mdash; without ever having to unexpectedly be burdened by the mortgage bill.
+        <br><br>
+        <strong>I&rsquo;m assuming that&rsquo;s pretty important to you, right?</strong>
+      </div>
+    </div>
+
+    <!-- Living Benefits -->
+    <div class="inoculation-card">
+      <div class="card-header">Side 2 &mdash; Living Benefits</div>
+      <div class="script-text">
+        Now, the other side of the coin is what we call <strong>living benefits</strong> &mdash; and remember, these plans are fully customizable, so this is something I can build in if it makes sense for you.
+        <br><br>
+        Basically, if you were to get sick &mdash; anything major like cancer, heart attack, stroke &mdash; the insurance company would actually <strong>advance you the death benefit while you&rsquo;re still alive.</strong>
+        <br><br>
+        You could use that money to keep the mortgage covered while you&rsquo;re out of work, or honestly, anything else you might need at that point &mdash; it&rsquo;s your money.
+        <br><br>
+        <strong>Are those living benefits something you could also see the value in?</strong>
+      </div>
+      <div class="coaching-tip">Living benefits are the differentiator. Most prospects have never heard of this &mdash; it&rsquo;s your &ldquo;wow factor&rdquo; moment.</div>
+    </div>
+
+    <!-- ======== 12. HOLD & QUOTE ======== -->
+    <div class="card" style="border-left: 4px solid var(--success);">
+      <div class="card-header">Hold &amp; Quote</div>
+      <div class="script-text">
+        Perfect. Give me a couple mins &mdash; I&rsquo;m going to plug in this information in our software that checks all 65 carriers here in the state and see what options we have available for you that match exactly what you&rsquo;re looking for.
+        <br><br>
+        I&rsquo;m gonna place you on a brief hold&hellip; <strong>go ahead and grab a pen and paper, I&rsquo;ll have you write a few things down when I get back. Sound good?</strong>
+      </div>
+    </div>
+
+    <!-- Call Complete -->
+    <div class="card text-center" style="margin-top: 20px;">
+      <div style="font-size: 40px; margin-bottom: 12px;">&#127881;</div>
+      <div class="section-title" style="font-size: 22px;">End of Script</div>
+      <div class="text-secondary text-sm mt-8">Come back with quote options and close.</div>
+      <button class="start-btn mt-16" onclick="resetCall()" style="max-width: 200px; margin: 16px auto 0;">Start New Call</button>
+    </div>
+  </div>
+
 </div>
 
 
@@ -2917,6 +3361,23 @@ body.edit-mode .fill-field {
     <div class="input-actions">
       <button class="secondary" style="background:var(--input-bg);color:var(--text);" onclick="document.getElementById('kepfeModal').classList.remove('active');">Cancel</button>
       <button class="primary" style="background:var(--primary);color:white;" onclick="submitKepfePw()">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<!-- MORTGAGE PROTECTION VOICEMAIL MODAL -->
+<div class="input-modal" id="mpVoicemailModal" onclick="if(event.target===this){this.classList.remove('active');}">
+  <div class="input-card" style="max-width:440px;">
+    <label style="font-size:16px;font-weight:700;margin-bottom:12px;display:block;">Voicemail Script</label>
+    <div style="font-size:15px;line-height:1.7;color:var(--text);">
+      Good <strong>{Morning/Evening/Day}</strong>, this message is for <strong><span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span></strong> &mdash; this is ______ getting back to you in regards to your mortgage with <strong><span class="fill-field" data-field="lender" onclick="editField(this)">Lender</span></strong>.
+      <br><br>
+      We have some pending paperwork to get back to you on regarding an internal audit on the mortgage for <strong><span class="fill-field" data-field="address" onclick="editField(this)">Address</span></strong>.
+      <br><br>
+      Please give me a call back at <strong>443.878.2749</strong>, regarding pending paperwork.
+    </div>
+    <div class="input-actions" style="margin-top:16px;">
+      <button class="primary" style="background:var(--primary);color:white;width:100%;" onclick="document.getElementById('mpVoicemailModal').classList.remove('active');">Close</button>
     </div>
   </div>
 </div>
@@ -3031,6 +3492,10 @@ const KEPFE_STAGES_V3 = [
   { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
 ];
 
+const MP_STAGES = [
+  { id: 'mp-sec-script', label: 'Script', title: 'Mortgage Protection' },
+];
+
 let STAGES = VETERANS_STAGES;
 
 let currentStage = -1; // -1 = welcome
@@ -3087,7 +3552,9 @@ function startCall() {
   const nameInput = document.getElementById('prospectNameInput');
   const name = nameInput.value.trim() || 'Prospect';
   fieldData['name'] = name;
-  if (selectedScript === 'kepfe' && kepfeVersion === 2) {
+  if (selectedScript === 'mp') {
+    STAGES = MP_STAGES;
+  } else if (selectedScript === 'kepfe' && kepfeVersion === 2) {
     STAGES = KEPFE_STAGES_V2;
   } else if (selectedScript === 'kepfe' && kepfeVersion === 3) {
     STAGES = KEPFE_STAGES_V3;
@@ -3098,7 +3565,7 @@ function startCall() {
   updateAllFields();
   document.body.classList.remove('on-welcome');
   document.getElementById('welcome').classList.remove('active');
-  document.getElementById('scriptTypeBadge').textContent = selectedScript === 'aged' ? 'Aged Leads' : selectedScript === 'fe' ? 'Final Expense' : selectedScript === 'kepfe' ? (kepfeVersion > 1 ? "Kep's Proprietary FE (V" + kepfeVersion + ")" : "Kep's Proprietary FE") : 'Veterans';
+  document.getElementById('scriptTypeBadge').textContent = selectedScript === 'mp' ? 'Mortgage Protection' : selectedScript === 'aged' ? 'Aged Leads' : selectedScript === 'fe' ? 'Final Expense' : selectedScript === 'kepfe' ? (kepfeVersion > 1 ? "Kep's Proprietary FE (V" + kepfeVersion + ")" : "Kep's Proprietary FE") : 'Veterans';
   updateScriptVersionToggle();
   goToStage(0);
 }
@@ -3232,6 +3699,23 @@ function resetCall() {
   document.getElementById('kepfev2-btn-burial').classList.remove('active');
   updateScriptVersionToggle();
 
+  // Reset Mortgage Protection elements
+  document.getElementById('mpBeneficiaryInput').value = '';
+  document.getElementById('mpBeneficiaryInputNobody').value = '';
+  document.getElementById('mpMortgagePayment').value = '';
+  document.getElementById('mpLoanBalance').value = '';
+  mpSelectedScenarios = [];
+  document.getElementById('mp-recap-scenario').textContent = '___';
+  document.querySelectorAll('#mp-scenario-stay,#mp-scenario-sell,#mp-scenario-afford,#mp-scenario-movein,#mp-scenario-equity').forEach(b => b.classList.remove('active'));
+  document.getElementById('mp-hh-somebody').style.display = 'none';
+  document.getElementById('mp-hh-nobody').style.display = 'none';
+  document.getElementById('mp-hh-btn-somebody').classList.remove('active');
+  document.getElementById('mp-hh-btn-nobody').classList.remove('active');
+  document.getElementById('mp-afford-yes').style.display = 'none';
+  document.getElementById('mp-afford-no').style.display = 'none';
+  document.getElementById('mp-afford-btn-yes').classList.remove('active');
+  document.getElementById('mp-afford-btn-no').classList.remove('active');
+
   // Reset script choice UI
   selectedScript = 'veterans';
   document.querySelectorAll('.script-choice').forEach(c => c.classList.remove('active'));
@@ -3258,6 +3742,11 @@ const FIELD_LABELS = {
   carrier: "Insurance Carrier",
   cityState: "City or State",
   relationship: "Relationship (Son/Daughter/Spouse)",
+  lender: "Mortgage Lender",
+  streetName: "Street Name",
+  address: "Property Address",
+  mortgagePayment: "Monthly Mortgage Payment",
+  loanBalance: "Loan Balance",
 };
 
 function editField(el) {
@@ -3320,6 +3809,7 @@ document.addEventListener('keydown', (e) => {
     closeQbModal();
     closeAllModals();
     document.getElementById('kepfeModal').classList.remove('active');
+    document.getElementById('mpVoicemailModal').classList.remove('active');
   }
 });
 
@@ -3442,15 +3932,12 @@ function updateScriptVersionToggle() {
       btn.classList.add('v3-active');
     }
     lbl.textContent = 'V' + kepfeVersion;
-    // Show tips toggle only on V3
-    tipsBtn.classList.toggle('active', kepfeVersion === 3);
-    if (kepfeVersion === 3) {
-      updateTipsToggle();
-    }
   } else {
     btn.classList.remove('active', 'v2-active', 'v3-active');
-    tipsBtn.classList.remove('active');
   }
+  // Tips toggle always visible
+  tipsBtn.classList.add('active');
+  updateTipsToggle();
 }
 
 function toggleScriptVersion() {
@@ -3727,6 +4214,150 @@ document.addEventListener('click', (e) => {
 });
 
 // ============================================================
+// MORTGAGE PROTECTION TOGGLES
+// ============================================================
+function mpShowHousehold(type) {
+  document.getElementById('mp-hh-somebody').style.display = type === 'somebody' ? 'block' : 'none';
+  document.getElementById('mp-hh-nobody').style.display = type === 'nobody' ? 'block' : 'none';
+  document.getElementById('mp-hh-btn-somebody').classList.toggle('active', type === 'somebody');
+  document.getElementById('mp-hh-btn-nobody').classList.toggle('active', type === 'nobody');
+  // Reset afford toggles when switching
+  document.getElementById('mp-afford-yes').style.display = 'none';
+  document.getElementById('mp-afford-no').style.display = 'none';
+  document.getElementById('mp-afford-btn-yes').classList.remove('active');
+  document.getElementById('mp-afford-btn-no').classList.remove('active');
+}
+
+let mpSelectedScenarios = [];
+const MP_SCENARIO_TEXT = {
+  stay: 'want to stay in the home',
+  sell: 'want to sell or downsize',
+  afford: 'want to make it affordable',
+  movein: 'want to move in',
+  equity: 'sell for equity and keep it as a blessing'
+};
+
+function mpToggleScenario(btn, key) {
+  btn.classList.toggle('active');
+  const idx = mpSelectedScenarios.indexOf(key);
+  if (idx > -1) {
+    mpSelectedScenarios.splice(idx, 1);
+  } else {
+    mpSelectedScenarios.push(key);
+  }
+  const el = document.getElementById('mp-recap-scenario');
+  if (mpSelectedScenarios.length === 0) {
+    el.textContent = '___';
+  } else {
+    el.textContent = mpSelectedScenarios.map(k => MP_SCENARIO_TEXT[k]).join(', ');
+  }
+}
+
+function mpSetField(field, val) {
+  const v = val.trim();
+  if (v) { fieldData[field] = v; }
+  updateAllFields();
+}
+
+function mpShowAfford(type) {
+  document.getElementById('mp-afford-yes').style.display = type === 'yes' ? 'block' : 'none';
+  document.getElementById('mp-afford-no').style.display = type === 'no' ? 'block' : 'none';
+  document.getElementById('mp-afford-btn-yes').classList.toggle('active', type === 'yes');
+  document.getElementById('mp-afford-btn-no').classList.toggle('active', type === 'no');
+}
+
+// MP Bank Lookup
+function mpSearchState(val) {
+  const dropdown = document.getElementById('mpStateDropdown');
+  const query = val.toLowerCase().trim();
+  const matches = query.length === 0 ? US_STATES : US_STATES.filter(s =>
+    s.toLowerCase().includes(query) || STATE_NAMES[s].toLowerCase().includes(query)
+  );
+  if (matches.length === 0) { dropdown.style.display = 'none'; return; }
+  dropdown.innerHTML = matches.map(s =>
+    '<div onclick="mpPickState(\'' + s + '\')" style="padding:12px 14px;cursor:pointer;font-size:16px;border-bottom:1px solid var(--border);color:var(--text);">' + STATE_NAMES[s] + ' <span style="color:var(--text-secondary);">(' + s + ')</span></div>'
+  ).join('');
+  dropdown.style.display = 'block';
+}
+
+function mpPickState(code) {
+  document.getElementById('mpStateInput').value = STATE_NAMES[code] + ' (' + code + ')';
+  document.getElementById('mpStateSelect').value = code;
+  document.getElementById('mpStateDropdown').style.display = 'none';
+  const bankVal = document.getElementById('mpBankInput').value.trim();
+  if (bankVal) mpLookupRouting();
+}
+
+function mpSearchBank(val) {
+  const dropdown = document.getElementById('mpBankDropdown');
+  if (!val || val.length < 2) { dropdown.style.display = 'none'; return; }
+  const query = val.toLowerCase();
+  const bankNames = Object.keys(BANK_DATA);
+  const matches = bankNames.filter(b => b.toLowerCase().includes(query)).slice(0, 6);
+  if (matches.length === 0) {
+    dropdown.innerHTML = '<div style="padding:12px 14px;color:var(--text-secondary);font-size:14px;">No match &mdash; try another name</div>';
+    dropdown.style.display = 'block';
+    return;
+  }
+  dropdown.innerHTML = matches.map(b =>
+    '<div onclick="mpSelectBank(\'' + b.replace(/'/g,"\\'") + '\')" style="padding:12px 14px;cursor:pointer;font-size:16px;border-bottom:1px solid var(--border);color:var(--text);"><strong>' + b + '</strong></div>'
+  ).join('');
+  dropdown.style.display = 'block';
+}
+
+function mpSelectBank(name) {
+  document.getElementById('mpBankInput').value = name;
+  document.getElementById('mpBankDropdown').style.display = 'none';
+  mpLookupRouting();
+}
+
+function mpLookupRouting() {
+  const bankVal = document.getElementById('mpBankInput').value.trim();
+  const state = document.getElementById('mpStateSelect').value;
+  const notFound = document.getElementById('mpRoutingNotFound');
+  const result = document.getElementById('mpRoutingResult');
+  result.style.display = 'none';
+  notFound.style.display = 'none';
+  if (!bankVal) return;
+  if (!state) {
+    alert('Please select a state first');
+    document.getElementById('mpStateInput').focus();
+    return;
+  }
+  const query = bankVal.toLowerCase();
+  let entry = null;
+  let matchedName = bankVal;
+  for (const key of Object.keys(BANK_DATA)) {
+    if (key.toLowerCase() === query || key.toLowerCase().includes(query) || query.includes(key.toLowerCase())) {
+      entry = BANK_DATA[key];
+      matchedName = key;
+      break;
+    }
+  }
+  if (!entry) {
+    notFound.innerHTML = 'Bank not in database. <a href="https://www.google.com/search?q=' + encodeURIComponent(bankVal + ' routing number ' + state) + '" target="_blank" style="color:var(--primary);font-weight:600;">Search Google</a>';
+    notFound.style.display = 'block';
+    return;
+  }
+  let routing = null;
+  if (typeof entry === 'string') {
+    routing = entry;
+  } else if (entry[state]) {
+    routing = entry[state];
+  } else if (entry['ALL']) {
+    routing = entry['ALL'];
+  }
+  if (routing) {
+    document.getElementById('mpRoutingNumber').textContent = routing;
+    document.getElementById('mpRoutingBankName').textContent = matchedName + ' (' + state + ')';
+    result.style.display = 'block';
+  } else {
+    notFound.innerHTML = 'No routing number for <strong>' + matchedName + '</strong> in <strong>' + state + '</strong>. <a href="https://www.google.com/search?q=' + encodeURIComponent(matchedName + ' routing number ' + state) + '" target="_blank" style="color:var(--primary);font-weight:600;">Search Google</a>';
+    notFound.style.display = 'block';
+  }
+}
+
+// ============================================================
 // OBJECTION ACCORDIONS
 // ============================================================
 function toggleAccordion(el) {
@@ -3850,6 +4481,18 @@ document.addEventListener('click', (e) => {
     }
     if (!e.target.closest('#bankInput') && !e.target.closest('#bankDropdown')) {
       document.getElementById('bankDropdown').style.display = 'none';
+    }
+  }
+  // MP bank lookup dropdowns
+  if (!e.target.closest('#mpBankLookupCard')) {
+    document.getElementById('mpBankDropdown').style.display = 'none';
+    document.getElementById('mpStateDropdown').style.display = 'none';
+  } else {
+    if (!e.target.closest('#mpStateInput') && !e.target.closest('#mpStateDropdown')) {
+      document.getElementById('mpStateDropdown').style.display = 'none';
+    }
+    if (!e.target.closest('#mpBankInput') && !e.target.closest('#mpBankDropdown')) {
+      document.getElementById('mpBankDropdown').style.display = 'none';
     }
   }
 });
