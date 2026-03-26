@@ -2919,7 +2919,7 @@ body.edit-mode .fill-field {
 
     <!-- Voicemail Button -->
     <div style="text-align:center;margin-bottom:16px;">
-      <button class="coverage-toggle active" style="max-width:260px;width:100%;padding:12px 20px;font-size:15px;" onclick="document.getElementById('mpVoicemailModal').classList.add('active')">&#9993; Voicemail Script</button>
+      <button class="coverage-toggle active" style="max-width:260px;width:100%;padding:12px 20px;font-size:15px;" onclick="openMpVoicemail()">&#9993; Voicemail Script</button>
     </div>
 
     <!-- ======== 1. AUTHORITY OPENER ======== -->
@@ -3393,12 +3393,12 @@ body.edit-mode .fill-field {
 <div class="input-modal" id="mpVoicemailModal" onclick="if(event.target===this){this.classList.remove('active');}">
   <div class="input-card" style="max-width:440px;">
     <label style="font-size:16px;font-weight:700;margin-bottom:12px;display:block;">Voicemail Script</label>
-    <div style="font-size:15px;line-height:1.7;color:var(--text);">
-      Good <strong>{Morning/Evening/Day}</strong>, this message is for <strong><span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span></strong> &mdash; this is ______ getting back to you in regards to your mortgage with <strong><span class="fill-field" data-field="lender" onclick="editField(this)">Lender</span></strong>.
+    <div class="script-text" style="font-size:15px;line-height:1.7;">
+      Good <span id="mpVmGreeting" style="color:var(--primary);font-weight:700;">Morning</span>, this message is for <span class="fill-field filled" data-field="name" onclick="editField(this)">Prospect</span> &mdash; this is ______ getting back to you in regards to your mortgage with <span class="fill-field filled" data-field="lender" onclick="editField(this)">Lender</span>.
       <br><br>
-      We have some pending paperwork to get back to you on regarding an internal audit on the mortgage for <strong><span class="fill-field" data-field="address" onclick="editField(this)">Address</span></strong>.
+      We have some pending paperwork to get back to you on regarding an internal audit on the mortgage for <span class="fill-field filled" data-field="address" onclick="editField(this)">Address</span>.
       <br><br>
-      Please give me a call back at <strong>443.878.2749</strong>, regarding pending paperwork.
+      Please give me a call back at <strong>(443) 878-2749</strong>, regarding pending paperwork.
     </div>
     <div class="input-actions" style="margin-top:16px;">
       <button class="primary" style="background:var(--primary);color:white;width:100%;" onclick="document.getElementById('mpVoicemailModal').classList.remove('active');">Close</button>
@@ -4276,6 +4276,13 @@ function mpToggleScenario(btn, key) {
   } else {
     el.textContent = mpSelectedScenarios.map(k => MP_SCENARIO_TEXT[k]).join(', ');
   }
+}
+
+function openMpVoicemail() {
+  const h = new Date().getHours();
+  const greeting = h < 12 ? 'Morning' : h < 17 ? 'Afternoon' : 'Evening';
+  document.getElementById('mpVmGreeting').textContent = greeting;
+  document.getElementById('mpVoicemailModal').classList.add('active');
 }
 
 function mpSetField(field, val) {
