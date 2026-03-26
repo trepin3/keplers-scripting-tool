@@ -3340,6 +3340,30 @@ body.edit-mode .fill-field {
       </div>
     </div>
 
+    <!-- Bottom Bank Lookup (mirrors top) -->
+    <div class="card" id="mpBankLookupCardBottom">
+      <div class="card-header">Bank Routing Lookup</div>
+      <div style="position:relative;">
+        <input type="text" id="mpStateInputBottom" placeholder="Type or select state..." autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"
+          style="width:100%;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:17px;background:var(--input-bg);color:var(--text);outline:none;margin-bottom:10px;"
+          oninput="mpSearchStateBottom(this.value)" onfocus="mpSearchStateBottom(this.value)">
+        <input type="hidden" id="mpStateSelectBottom" value="">
+        <div id="mpStateDropdownBottom" style="display:none;position:absolute;left:0;right:0;top:calc(100% - 10px);background:var(--card);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);max-height:200px;overflow-y:auto;z-index:11;box-shadow:var(--shadow-lg);"></div>
+      </div>
+      <div style="position:relative;">
+        <input type="text" id="mpBankInputBottom" placeholder="Type bank name..." autocomplete="nope" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true"
+          style="width:100%;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:17px;background:var(--input-bg);color:var(--text);outline:none;"
+          oninput="mpSearchBankBottom(this.value)" onfocus="mpSearchBankBottom(this.value)" onblur="setTimeout(mpLookupRoutingBottom,200)" onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('mpBankDropdownBottom').style.display='none';mpLookupRoutingBottom();}">
+        <div id="mpBankDropdownBottom" style="display:none;position:absolute;left:0;right:0;top:100%;background:var(--card);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);max-height:200px;overflow-y:auto;z-index:10;box-shadow:var(--shadow-lg);"></div>
+      </div>
+      <div id="mpRoutingResultBottom2" style="display:none;margin-top:14px;padding:16px;background:rgba(48,209,88,0.1);border:1.5px solid var(--success);border-radius:var(--radius-sm);text-align:center;">
+        <div style="font-size:13px;font-weight:600;color:var(--success);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Routing Number</div>
+        <div id="mpRoutingNumberBottom2" style="font-size:28px;font-weight:800;letter-spacing:2px;color:var(--text);"></div>
+        <div id="mpRoutingBankNameBottom2" style="font-size:13px;color:var(--text-secondary);margin-top:4px;"></div>
+      </div>
+      <div id="mpRoutingNotFoundBottom" style="display:none;margin-top:14px;padding:14px;background:rgba(255,69,58,0.1);border:1.5px solid var(--danger);border-radius:var(--radius-sm);text-align:center;font-size:14px;color:var(--text);"></div>
+    </div>
+
     <!-- Call Complete -->
     <div class="card text-center" style="margin-top: 20px;">
       <div style="font-size: 40px; margin-bottom: 12px;">&#127881;</div>
@@ -3707,6 +3731,7 @@ function resetCall() {
   mpSelectedScenarios = [];
   document.getElementById('mp-recap-scenario').textContent = '___';
   document.querySelectorAll('#mp-scenario-stay,#mp-scenario-sell,#mp-scenario-afford,#mp-scenario-movein,#mp-scenario-equity').forEach(b => b.classList.remove('active'));
+  document.getElementById('mpRoutingResultBottom2').style.display = 'none';
   document.getElementById('mp-hh-somebody').style.display = 'none';
   document.getElementById('mp-hh-nobody').style.display = 'none';
   document.getElementById('mp-hh-btn-somebody').classList.remove('active');
@@ -4351,6 +4376,114 @@ function mpLookupRouting() {
     document.getElementById('mpRoutingNumber').textContent = routing;
     document.getElementById('mpRoutingBankName').textContent = matchedName + ' (' + state + ')';
     result.style.display = 'block';
+    // Mirror into bottom lookup card
+    document.getElementById('mpRoutingNumberBottom2').textContent = routing;
+    document.getElementById('mpRoutingBankNameBottom2').textContent = matchedName + ' (' + state + ')';
+    document.getElementById('mpRoutingResultBottom2').style.display = 'block';
+    // Sync bottom inputs
+    document.getElementById('mpStateInputBottom').value = document.getElementById('mpStateInput').value;
+    document.getElementById('mpStateSelectBottom').value = state;
+    document.getElementById('mpBankInputBottom').value = document.getElementById('mpBankInput').value;
+    document.getElementById('mpRoutingNotFoundBottom').style.display = 'none';
+  } else {
+    notFound.innerHTML = 'No routing number for <strong>' + matchedName + '</strong> in <strong>' + state + '</strong>. <a href="https://www.google.com/search?q=' + encodeURIComponent(matchedName + ' routing number ' + state) + '" target="_blank" style="color:var(--primary);font-weight:600;">Search Google</a>';
+    notFound.style.display = 'block';
+    document.getElementById('mpRoutingResultBottom2').style.display = 'none';
+  }
+}
+
+// Bottom bank lookup (mirrors top)
+function mpSearchStateBottom(val) {
+  const dropdown = document.getElementById('mpStateDropdownBottom');
+  const query = val.toLowerCase().trim();
+  const matches = query.length === 0 ? US_STATES : US_STATES.filter(s =>
+    s.toLowerCase().includes(query) || STATE_NAMES[s].toLowerCase().includes(query)
+  );
+  if (matches.length === 0) { dropdown.style.display = 'none'; return; }
+  dropdown.innerHTML = matches.map(s =>
+    '<div onclick="mpPickStateBottom(\'' + s + '\')" style="padding:12px 14px;cursor:pointer;font-size:16px;border-bottom:1px solid var(--border);color:var(--text);">' + STATE_NAMES[s] + ' <span style="color:var(--text-secondary);">(' + s + ')</span></div>'
+  ).join('');
+  dropdown.style.display = 'block';
+}
+
+function mpPickStateBottom(code) {
+  document.getElementById('mpStateInputBottom').value = STATE_NAMES[code] + ' (' + code + ')';
+  document.getElementById('mpStateSelectBottom').value = code;
+  document.getElementById('mpStateDropdownBottom').style.display = 'none';
+  // Sync top
+  document.getElementById('mpStateInput').value = STATE_NAMES[code] + ' (' + code + ')';
+  document.getElementById('mpStateSelect').value = code;
+  if (document.getElementById('mpBankInputBottom').value.trim()) mpLookupRoutingBottom();
+}
+
+function mpSearchBankBottom(val) {
+  const dropdown = document.getElementById('mpBankDropdownBottom');
+  if (!val || val.length < 2) { dropdown.style.display = 'none'; return; }
+  const query = val.toLowerCase();
+  const matches = Object.keys(BANK_DATA).filter(b => b.toLowerCase().includes(query)).slice(0, 6);
+  if (matches.length === 0) {
+    dropdown.innerHTML = '<div style="padding:12px 14px;color:var(--text-secondary);font-size:14px;">No match &mdash; try another name</div>';
+    dropdown.style.display = 'block';
+    return;
+  }
+  dropdown.innerHTML = matches.map(b =>
+    '<div onclick="mpSelectBankBottom(\'' + b.replace(/'/g,"\\'") + '\')" style="padding:12px 14px;cursor:pointer;font-size:16px;border-bottom:1px solid var(--border);color:var(--text);"><strong>' + b + '</strong></div>'
+  ).join('');
+  dropdown.style.display = 'block';
+}
+
+function mpSelectBankBottom(name) {
+  document.getElementById('mpBankInputBottom').value = name;
+  document.getElementById('mpBankDropdownBottom').style.display = 'none';
+  mpLookupRoutingBottom();
+}
+
+function mpLookupRoutingBottom() {
+  const bankVal = document.getElementById('mpBankInputBottom').value.trim();
+  const state = document.getElementById('mpStateSelectBottom').value;
+  const notFound = document.getElementById('mpRoutingNotFoundBottom');
+  const result = document.getElementById('mpRoutingResultBottom2');
+  result.style.display = 'none';
+  notFound.style.display = 'none';
+  if (!bankVal) return;
+  if (!state) {
+    alert('Please select a state first');
+    document.getElementById('mpStateInputBottom').focus();
+    return;
+  }
+  const query = bankVal.toLowerCase();
+  let entry = null;
+  let matchedName = bankVal;
+  for (const key of Object.keys(BANK_DATA)) {
+    if (key.toLowerCase() === query || key.toLowerCase().includes(query) || query.includes(key.toLowerCase())) {
+      entry = BANK_DATA[key];
+      matchedName = key;
+      break;
+    }
+  }
+  if (!entry) {
+    notFound.innerHTML = 'Bank not in database. <a href="https://www.google.com/search?q=' + encodeURIComponent(bankVal + ' routing number ' + state) + '" target="_blank" style="color:var(--primary);font-weight:600;">Search Google</a>';
+    notFound.style.display = 'block';
+    return;
+  }
+  let routing = null;
+  if (typeof entry === 'string') { routing = entry; }
+  else if (entry[state]) { routing = entry[state]; }
+  else if (entry['ALL']) { routing = entry['ALL']; }
+  if (routing) {
+    // Update bottom card result
+    document.getElementById('mpRoutingNumberBottom2').textContent = routing;
+    document.getElementById('mpRoutingBankNameBottom2').textContent = matchedName + ' (' + state + ')';
+    result.style.display = 'block';
+    // Update top card
+    document.getElementById('mpRoutingNumber').textContent = routing;
+    document.getElementById('mpRoutingBankName').textContent = matchedName + ' (' + state + ')';
+    document.getElementById('mpRoutingResult').style.display = 'block';
+    document.getElementById('mpRoutingNotFound').style.display = 'none';
+    // Sync top inputs
+    document.getElementById('mpStateInput').value = document.getElementById('mpStateInputBottom').value;
+    document.getElementById('mpStateSelect').value = state;
+    document.getElementById('mpBankInput').value = document.getElementById('mpBankInputBottom').value;
   } else {
     notFound.innerHTML = 'No routing number for <strong>' + matchedName + '</strong> in <strong>' + state + '</strong>. <a href="https://www.google.com/search?q=' + encodeURIComponent(matchedName + ' routing number ' + state) + '" target="_blank" style="color:var(--primary);font-weight:600;">Search Google</a>';
     notFound.style.display = 'block';
@@ -4483,7 +4616,7 @@ document.addEventListener('click', (e) => {
       document.getElementById('bankDropdown').style.display = 'none';
     }
   }
-  // MP bank lookup dropdowns
+  // MP bank lookup dropdowns (top)
   if (!e.target.closest('#mpBankLookupCard')) {
     document.getElementById('mpBankDropdown').style.display = 'none';
     document.getElementById('mpStateDropdown').style.display = 'none';
@@ -4493,6 +4626,18 @@ document.addEventListener('click', (e) => {
     }
     if (!e.target.closest('#mpBankInput') && !e.target.closest('#mpBankDropdown')) {
       document.getElementById('mpBankDropdown').style.display = 'none';
+    }
+  }
+  // MP bank lookup dropdowns (bottom)
+  if (!e.target.closest('#mpBankLookupCardBottom')) {
+    document.getElementById('mpBankDropdownBottom').style.display = 'none';
+    document.getElementById('mpStateDropdownBottom').style.display = 'none';
+  } else {
+    if (!e.target.closest('#mpStateInputBottom') && !e.target.closest('#mpStateDropdownBottom')) {
+      document.getElementById('mpStateDropdownBottom').style.display = 'none';
+    }
+    if (!e.target.closest('#mpBankInputBottom') && !e.target.closest('#mpBankDropdownBottom')) {
+      document.getElementById('mpBankDropdownBottom').style.display = 'none';
     }
   }
 });
