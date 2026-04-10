@@ -2479,9 +2479,25 @@ body.edit-mode .fill-field {
           Now is it just you we&rsquo;re looking at coverage for, or is there a spouse as well?
         </div>
         <div class="coaching-tip"><strong>Psychology:</strong> &ldquo;The state requires&rdquo; = authority compliance frame &mdash; they don&rsquo;t question it. Sharing your NPN first builds reciprocity and pre-frames the SSN ask later: &ldquo;You gave me yours, I gave you mine.&rdquo; Pen &amp; paper = sunk cost investment.</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;">
+          <button class="coverage-toggle" id="v4-policy-btn-one" onclick="handleV4PolicyCount('one')">1 Policy</button>
+          <button class="coverage-toggle" id="v4-policy-btn-more" onclick="handleV4PolicyCount('more')">More Policies</button>
+        </div>
       </div>
 
-      <div class="card">
+      <!-- Spouse Name (shown on More Policies) -->
+      <div class="card" id="v4-spouse-card" style="display:none;">
+        <div class="card-header">Spouse Info</div>
+        <div class="script-text">
+          Perfect, and what&rsquo;s your spouse&rsquo;s first name?
+        </div>
+        <div style="margin-top:12px;">
+          <input type="text" class="prospect-input" id="v4SpouseInput" placeholder="Spouse's Name" autocomplete="off" style="text-align:left;max-width:100%;padding:12px 14px;font-size:16px;" oninput="setField('spouse', this.value)">
+        </div>
+      </div>
+
+      <!-- What to Expect (shown on either button) -->
+      <div class="card" id="v4-what-to-expect" style="display:none;">
         <div class="card-header">What to Expect</div>
         <div class="script-text">
           Alright so here&rsquo;s what we&rsquo;re gonna do &mdash; real simple. I&rsquo;m gonna confirm a couple details from your file, ask a few questions to figure out the right amount of coverage for your situation, and then just some basic health questions to see what you qualify for.
@@ -2491,7 +2507,8 @@ body.edit-mode .fill-field {
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
       </div>
 
-      <div class="card">
+      <!-- Confirm Details (shown on either button) -->
+      <div class="card" id="v4-confirm-details-quotes" style="display:none;">
         <div class="card-header">Confirm Details</div>
         <div class="script-text">
           So next steps forward &mdash; I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
@@ -3904,6 +3921,7 @@ const FIELD_LABELS = {
   loanBalance: "Loan Balance",
   agentName: "Your Name",
   npn: "National Producer Number",
+  spouse: "Spouse's Name",
 };
 
 function editField(el) {
@@ -4170,6 +4188,14 @@ function handleV4OpenerResponse(type) {
   document.getElementById('v4-needs-quotes').style.display = 'none';
   if (document.getElementById('v4-no-btn-covered')) document.getElementById('v4-no-btn-covered').classList.remove('active');
   if (document.getElementById('v4-no-btn-quotes')) document.getElementById('v4-no-btn-quotes').classList.remove('active');
+}
+
+function handleV4PolicyCount(type) {
+  document.getElementById('v4-policy-btn-one').classList.toggle('active', type === 'one');
+  document.getElementById('v4-policy-btn-more').classList.toggle('active', type === 'more');
+  document.getElementById('v4-spouse-card').style.display = type === 'more' ? 'block' : 'none';
+  document.getElementById('v4-what-to-expect').style.display = 'block';
+  document.getElementById('v4-confirm-details-quotes').style.display = 'block';
 }
 
 function handleV4NoPath(path) {
