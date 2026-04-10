@@ -625,6 +625,8 @@ body {
 .script-version-toggle.v2-active .toggle-dot { background: var(--success); }
 .script-version-toggle.v3-active { border-color: var(--primary); color: var(--primary); }
 .script-version-toggle.v3-active .toggle-dot { background: var(--primary); }
+.script-version-toggle.v4-active { border-color: var(--warning); color: var(--warning); }
+.script-version-toggle.v4-active .toggle-dot { background: var(--warning); }
 .script-version-toggle.tips-active { border-color: var(--success); color: var(--success); }
 .script-version-toggle.tips-active .toggle-dot { background: var(--success); }
 .tips-hidden .coaching-tip { display: none !important; }
@@ -2390,6 +2392,41 @@ body.edit-mode .fill-field {
     <div class="coaching-tip">Pause after &ldquo;okay?&rdquo; &mdash; let them confirm. Don&rsquo;t rush past it. Every micro-commitment stacks.</div>
   </div>
 
+  <!-- KEP'S PROPRIETARY FE INTRO V4 — RELATIONSHIP OPENER -->
+  <div class="script-section" id="kepfe-sec-intro-v4">
+    <span class="stage-badge">Stage 1 of 10 (V4)</span>
+    <div class="section-title">Intro (V4 &mdash; Relationship)</div>
+    <div class="section-subtitle">Casual relationship opener &mdash; disarm &amp; qualify fast</div>
+
+    <!-- 1. Relationship Opener (V4) -->
+    <div class="inoculation-card">
+      <div class="card-header">Relationship Opener</div>
+      <div class="script-text">
+        Hey <span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, it&rsquo;s <span class="fill-field" data-field="agentName" onclick="editField(this)">Agent Name</span> &mdash; I&rsquo;m just the underwriter.
+        <br><br>
+        <strong>Are you getting a lot of calls about the funeral life insurance?</strong>
+      </div>
+
+      <!-- Yes / No Buttons -->
+      <div class="coverage-toggle-group" style="margin-top:14px;">
+        <button class="coverage-toggle" id="v4-opener-btn-yes" onclick="handleV4OpenerResponse('yes')">Yes</button>
+        <button class="coverage-toggle" id="v4-opener-btn-no" onclick="handleV4OpenerResponse('no')">No</button>
+      </div>
+
+      <!-- Yes Response -->
+      <div id="v4-opener-yes-card" style="display:none;margin-top:12px;">
+        <div class="script-text">Do you mind if I confirm your information so I can get you out of the system here?</div>
+      </div>
+
+      <!-- No Response -->
+      <div id="v4-opener-no-card" style="display:none;margin-top:12px;">
+        <div class="script-text">Is that something you already got taken care of or do you still need the quotes?</div>
+      </div>
+
+      <div class="coaching-tip"><strong>Why this works:</strong> Leading with &ldquo;I&rsquo;m just the underwriter&rdquo; strips away sales pressure instantly. The yes/no question lets them vent about calls (yes) or reveal intent (no) &mdash; either way you&rsquo;re in.</div>
+    </div>
+  </div>
+
   <!-- KEP'S PROPRIETARY FE SECTION 3: NEEDS ANALYSIS -->
   <div class="script-section" id="kepfe-sec-needs">
     <span class="stage-badge">Stage 3 of 10</span>
@@ -3516,6 +3553,19 @@ const KEPFE_STAGES_V3 = [
   { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
 ];
 
+const KEPFE_STAGES_V4 = [
+  { id: 'kepfe-sec-intro-v4', label: 'Intro', title: 'Intro (V4)' },
+  { id: 'sec-health', label: 'Health', title: 'Health Questions' },
+  { id: 'kepfe-sec-needs', label: 'Needs', title: 'Needs Analysis' },
+  { id: 'sec-finances', label: 'Finance', title: 'Occupation & Finances' },
+  { id: 'sec-product', label: 'Product', title: 'Product Explanation' },
+  { id: 'sec-quote', label: 'Quote', title: 'Quote & Pitch' },
+  { id: 'sec-info', label: 'Info', title: 'Collect Info' },
+  { id: 'sec-social', label: 'DL/SSN', title: 'DL & Social' },
+  { id: 'sec-bank', label: 'Bank', title: 'Bank Info' },
+  { id: 'sec-close', label: 'Close', title: 'Close & Recap' },
+];
+
 const MP_STAGES = [
   { id: 'mp-sec-script', label: 'Script', title: 'Mortgage Protection' },
 ];
@@ -3582,6 +3632,8 @@ function startCall() {
     STAGES = KEPFE_STAGES_V2;
   } else if (selectedScript === 'kepfe' && kepfeVersion === 3) {
     STAGES = KEPFE_STAGES_V3;
+  } else if (selectedScript === 'kepfe' && kepfeVersion === 4) {
+    STAGES = KEPFE_STAGES_V4;
   } else {
     STAGES = selectedScript === 'aged' ? AGED_STAGES : selectedScript === 'fe' ? FE_STAGES : selectedScript === 'kepfe' ? KEPFE_STAGES : VETERANS_STAGES;
   }
@@ -3772,6 +3824,7 @@ const FIELD_LABELS = {
   address: "Property Address",
   mortgagePayment: "Monthly Mortgage Payment",
   loanBalance: "Loan Balance",
+  agentName: "Your Name",
 };
 
 function editField(el) {
@@ -3950,15 +4003,17 @@ function updateScriptVersionToggle() {
   const tipsBtn = document.getElementById('tipsToggle');
   if (selectedScript === 'kepfe') {
     btn.classList.add('active');
-    btn.classList.remove('v2-active', 'v3-active');
+    btn.classList.remove('v2-active', 'v3-active', 'v4-active');
     if (kepfeVersion === 2) {
       btn.classList.add('v2-active');
     } else if (kepfeVersion === 3) {
       btn.classList.add('v3-active');
+    } else if (kepfeVersion === 4) {
+      btn.classList.add('v4-active');
     }
     lbl.textContent = 'V' + kepfeVersion;
   } else {
-    btn.classList.remove('active', 'v2-active', 'v3-active');
+    btn.classList.remove('active', 'v2-active', 'v3-active', 'v4-active');
   }
   // Tips toggle always visible
   tipsBtn.classList.add('active');
@@ -3967,9 +4022,9 @@ function updateScriptVersionToggle() {
 
 function toggleScriptVersion() {
   if (selectedScript !== 'kepfe') return;
-  kepfeVersion = kepfeVersion >= 3 ? 1 : kepfeVersion + 1;
+  kepfeVersion = kepfeVersion >= 4 ? 1 : kepfeVersion + 1;
   localStorage.setItem('kepfeVersion', kepfeVersion);
-  STAGES = kepfeVersion === 2 ? KEPFE_STAGES_V2 : kepfeVersion === 3 ? KEPFE_STAGES_V3 : KEPFE_STAGES;
+  STAGES = kepfeVersion === 2 ? KEPFE_STAGES_V2 : kepfeVersion === 3 ? KEPFE_STAGES_V3 : kepfeVersion === 4 ? KEPFE_STAGES_V4 : KEPFE_STAGES;
   buildProgressBar();
   updateScriptVersionToggle();
   if (currentStage === 0) goToStage(0);
@@ -4023,6 +4078,13 @@ function handleV3RequestResponse(type) {
   document.getElementById('v3-request-yes-card').style.display = type === 'yes' ? 'block' : 'none';
   document.getElementById('v3-request-no-card').style.display = type === 'no' ? 'block' : 'none';
   document.getElementById('v3-confirm-details').style.display = type === 'no' ? 'none' : '';
+}
+
+function handleV4OpenerResponse(type) {
+  document.getElementById('v4-opener-btn-yes').classList.toggle('active', type === 'yes');
+  document.getElementById('v4-opener-btn-no').classList.toggle('active', type === 'no');
+  document.getElementById('v4-opener-yes-card').style.display = type === 'yes' ? 'block' : 'none';
+  document.getElementById('v4-opener-no-card').style.display = type === 'no' ? 'block' : 'none';
 }
 
 function showDmResponse(type) {
