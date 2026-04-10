@@ -4429,19 +4429,33 @@ function handleV4PolicyCount(type) {
   document.getElementById('v4-what-to-expect-more').style.display = type === 'more' ? 'block' : 'none';
 }
 
+function v4ResetAllRebuttals() {
+  document.getElementById('v4-skeptical').style.display = 'none';
+  document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
+  document.getElementById('v4-confirm-details-quotes').style.display = 'none';
+  document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('v4-spouse-card').style.display = 'none';
+  document.getElementById('v4-what-to-expect-one').style.display = 'none';
+  document.getElementById('v4-what-to-expect-more').style.display = 'none';
+  var pOne = document.getElementById('v4-policy-btn-one');
+  var pMore = document.getElementById('v4-policy-btn-more');
+  if (pOne) pOne.classList.remove('active');
+  if (pMore) pMore.classList.remove('active');
+}
+
 function handleV4NoPath(path) {
   document.getElementById('v4-no-btn-covered').classList.toggle('active', path === 'covered');
   document.getElementById('v4-no-btn-quotes').classList.toggle('active', path === 'quotes');
-  var takenCareOf = document.getElementById('v4-reb-taken-care-of');
-  var container = document.getElementById('v4-rebuttal-container');
+  v4ResetAllRebuttals();
+  document.getElementById('v4-needs-quotes').style.display = path === 'quotes' ? 'block' : 'none';
   if (path === 'covered') {
+    var takenCareOf = document.getElementById('v4-reb-taken-care-of');
+    var container = document.getElementById('v4-rebuttal-container');
     container.appendChild(takenCareOf);
     takenCareOf.style.display = 'block';
     takenCareOf.scrollIntoView({behavior:'smooth',block:'center'});
-  } else {
-    takenCareOf.style.display = 'none';
   }
-  document.getElementById('v4-needs-quotes').style.display = path === 'quotes' ? 'block' : 'none';
 }
 
 function showDmResponse(type) {
