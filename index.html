@@ -4414,6 +4414,8 @@ function v4HandleSoundGood() {
   }
   var container = document.getElementById('v4-rebuttal-container');
   if (isAlreadyCovered) {
+    // Hide skeptical card if toggling from Skeptical Bastard
+    document.getElementById('v4-skeptical').style.display = 'none';
     // Show Lock In card
     var needsQuotes = document.getElementById('v4-needs-quotes');
     document.getElementById('v4-lockin-text-quotes').style.display = 'none';
@@ -4433,6 +4435,12 @@ function v4HandleSkeptical() {
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('v4-confirm-details-quotes').style.display = 'none';
+  var coveredBtn = document.getElementById('v4-no-btn-covered');
+  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  if (isAlreadyCovered) {
+    // Hide Lock In if toggling from Sounds Good
+    document.getElementById('v4-needs-quotes').style.display = 'none';
+  }
   var el = document.getElementById('v4-skeptical');
   var container = document.getElementById('v4-rebuttal-container');
   container.appendChild(el);
