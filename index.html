@@ -4434,12 +4434,12 @@ function v4HandleSoundGood() {
 function v4HandleSkeptical() {
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('v4-confirm-details-quotes').style.display = 'none';
   var coveredBtn = document.getElementById('v4-no-btn-covered');
   var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
   if (isAlreadyCovered) {
-    // Hide Lock In if toggling from Sounds Good
     document.getElementById('v4-needs-quotes').style.display = 'none';
+  } else {
+    document.getElementById('v4-confirm-details-quotes').style.display = 'none';
   }
   var el = document.getElementById('v4-skeptical');
   var container = document.getElementById('v4-rebuttal-container');
@@ -4465,8 +4465,17 @@ function v4ShowConfirmDetails() {
   var needsQuotes = document.getElementById('v4-needs-quotes');
   var coveredBtn = document.getElementById('v4-no-btn-covered');
   var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
-  // Already Covered path (non-taken-care-of rebuttals): show only What to Expect
-  if (isAlreadyCovered && (needsQuotes.style.display === 'none' || needsQuotes.style.display === '')) {
+  // Already Covered path (non-taken-care-of rebuttals)
+  if (isAlreadyCovered && v4WteShown) {
+    // Already saw What to Expect, go straight to Lock In
+    document.getElementById('v4-lockin-text-quotes').style.display = 'none';
+    document.getElementById('v4-lockin-text-covered').style.display = 'block';
+    container.appendChild(needsQuotes);
+    needsQuotes.style.display = 'block';
+    needsQuotes.scrollIntoView({behavior:'smooth',block:'center'});
+  } else if (isAlreadyCovered && (needsQuotes.style.display === 'none' || needsQuotes.style.display === '')) {
+    // First time: show only What to Expect
+    v4WteShown = true;
     var wte = document.getElementById('v4-what-to-expect-one');
     container.appendChild(wte);
     wte.style.display = 'block';
@@ -4511,7 +4520,10 @@ function handleV4PolicyCount(type) {
   }
 }
 
+var v4WteShown = false;
+
 function v4ResetAllRebuttals() {
+  v4WteShown = false;
   document.getElementById('v4-skeptical').style.display = 'none';
   document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
   document.getElementById('v4-confirm-details-quotes').style.display = 'none';
