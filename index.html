@@ -4537,8 +4537,12 @@ function handleV4PolicyCount(type) {
   var coveredBtn = document.getElementById('v4-no-btn-covered');
   var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
   if (isAlreadyCovered) {
-    document.getElementById('v4-what-to-expect-one').style.display = 'none';
-    document.getElementById('v4-what-to-expect-more').style.display = 'none';
+    // Only hide What to Expect if it's inside v4-needs-quotes (not shown standalone earlier)
+    var nqCheck = document.getElementById('v4-needs-quotes');
+    var wteOneCheck = document.getElementById('v4-what-to-expect-one');
+    var wteMoreCheck = document.getElementById('v4-what-to-expect-more');
+    if (wteOneCheck.parentNode === nqCheck) wteOneCheck.style.display = 'none';
+    if (wteMoreCheck.parentNode === nqCheck) wteMoreCheck.style.display = 'none';
     // Move confirm details into v4-needs-quotes before who-in-charge
     var nq = document.getElementById('v4-needs-quotes');
     var whoCard = document.getElementById('v4-who-in-charge');
