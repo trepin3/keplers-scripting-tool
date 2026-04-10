@@ -2443,27 +2443,6 @@ body.edit-mode .fill-field {
       <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
     </div>
 
-    <!-- Already Covered (shown on No → Already Covered) — starts expanded -->
-    <div class="objection-accordion expanded" id="v4-already-covered" style="display:none;" onclick="toggleAccordion(this)">
-      <button class="objection-accordion-trigger">
-        <span>&ldquo;Already got it taken care of&rdquo;</span>
-        <span class="obj-arrow">&#9654;</span>
-      </button>
-      <div class="objection-accordion-body">
-        <div class="rebuttal">Perfect, that&rsquo;s exactly the reason for my call, whoever helped you with the coverage forgot to update your policy information in the system so that the calls would stop. And no worries, this has been happening a lot recently; it&rsquo;s usually just a junior underwriter who might be new, so I&rsquo;ll make sure to help update that for you now&hellip;&hellip;
-        <br><br>
-        <strong>Do you remember the name of the company they put you with?</strong>
-        <br><br>
-        <em>**????*** &lt;&lt;carrier&gt;&gt; ???</em> Was that the first place that you looked for the coverage? Do you have any sort of major medical conditions or diabetes at a young age?
-        <br><br>
-        Ok and it is state law that they would have sent the policy packet in the mail &mdash; did you get that ok?
-        <br><br>
-        <strong>Got it and how much were they making you pay for that?</strong>
-        <br><br>
-        <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, something isn&rsquo;t right here&hellip; it looks like they put you in the wrong risk class&hellip; let me loop in senior medical underwriter to get this taken care of&hellip; Go ahead and grab a pen and paper. I&rsquo;ll have you write a few things down before I connect you&hellip;</div>
-        <div class="coaching-tip">Run through their existing coverage to find gaps, then transition to the transfer.</div>
-      </div>
-    </div>
 
     <!-- Needs Quotes (shown on No → Needs Quotes) -->
     <div id="v4-needs-quotes" style="display:none;">
@@ -4397,7 +4376,7 @@ function handleV4OpenerResponse(type) {
   document.getElementById('v4-opener-no-card').style.display = type === 'no' ? 'block' : 'none';
   document.getElementById('v4-confirm-details').style.display = type === 'yes' ? 'block' : 'none';
   // Reset No sub-paths when switching
-  document.getElementById('v4-already-covered').style.display = 'none';
+  document.getElementById('v4-reb-taken-care-of').style.display = 'none';
   document.getElementById('v4-needs-quotes').style.display = 'none';
   if (document.getElementById('v4-no-btn-covered')) document.getElementById('v4-no-btn-covered').classList.remove('active');
   if (document.getElementById('v4-no-btn-quotes')) document.getElementById('v4-no-btn-quotes').classList.remove('active');
@@ -4442,7 +4421,7 @@ function handleV4PolicyCount(type) {
 function handleV4NoPath(path) {
   document.getElementById('v4-no-btn-covered').classList.toggle('active', path === 'covered');
   document.getElementById('v4-no-btn-quotes').classList.toggle('active', path === 'quotes');
-  document.getElementById('v4-already-covered').style.display = path === 'covered' ? 'block' : 'none';
+  document.getElementById('v4-reb-taken-care-of').style.display = path === 'covered' ? 'block' : 'none';
   document.getElementById('v4-needs-quotes').style.display = path === 'quotes' ? 'block' : 'none';
 }
 
