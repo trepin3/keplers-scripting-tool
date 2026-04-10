@@ -2505,6 +2505,17 @@ body.edit-mode .fill-field {
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
       </div>
 
+      <!-- Who is in charge (Already Covered → 1 Policy) -->
+      <div class="card" id="v4-who-in-charge" style="display:none;">
+        <div class="card-header">Who is in Charge</div>
+        <div class="script-text">
+          <strong>Who is going to be in charge of your final arrangements?</strong>
+        </div>
+        <input type="text" id="v4BeneficiaryInput" placeholder="Enter beneficiary name..." autocomplete="off"
+          style="width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--input-bg);color:var(--text);outline:none;margin-top:10px;"
+          oninput="kepfeSetBeneficiary(this.value)">
+      </div>
+
     </div><!-- /v4-needs-quotes -->
 
     <div id="v4-rebuttal-container">
@@ -4433,8 +4444,17 @@ function handleV4PolicyCount(type) {
   document.getElementById('v4-policy-btn-one').classList.toggle('active', type === 'one');
   document.getElementById('v4-policy-btn-more').classList.toggle('active', type === 'more');
   document.getElementById('v4-spouse-card').style.display = type === 'more' ? 'block' : 'none';
-  document.getElementById('v4-what-to-expect-one').style.display = type === 'one' ? 'block' : 'none';
-  document.getElementById('v4-what-to-expect-more').style.display = type === 'more' ? 'block' : 'none';
+  var coveredBtn = document.getElementById('v4-no-btn-covered');
+  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  if (isAlreadyCovered && type === 'one') {
+    document.getElementById('v4-what-to-expect-one').style.display = 'none';
+    document.getElementById('v4-what-to-expect-more').style.display = 'none';
+    document.getElementById('v4-who-in-charge').style.display = 'block';
+  } else {
+    document.getElementById('v4-who-in-charge').style.display = 'none';
+    document.getElementById('v4-what-to-expect-one').style.display = type === 'one' ? 'block' : 'none';
+    document.getElementById('v4-what-to-expect-more').style.display = type === 'more' ? 'block' : 'none';
+  }
 }
 
 function v4ResetAllRebuttals() {
@@ -4446,6 +4466,7 @@ function v4ResetAllRebuttals() {
   document.getElementById('v4-spouse-card').style.display = 'none';
   document.getElementById('v4-what-to-expect-one').style.display = 'none';
   document.getElementById('v4-what-to-expect-more').style.display = 'none';
+  document.getElementById('v4-who-in-charge').style.display = 'none';
   var pOne = document.getElementById('v4-policy-btn-one');
   var pMore = document.getElementById('v4-policy-btn-more');
   if (pOne) pOne.classList.remove('active');
