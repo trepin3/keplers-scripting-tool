@@ -4542,6 +4542,12 @@ function handleV4PolicyCount(type) {
     document.getElementById('v4-who-in-charge').style.display = 'block';
   } else {
     document.getElementById('v4-who-in-charge').style.display = 'none';
+    // Make sure What to Expect cards are inside v4-needs-quotes
+    var nq = document.getElementById('v4-needs-quotes');
+    var wteOne = document.getElementById('v4-what-to-expect-one');
+    var wteMore = document.getElementById('v4-what-to-expect-more');
+    if (wteOne.parentNode !== nq) nq.appendChild(wteOne);
+    if (wteMore.parentNode !== nq) nq.appendChild(wteMore);
     document.getElementById('v4-what-to-expect-one').style.display = type === 'one' ? 'block' : 'none';
     document.getElementById('v4-what-to-expect-more').style.display = type === 'more' ? 'block' : 'none';
   }
