@@ -2425,6 +2425,19 @@ body.edit-mode .fill-field {
 
       <div class="coaching-tip"><strong>Why this works:</strong> Leading with &ldquo;I&rsquo;m just the underwriter&rdquo; strips away sales pressure instantly. The yes/no question lets them vent about calls (yes) or reveal intent (no) &mdash; either way you&rsquo;re in.</div>
     </div>
+
+    <!-- Confirm Details (shown only on Yes) -->
+    <div class="card" id="v4-confirm-details" style="display:none;">
+      <div class="card-header">Confirm Details</div>
+      <div class="script-text">
+        I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
+        <br><br>
+        Perfect. And your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
+        <br><br>
+        Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+      </div>
+      <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
+    </div>
   </div>
 
   <!-- KEP'S PROPRIETARY FE SECTION 3: NEEDS ANALYSIS -->
@@ -4085,6 +4098,7 @@ function handleV4OpenerResponse(type) {
   document.getElementById('v4-opener-btn-no').classList.toggle('active', type === 'no');
   document.getElementById('v4-opener-yes-card').style.display = type === 'yes' ? 'block' : 'none';
   document.getElementById('v4-opener-no-card').style.display = type === 'no' ? 'block' : 'none';
+  document.getElementById('v4-confirm-details').style.display = type === 'yes' ? 'block' : 'none';
 }
 
 function showDmResponse(type) {
