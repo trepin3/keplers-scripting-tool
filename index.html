@@ -4406,10 +4406,12 @@ function handleV4OpenerResponse(type) {
 function v4HandleSoundGood() {
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('v4-skeptical').style.display = 'none';
-  document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
   var coveredBtn = document.getElementById('v4-no-btn-covered');
   var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  if (!isAlreadyCovered) {
+    document.getElementById('v4-skeptical').style.display = 'none';
+    document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
+  }
   var container = document.getElementById('v4-rebuttal-container');
   if (isAlreadyCovered) {
     // Show Lock In card
