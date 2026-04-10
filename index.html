@@ -4457,7 +4457,7 @@ function handleV4PolicyCount(type) {
   document.getElementById('v4-spouse-card').style.display = type === 'more' ? 'block' : 'none';
   var coveredBtn = document.getElementById('v4-no-btn-covered');
   var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
-  if (isAlreadyCovered && type === 'one') {
+  if (isAlreadyCovered) {
     document.getElementById('v4-what-to-expect-one').style.display = 'none';
     document.getElementById('v4-what-to-expect-more').style.display = 'none';
     document.getElementById('v4-who-in-charge').style.display = 'block';
