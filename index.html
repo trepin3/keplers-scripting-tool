@@ -2472,11 +2472,13 @@ body.edit-mode .fill-field {
         <div class="script-text">
           Perfect, <span class="fill-field" data-field="name" onclick="editField(this)">Name</span> &mdash; honestly that&rsquo;s the best thing you could do. Most people I talk to wait too long and end up paying two, three times more than they would&rsquo;ve if they locked it in earlier.
           <br><br>
-          Let me ask you a couple quick questions so I can see what you actually qualify for &mdash; <strong>that way you&rsquo;re not guessing at numbers, you&rsquo;ll have real options in front of you.</strong>
+          Grab a pen and paper real quick &mdash; the state requires I give you my name and state license number, so you can look me up anytime.
           <br><br>
-          Now is it just you we&rsquo;re looking at coverage for, or is there a spouse as well?
+          It&rsquo;s <span class="fill-field" data-field="agentName" onclick="editField(this)">Agent Name</span>, NPN <span class="fill-field" data-field="npn" onclick="editField(this)">NPN</span>. That&rsquo;s basically my insurance social security number &mdash; it&rsquo;s tied to everything I do in the state.
+          <br><br>
+          Great. Now is it just you we&rsquo;re looking at coverage for, or is there a spouse as well?
         </div>
-        <div class="coaching-tip"><strong>Psychology:</strong> Loss aversion (&ldquo;paying 2&ndash;3x more&rdquo;) + future pacing (&ldquo;real options in front of you&rdquo;). The qualifying question at the end creates a seamless transition into the health questions without asking for permission to continue.</div>
+        <div class="coaching-tip"><strong>Psychology:</strong> &ldquo;The state requires&rdquo; = authority compliance frame &mdash; they don&rsquo;t question it. Sharing your NPN first builds reciprocity and pre-frames the SSN ask later: &ldquo;You gave me yours, I gave you mine.&rdquo; Pen &amp; paper = sunk cost investment.</div>
       </div>
 
       <div class="card">
@@ -3891,6 +3893,7 @@ const FIELD_LABELS = {
   mortgagePayment: "Monthly Mortgage Payment",
   loanBalance: "Loan Balance",
   agentName: "Your Name",
+  npn: "National Producer Number",
 };
 
 function editField(el) {
