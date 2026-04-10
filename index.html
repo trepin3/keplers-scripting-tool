@@ -4408,9 +4408,21 @@ function v4HandleSoundGood() {
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
   var coveredBtn = document.getElementById('v4-no-btn-covered');
   var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  // Hide skeptical flow cards that appeared after What to Expect
+  document.getElementById('v4-skeptical').style.display = 'none';
   if (!isAlreadyCovered) {
-    document.getElementById('v4-skeptical').style.display = 'none';
     document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
+  } else {
+    // On Already Covered path, only hide rebuttals that came AFTER the What to Expect card
+    var wte = document.getElementById('v4-what-to-expect-one');
+    var found = false;
+    var container = document.getElementById('v4-rebuttal-container');
+    Array.from(container.children).forEach(function(el) {
+      if (el === wte) { found = true; return; }
+      if (found && el.id && (el.id.startsWith('v4-reb-') || el.id === 'v4-skeptical' || el.id === 'v4-confirm-details-quotes')) {
+        el.style.display = 'none';
+      }
+    });
   }
   var container = document.getElementById('v4-rebuttal-container');
   if (isAlreadyCovered) {
