@@ -2507,6 +2507,7 @@ body.edit-mode .fill-field {
 
     </div><!-- /v4-needs-quotes -->
 
+    <div id="v4-rebuttal-container">
     <!-- Skeptical Bastard — What's the Holdup -->
     <div class="card" id="v4-skeptical" style="display:none;">
         <div class="card-header">What&rsquo;s the Holdup?</div>
@@ -2713,6 +2714,7 @@ body.edit-mode .fill-field {
         </div>
         <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
       </div>
+    </div><!-- /v4-rebuttal-container -->
   </div>
 
   <!-- KEP'S PROPRIETARY FE SECTION 3: NEEDS ANALYSIS -->
@@ -4396,17 +4398,25 @@ function v4HandleSkeptical() {
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('v4-confirm-details-quotes').style.display = 'none';
-  document.getElementById('v4-skeptical').style.display = 'block';
-  document.getElementById('v4-skeptical').scrollIntoView({behavior:'smooth',block:'center'});
+  var el = document.getElementById('v4-skeptical');
+  var container = document.getElementById('v4-rebuttal-container');
+  container.appendChild(el);
+  el.style.display = 'block';
+  el.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function v4ShowConfirmDetails() {
-  document.getElementById('v4-confirm-details-quotes').style.display = 'block';
-  document.getElementById('v4-confirm-details-quotes').scrollIntoView({behavior:'smooth',block:'center'});
+  var el = document.getElementById('v4-confirm-details-quotes');
+  var container = document.getElementById('v4-rebuttal-container');
+  container.appendChild(el);
+  el.style.display = 'block';
+  el.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function v4ShowRebuttal(type) {
   var el = document.getElementById('v4-reb-' + type);
+  var container = document.getElementById('v4-rebuttal-container');
+  container.appendChild(el);
   el.style.display = 'block';
   el.scrollIntoView({behavior:'smooth',block:'center'});
 }
@@ -4422,7 +4432,15 @@ function handleV4PolicyCount(type) {
 function handleV4NoPath(path) {
   document.getElementById('v4-no-btn-covered').classList.toggle('active', path === 'covered');
   document.getElementById('v4-no-btn-quotes').classList.toggle('active', path === 'quotes');
-  document.getElementById('v4-reb-taken-care-of').style.display = path === 'covered' ? 'block' : 'none';
+  var takenCareOf = document.getElementById('v4-reb-taken-care-of');
+  var container = document.getElementById('v4-rebuttal-container');
+  if (path === 'covered') {
+    container.appendChild(takenCareOf);
+    takenCareOf.style.display = 'block';
+    takenCareOf.scrollIntoView({behavior:'smooth',block:'center'});
+  } else {
+    takenCareOf.style.display = 'none';
+  }
   document.getElementById('v4-needs-quotes').style.display = path === 'quotes' ? 'block' : 'none';
 }
 
