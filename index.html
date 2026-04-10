@@ -2504,6 +2504,10 @@ body.edit-mode .fill-field {
           <br><br>
           If everything checks out, I&rsquo;ll help you fill out and submit the application to the carriers &mdash; and they&rsquo;ll let us know if you&rsquo;re approved. Sound good?
         </div>
+        <div class="coverage-toggle-group" style="margin-top:14px;">
+          <button class="coverage-toggle" onclick="v4ShowConfirmDetails()">Sounds Good</button>
+          <button class="coverage-toggle" onclick="v4ShowSkeptical()">Skeptical Bastard</button>
+        </div>
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
       </div>
 
@@ -2515,7 +2519,109 @@ body.edit-mode .fill-field {
           <br><br>
           If everything checks out, I&rsquo;ll help y&rsquo;all fill out and submit the applications to the carriers &mdash; and they&rsquo;ll let us know if you&rsquo;re approved. Sound good?
         </div>
+        <div class="coverage-toggle-group" style="margin-top:14px;">
+          <button class="coverage-toggle" onclick="v4ShowConfirmDetails()">Sounds Good</button>
+          <button class="coverage-toggle" onclick="v4ShowSkeptical()">Skeptical Bastard</button>
+        </div>
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
+      </div>
+
+      <!-- Skeptical Bastard — What's the Holdup -->
+      <div class="card" id="v4-skeptical" style="display:none;">
+        <div class="card-header">What&rsquo;s the Holdup?</div>
+        <div class="script-text">
+          Totally fair, <span class="fill-field" data-field="name" onclick="editField(this)">Name</span> &mdash; what&rsquo;s holding you back?
+        </div>
+        <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('send-info')" style="flex:1 1 45%;">Send Info</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('talk-spouse')" style="flex:1 1 45%;">Talk to Spouse</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('how-long')" style="flex:1 1 45%;">How Long?</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('no-trust')" style="flex:1 1 45%;">Don&rsquo;t Trust Phone</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('just-number')" style="flex:1 1 100%;">Just Give Me a Number</button>
+        </div>
+      </div>
+
+      <!-- Rebuttal: Send Info -->
+      <div class="inoculation-card" id="v4-reb-send-info" style="display:none;">
+        <div class="card-header">Send Info &mdash; Rebuttal</div>
+        <div class="script-text">
+          I totally can &mdash; but here&rsquo;s the thing, the rates I can show you right now are locked to today. Once I send it out and you get around to looking at it in a week or two, those numbers might not even be available anymore. It literally takes 5 minutes &mdash; worst case, you don&rsquo;t like what you see and we part ways. Fair enough?
+        </div>
+        <div class="coaching-tip"><strong>TIP:</strong> Scarcity + low commitment ask. &ldquo;Fair enough?&rdquo; is a closing micro-agreement that&rsquo;s almost impossible to say no to.</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
+          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowConfirmDetails()">&#10003; Back on Track</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('talk-spouse')" style="flex:1 1 45%;">Talk to Spouse</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('how-long')" style="flex:1 1 45%;">How Long?</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('no-trust')" style="flex:1 1 45%;">Don&rsquo;t Trust Phone</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('just-number')" style="flex:1 1 45%;">Just a Number</button>
+        </div>
+      </div>
+
+      <!-- Rebuttal: Talk to Spouse -->
+      <div class="inoculation-card" id="v4-reb-talk-spouse" style="display:none;">
+        <div class="card-header">Talk to Spouse &mdash; Rebuttal</div>
+        <div class="script-text">
+          Of course &mdash; is <span class="fill-field" data-field="spouse" onclick="editField(this)">Spouse</span> there with you right now? We could do this together, that way nobody&rsquo;s playing telephone later.
+          <br><br>
+          <strong>If spouse isn&rsquo;t available:</strong><br>
+          No worries. Here&rsquo;s what I&rsquo;d suggest &mdash; let me at least get you the numbers now so when you do sit down with them you actually have something to look at. Otherwise you&rsquo;re just telling them &ldquo;some guy called about insurance&rdquo; and that conversation goes nowhere, right?
+        </div>
+        <div class="coaching-tip"><strong>TIP:</strong> Reframe: without numbers they have nothing to discuss. You&rsquo;re helping them have a productive conversation, not pressuring.</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
+          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowConfirmDetails()">&#10003; Back on Track</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('send-info')" style="flex:1 1 45%;">Send Info</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('how-long')" style="flex:1 1 45%;">How Long?</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('no-trust')" style="flex:1 1 45%;">Don&rsquo;t Trust Phone</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('just-number')" style="flex:1 1 45%;">Just a Number</button>
+        </div>
+      </div>
+
+      <!-- Rebuttal: How Long -->
+      <div class="inoculation-card" id="v4-reb-how-long" style="display:none;">
+        <div class="card-header">How Long? &mdash; Rebuttal</div>
+        <div class="script-text">
+          5 minutes tops for the questions. If you qualify and want to move forward with an application, maybe another 10. But we don&rsquo;t even get there unless the numbers make sense for you first &mdash; so let&rsquo;s just start with the quick stuff and see where we&rsquo;re at. Cool?
+        </div>
+        <div class="coaching-tip"><strong>TIP:</strong> Break it into small chunks. &ldquo;5 minutes for questions&rdquo; feels manageable. &ldquo;We don&rsquo;t get there unless numbers make sense&rdquo; = they&rsquo;re in control.</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
+          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowConfirmDetails()">&#10003; Back on Track</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('send-info')" style="flex:1 1 45%;">Send Info</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('talk-spouse')" style="flex:1 1 45%;">Talk to Spouse</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('no-trust')" style="flex:1 1 45%;">Don&rsquo;t Trust Phone</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('just-number')" style="flex:1 1 45%;">Just a Number</button>
+        </div>
+      </div>
+
+      <!-- Rebuttal: Don't Trust Phone -->
+      <div class="inoculation-card" id="v4-reb-no-trust" style="display:none;">
+        <div class="card-header">Don&rsquo;t Trust Phone &mdash; Rebuttal</div>
+        <div class="script-text">
+          I respect that 100% &mdash; that&rsquo;s exactly why I gave you my name and license number. You can look me up right now on the state insurance website while we&rsquo;re on the phone. I&rsquo;m not asking for anything sensitive &mdash; just a couple basic details to see if you even qualify. If you don&rsquo;t, I&rsquo;ll tell you straight up and we&rsquo;ll go from there. Sound fair?
+        </div>
+        <div class="coaching-tip"><strong>TIP:</strong> Callback to the NPN inoculation &mdash; this is why you gave it to them early. &ldquo;Look me up right now&rdquo; = transparency challenge most scammers would never offer.</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
+          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowConfirmDetails()">&#10003; Back on Track</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('send-info')" style="flex:1 1 45%;">Send Info</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('talk-spouse')" style="flex:1 1 45%;">Talk to Spouse</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('how-long')" style="flex:1 1 45%;">How Long?</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('just-number')" style="flex:1 1 45%;">Just a Number</button>
+        </div>
+      </div>
+
+      <!-- Rebuttal: Just Give Me a Number -->
+      <div class="inoculation-card" id="v4-reb-just-number" style="display:none;">
+        <div class="card-header">Just Give Me a Number &mdash; Rebuttal</div>
+        <div class="script-text">
+          I wish I could &mdash; but it&rsquo;s not one-size-fits-all. It depends on your age, health, and how much coverage actually makes sense for your situation. That&rsquo;s why I need to ask a few quick questions first. I&rsquo;d rather give you an accurate number than throw something out there that&rsquo;s gonna be wrong. That way you&rsquo;re making a real decision, not guessing. Fair?
+        </div>
+        <div class="coaching-tip"><strong>TIP:</strong> Position accuracy as respect for their intelligence. &ldquo;I&rsquo;d rather give you accurate&rdquo; = you&rsquo;re on their side, not dodging.</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
+          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowConfirmDetails()">&#10003; Back on Track</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('send-info')" style="flex:1 1 45%;">Send Info</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('talk-spouse')" style="flex:1 1 45%;">Talk to Spouse</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('how-long')" style="flex:1 1 45%;">How Long?</button>
+          <button class="coverage-toggle" onclick="v4ShowRebuttal('no-trust')" style="flex:1 1 45%;">Don&rsquo;t Trust Phone</button>
+        </div>
       </div>
 
       <!-- Confirm Details (shown on either button) -->
@@ -4199,6 +4305,22 @@ function handleV4OpenerResponse(type) {
   document.getElementById('v4-needs-quotes').style.display = 'none';
   if (document.getElementById('v4-no-btn-covered')) document.getElementById('v4-no-btn-covered').classList.remove('active');
   if (document.getElementById('v4-no-btn-quotes')) document.getElementById('v4-no-btn-quotes').classList.remove('active');
+}
+
+function v4ShowConfirmDetails() {
+  document.getElementById('v4-confirm-details-quotes').style.display = 'block';
+  document.getElementById('v4-confirm-details-quotes').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function v4ShowSkeptical() {
+  document.getElementById('v4-skeptical').style.display = 'block';
+  document.getElementById('v4-skeptical').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function v4ShowRebuttal(type) {
+  var el = document.getElementById('v4-reb-' + type);
+  el.style.display = 'block';
+  el.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function handleV4PolicyCount(type) {
