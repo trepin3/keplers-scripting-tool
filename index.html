@@ -4413,16 +4413,22 @@ function v4HandleSoundGood() {
   if (!isAlreadyCovered) {
     document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
   } else {
-    // On Already Covered path, only hide rebuttals that came AFTER the What to Expect card
+    // On Already Covered path, only hide/remove rebuttals that came AFTER the What to Expect card
     var wte = document.getElementById('v4-what-to-expect-one');
     var found = false;
     var container = document.getElementById('v4-rebuttal-container');
+    var toRemove = [];
     Array.from(container.children).forEach(function(el) {
       if (el === wte) { found = true; return; }
-      if (found && el.id && (el.id.startsWith('v4-reb-') || el.id === 'v4-skeptical' || el.id === 'v4-confirm-details-quotes')) {
-        el.style.display = 'none';
+      if (found) {
+        if (el.classList.contains('v4-reb-clone')) {
+          toRemove.push(el);
+        } else if (el.id && (el.id.startsWith('v4-reb-') || el.id === 'v4-skeptical' || el.id === 'v4-confirm-details-quotes')) {
+          el.style.display = 'none';
+        }
       }
     });
+    toRemove.forEach(function(el){el.remove();});
   }
   var container = document.getElementById('v4-rebuttal-container');
   if (isAlreadyCovered) {
@@ -4510,9 +4516,18 @@ function v4ShowConfirmDetails() {
 function v4ShowRebuttal(type) {
   var el = document.getElementById('v4-reb-' + type);
   var container = document.getElementById('v4-rebuttal-container');
-  container.appendChild(el);
-  el.style.display = 'block';
-  el.scrollIntoView({behavior:'smooth',block:'center'});
+  if (el.style.display === 'block') {
+    // Already visible — clone it so original stays in place
+    var clone = el.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.classList.add('v4-reb-clone');
+    container.appendChild(clone);
+    clone.scrollIntoView({behavior:'smooth',block:'center'});
+  } else {
+    container.appendChild(el);
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+  }
 }
 
 function handleV4PolicyCount(type) {
@@ -4538,6 +4553,7 @@ function v4ResetAllRebuttals() {
   v4WteShown = false;
   document.getElementById('v4-skeptical').style.display = 'none';
   document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
+  document.querySelectorAll('.v4-reb-clone').forEach(function(el){el.remove();});
   document.getElementById('v4-confirm-details-quotes').style.display = 'none';
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
