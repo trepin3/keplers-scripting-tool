@@ -4406,11 +4406,19 @@ function v4HandleSkeptical() {
 }
 
 function v4ShowConfirmDetails() {
-  var el = document.getElementById('v4-confirm-details-quotes');
   var container = document.getElementById('v4-rebuttal-container');
-  container.appendChild(el);
-  el.style.display = 'block';
-  el.scrollIntoView({behavior:'smooth',block:'center'});
+  var needsQuotes = document.getElementById('v4-needs-quotes');
+  // If Lock In card isn't visible yet (Already Covered path), show it first
+  if (needsQuotes.style.display === 'none' || needsQuotes.style.display === '') {
+    container.appendChild(needsQuotes);
+    needsQuotes.style.display = 'block';
+    needsQuotes.scrollIntoView({behavior:'smooth',block:'center'});
+  } else {
+    var el = document.getElementById('v4-confirm-details-quotes');
+    container.appendChild(el);
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+  }
 }
 
 function v4ShowRebuttal(type) {
