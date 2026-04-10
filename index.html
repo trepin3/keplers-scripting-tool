@@ -2505,8 +2505,8 @@ body.edit-mode .fill-field {
           If everything checks out, I&rsquo;ll help you fill out and submit the application to the carriers &mdash; and they&rsquo;ll let us know if you&rsquo;re approved. Sound good?
         </div>
         <div class="coverage-toggle-group" style="margin-top:14px;">
-          <button class="coverage-toggle" onclick="v4ShowConfirmDetails()">Sounds Good</button>
-          <button class="coverage-toggle" onclick="v4ShowSkeptical()">Skeptical Bastard</button>
+          <button class="coverage-toggle v4-sg-btn" onclick="v4HandleSoundGood()">Sounds Good</button>
+          <button class="coverage-toggle v4-sb-btn" onclick="v4HandleSkeptical()">Skeptical Bastard</button>
         </div>
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
       </div>
@@ -2520,8 +2520,8 @@ body.edit-mode .fill-field {
           If everything checks out, I&rsquo;ll help y&rsquo;all fill out and submit the applications to the carriers &mdash; and they&rsquo;ll let us know if you&rsquo;re approved. Sound good?
         </div>
         <div class="coverage-toggle-group" style="margin-top:14px;">
-          <button class="coverage-toggle" onclick="v4ShowConfirmDetails()">Sounds Good</button>
-          <button class="coverage-toggle" onclick="v4ShowSkeptical()">Skeptical Bastard</button>
+          <button class="coverage-toggle v4-sg-btn" onclick="v4HandleSoundGood()">Sounds Good</button>
+          <button class="coverage-toggle v4-sb-btn" onclick="v4HandleSkeptical()">Skeptical Bastard</button>
         </div>
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
       </div>
@@ -4307,14 +4307,26 @@ function handleV4OpenerResponse(type) {
   if (document.getElementById('v4-no-btn-quotes')) document.getElementById('v4-no-btn-quotes').classList.remove('active');
 }
 
-function v4ShowConfirmDetails() {
+function v4HandleSoundGood() {
+  document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.add('active');});
+  document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('v4-skeptical').style.display = 'none';
+  document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
   document.getElementById('v4-confirm-details-quotes').style.display = 'block';
   document.getElementById('v4-confirm-details-quotes').scrollIntoView({behavior:'smooth',block:'center'});
 }
 
-function v4ShowSkeptical() {
+function v4HandleSkeptical() {
+  document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.add('active');});
+  document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('v4-confirm-details-quotes').style.display = 'none';
   document.getElementById('v4-skeptical').style.display = 'block';
   document.getElementById('v4-skeptical').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function v4ShowConfirmDetails() {
+  document.getElementById('v4-confirm-details-quotes').style.display = 'block';
+  document.getElementById('v4-confirm-details-quotes').scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 function v4ShowRebuttal(type) {
