@@ -2421,6 +2421,10 @@ body.edit-mode .fill-field {
       <!-- No Response -->
       <div id="v4-opener-no-card" style="display:none;margin-top:12px;">
         <div class="script-text">Is that something you already got taken care of or do you still need the quotes?</div>
+        <div class="coverage-toggle-group" style="margin-top:14px;">
+          <button class="coverage-toggle" id="v4-no-btn-covered" onclick="handleV4NoPath('covered')">Already Covered</button>
+          <button class="coverage-toggle" id="v4-no-btn-quotes" onclick="handleV4NoPath('quotes')">Needs Quotes</button>
+        </div>
       </div>
 
       <div class="coaching-tip"><strong>Why this works:</strong> Leading with &ldquo;I&rsquo;m just the underwriter&rdquo; strips away sales pressure instantly. The yes/no question lets them vent about calls (yes) or reveal intent (no) &mdash; either way you&rsquo;re in.</div>
@@ -2437,6 +2441,55 @@ body.edit-mode .fill-field {
         Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
       </div>
       <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
+    </div>
+
+    <!-- Already Covered (shown on No → Already Covered) — starts expanded -->
+    <div class="objection-accordion expanded" id="v4-already-covered" style="display:none;" onclick="toggleAccordion(this)">
+      <button class="objection-accordion-trigger">
+        <span>&ldquo;Already got it taken care of&rdquo;</span>
+        <span class="obj-arrow">&#9654;</span>
+      </button>
+      <div class="objection-accordion-body">
+        <div class="rebuttal">Perfect, that&rsquo;s exactly the reason for my call, whoever helped you with the coverage forgot to update your policy information in the system so that the calls would stop. And no worries, this has been happening a lot recently; it&rsquo;s usually just a junior underwriter who might be new, so I&rsquo;ll make sure to help update that for you now&hellip;&hellip;
+        <br><br>
+        <strong>Do you remember the name of the company they put you with?</strong>
+        <br><br>
+        <em>**????*** &lt;&lt;carrier&gt;&gt; ???</em> Was that the first place that you looked for the coverage? Do you have any sort of major medical conditions or diabetes at a young age?
+        <br><br>
+        Ok and it is state law that they would have sent the policy packet in the mail &mdash; did you get that ok?
+        <br><br>
+        <strong>Got it and how much were they making you pay for that?</strong>
+        <br><br>
+        <span class="fill-field" data-field="name" onclick="editField(this)">Prospect</span>, something isn&rsquo;t right here&hellip; it looks like they put you in the wrong risk class&hellip; let me loop in senior medical underwriter to get this taken care of&hellip; Go ahead and grab a pen and paper. I&rsquo;ll have you write a few things down before I connect you&hellip;</div>
+        <div class="coaching-tip">Run through their existing coverage to find gaps, then transition to the transfer.</div>
+      </div>
+    </div>
+
+    <!-- Needs Quotes (shown on No → Needs Quotes) -->
+    <div id="v4-needs-quotes" style="display:none;">
+      <div class="inoculation-card">
+        <div class="card-header">Lock In &mdash; Urgency Frame</div>
+        <div class="script-text">
+          Perfect, <span class="fill-field" data-field="name" onclick="editField(this)">Name</span> &mdash; honestly that&rsquo;s the best thing you could do. Most people I talk to wait too long and end up paying two, three times more than they would&rsquo;ve if they locked it in earlier.
+          <br><br>
+          Let me ask you a couple quick questions so I can see what you actually qualify for &mdash; <strong>that way you&rsquo;re not guessing at numbers, you&rsquo;ll have real options in front of you.</strong>
+          <br><br>
+          Now is it just you we&rsquo;re looking at coverage for, or is there a spouse as well?
+        </div>
+        <div class="coaching-tip"><strong>Psychology:</strong> Loss aversion (&ldquo;paying 2&ndash;3x more&rdquo;) + future pacing (&ldquo;real options in front of you&rdquo;). The qualifying question at the end creates a seamless transition into the health questions without asking for permission to continue.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Confirm Details</div>
+        <div class="script-text">
+          I see that you&rsquo;re in <span class="fill-field" data-field="cityState" onclick="editField(this)">City/State</span>, is that right?
+          <br><br>
+          Perfect. And your birthday is <span class="fill-field" data-field="dob" onclick="editField(this)">DOB</span>?
+          <br><br>
+          Great. And your email is <span class="fill-field" data-field="email" onclick="editField(this)">email</span>?
+        </div>
+        <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
+      </div>
     </div>
   </div>
 
@@ -4099,6 +4152,18 @@ function handleV4OpenerResponse(type) {
   document.getElementById('v4-opener-yes-card').style.display = type === 'yes' ? 'block' : 'none';
   document.getElementById('v4-opener-no-card').style.display = type === 'no' ? 'block' : 'none';
   document.getElementById('v4-confirm-details').style.display = type === 'yes' ? 'block' : 'none';
+  // Reset No sub-paths when switching
+  document.getElementById('v4-already-covered').style.display = 'none';
+  document.getElementById('v4-needs-quotes').style.display = 'none';
+  if (document.getElementById('v4-no-btn-covered')) document.getElementById('v4-no-btn-covered').classList.remove('active');
+  if (document.getElementById('v4-no-btn-quotes')) document.getElementById('v4-no-btn-quotes').classList.remove('active');
+}
+
+function handleV4NoPath(path) {
+  document.getElementById('v4-no-btn-covered').classList.toggle('active', path === 'covered');
+  document.getElementById('v4-no-btn-quotes').classList.toggle('active', path === 'quotes');
+  document.getElementById('v4-already-covered').style.display = path === 'covered' ? 'block' : 'none';
+  document.getElementById('v4-needs-quotes').style.display = path === 'quotes' ? 'block' : 'none';
 }
 
 function showDmResponse(type) {
