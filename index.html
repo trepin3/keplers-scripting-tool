@@ -2496,13 +2496,24 @@ body.edit-mode .fill-field {
         </div>
       </div>
 
-      <!-- What to Expect (shown on either button) -->
-      <div class="card" id="v4-what-to-expect" style="display:none;">
+      <!-- What to Expect — 1 Policy -->
+      <div class="card" id="v4-what-to-expect-one" style="display:none;">
         <div class="card-header">What to Expect</div>
         <div class="script-text">
           Alright so here&rsquo;s what we&rsquo;re gonna do &mdash; real simple. I&rsquo;m gonna confirm a couple details from your file, ask a few questions to figure out the right amount of coverage for your situation, and then just some basic health questions to see what you qualify for.
           <br><br>
           If everything checks out, I&rsquo;ll help you fill out and submit the application to the carriers &mdash; and they&rsquo;ll let us know if you&rsquo;re approved. Sound good?
+        </div>
+        <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
+      </div>
+
+      <!-- What to Expect — More Policies -->
+      <div class="card" id="v4-what-to-expect-more" style="display:none;">
+        <div class="card-header">What to Expect</div>
+        <div class="script-text">
+          Alright so here&rsquo;s what we&rsquo;re gonna do &mdash; real simple. I&rsquo;m gonna confirm a couple details from your file, ask a few questions to figure out the right amount of coverage for you guys&rsquo; situation, and then just some basic health questions to see what y&rsquo;all qualify for.
+          <br><br>
+          If everything checks out, I&rsquo;ll help y&rsquo;all fill out and submit the applications to the carriers &mdash; and they&rsquo;ll let us know if you&rsquo;re approved. Sound good?
         </div>
         <div class="coaching-tip"><strong>Psychology:</strong> Setting expectations reduces resistance at every future step &mdash; they already agreed to the process. &ldquo;Sound good?&rdquo; is a commitment micro-yes that locks them into the flow.</div>
       </div>
@@ -4194,7 +4205,8 @@ function handleV4PolicyCount(type) {
   document.getElementById('v4-policy-btn-one').classList.toggle('active', type === 'one');
   document.getElementById('v4-policy-btn-more').classList.toggle('active', type === 'more');
   document.getElementById('v4-spouse-card').style.display = type === 'more' ? 'block' : 'none';
-  document.getElementById('v4-what-to-expect').style.display = 'block';
+  document.getElementById('v4-what-to-expect-one').style.display = type === 'one' ? 'block' : 'none';
+  document.getElementById('v4-what-to-expect-more').style.display = type === 'more' ? 'block' : 'none';
   document.getElementById('v4-confirm-details-quotes').style.display = 'block';
 }
 
