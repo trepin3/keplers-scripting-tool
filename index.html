@@ -2448,10 +2448,17 @@ body.edit-mode .fill-field {
     <div id="v4-needs-quotes" style="display:none;">
       <div class="inoculation-card">
         <div class="card-header">Lock In &mdash; Urgency Frame</div>
-        <div class="script-text">
+        <div class="script-text" id="v4-lockin-text-quotes">
           Perfect, <span class="fill-field" data-field="name" onclick="editField(this)">Name</span> &mdash; honestly that&rsquo;s the best thing you could do. Most people I talk to wait too long and end up paying two, three times more than they would&rsquo;ve if they locked it in earlier.
           <br><br>
           Grab a pen and paper real quick &mdash; the state requires I give you my name and state license number, so you can look me up anytime.
+          <br><br>
+          It&rsquo;s <span class="fill-field" data-field="agentName" onclick="editField(this)">Agent Name</span>, NPN <span class="fill-field" data-field="npn" onclick="editField(this)">NPN</span>. That&rsquo;s basically my insurance social security number &mdash; it&rsquo;s tied to everything I do in the state.
+          <br><br>
+          Now is it just you we&rsquo;re looking at coverage for, or is there a spouse as well?
+        </div>
+        <div class="script-text" id="v4-lockin-text-covered" style="display:none;">
+          Perfect, now <span class="fill-field" data-field="name" onclick="editField(this)">Name</span> I&rsquo;m going to need you to grab a pen and paper real quick &mdash; the state requires I give you my name and state license number, so you can look me up anytime.
           <br><br>
           It&rsquo;s <span class="fill-field" data-field="agentName" onclick="editField(this)">Agent Name</span>, NPN <span class="fill-field" data-field="npn" onclick="editField(this)">NPN</span>. That&rsquo;s basically my insurance social security number &mdash; it&rsquo;s tied to everything I do in the state.
           <br><br>
@@ -4421,6 +4428,10 @@ function v4ShowConfirmDetails() {
   var needsQuotes = document.getElementById('v4-needs-quotes');
   // If Lock In card isn't visible yet (Already Covered path), show it first
   if (needsQuotes.style.display === 'none' || needsQuotes.style.display === '') {
+    var coveredBtn = document.getElementById('v4-no-btn-covered');
+    var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+    document.getElementById('v4-lockin-text-quotes').style.display = isAlreadyCovered ? 'none' : 'block';
+    document.getElementById('v4-lockin-text-covered').style.display = isAlreadyCovered ? 'block' : 'none';
     container.appendChild(needsQuotes);
     needsQuotes.style.display = 'block';
     needsQuotes.scrollIntoView({behavior:'smooth',block:'center'});
@@ -4467,6 +4478,8 @@ function v4ResetAllRebuttals() {
   document.getElementById('v4-what-to-expect-one').style.display = 'none';
   document.getElementById('v4-what-to-expect-more').style.display = 'none';
   document.getElementById('v4-who-in-charge').style.display = 'none';
+  document.getElementById('v4-lockin-text-quotes').style.display = 'block';
+  document.getElementById('v4-lockin-text-covered').style.display = 'none';
   var pOne = document.getElementById('v4-policy-btn-one');
   var pMore = document.getElementById('v4-policy-btn-more');
   if (pOne) pOne.classList.remove('active');
