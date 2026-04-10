@@ -4539,6 +4539,16 @@ function handleV4PolicyCount(type) {
   if (isAlreadyCovered) {
     document.getElementById('v4-what-to-expect-one').style.display = 'none';
     document.getElementById('v4-what-to-expect-more').style.display = 'none';
+    // Move confirm details into v4-needs-quotes before who-in-charge
+    var nq = document.getElementById('v4-needs-quotes');
+    var whoCard = document.getElementById('v4-who-in-charge');
+    var confirmCard = document.getElementById('v4-confirm-details-quotes');
+    if (type === 'one') {
+      nq.insertBefore(confirmCard, whoCard);
+      confirmCard.style.display = 'block';
+    } else {
+      confirmCard.style.display = 'none';
+    }
     document.getElementById('v4-who-in-charge').style.display = 'block';
   } else {
     document.getElementById('v4-who-in-charge').style.display = 'none';
