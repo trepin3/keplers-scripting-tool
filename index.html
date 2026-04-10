@@ -2709,7 +2709,7 @@ body.edit-mode .fill-field {
         </div>
         <div class="coaching-tip"><strong>TIP:</strong> Run through their existing coverage to find gaps, then transition to the transfer.</div>
         <div class="coverage-toggle-group" style="margin-top:14px;flex-wrap:wrap;">
-          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowConfirmDetails()">&#10003; Back on Track</button>
+          <button class="coverage-toggle" style="flex:1 1 100%;border-color:var(--success);color:var(--success);" onclick="v4ShowLockIn()">&#10003; Back on Track</button>
           <button class="coverage-toggle" onclick="v4ShowRebuttal('send-info')" style="flex:1 1 45%;">Send Info</button>
           <button class="coverage-toggle" onclick="v4ShowRebuttal('talk-spouse')" style="flex:1 1 45%;">Talk to Spouse</button>
           <button class="coverage-toggle" onclick="v4ShowRebuttal('how-long')" style="flex:1 1 45%;">How Long?</button>
@@ -4423,15 +4423,35 @@ function v4HandleSkeptical() {
   el.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
+function v4ShowLockIn() {
+  var container = document.getElementById('v4-rebuttal-container');
+  var needsQuotes = document.getElementById('v4-needs-quotes');
+  var coveredBtn = document.getElementById('v4-no-btn-covered');
+  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  document.getElementById('v4-lockin-text-quotes').style.display = isAlreadyCovered ? 'none' : 'block';
+  document.getElementById('v4-lockin-text-covered').style.display = isAlreadyCovered ? 'block' : 'none';
+  container.appendChild(needsQuotes);
+  needsQuotes.style.display = 'block';
+  needsQuotes.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
 function v4ShowConfirmDetails() {
   var container = document.getElementById('v4-rebuttal-container');
   var needsQuotes = document.getElementById('v4-needs-quotes');
-  // If Lock In card isn't visible yet (Already Covered path), show it first
-  if (needsQuotes.style.display === 'none' || needsQuotes.style.display === '') {
-    var coveredBtn = document.getElementById('v4-no-btn-covered');
-    var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
-    document.getElementById('v4-lockin-text-quotes').style.display = isAlreadyCovered ? 'none' : 'block';
-    document.getElementById('v4-lockin-text-covered').style.display = isAlreadyCovered ? 'block' : 'none';
+  var coveredBtn = document.getElementById('v4-no-btn-covered');
+  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  // Already Covered path (non-taken-care-of rebuttals): show What to Expect
+  if (isAlreadyCovered && (needsQuotes.style.display === 'none' || needsQuotes.style.display === '')) {
+    document.getElementById('v4-lockin-text-quotes').style.display = 'none';
+    document.getElementById('v4-lockin-text-covered').style.display = 'block';
+    container.appendChild(needsQuotes);
+    needsQuotes.style.display = 'block';
+    document.getElementById('v4-what-to-expect-one').style.display = 'block';
+    document.getElementById('v4-what-to-expect-one').scrollIntoView({behavior:'smooth',block:'center'});
+  } else if (needsQuotes.style.display === 'none' || needsQuotes.style.display === '') {
+    // Needs Quotes path: show Lock In
+    document.getElementById('v4-lockin-text-quotes').style.display = 'block';
+    document.getElementById('v4-lockin-text-covered').style.display = 'none';
     container.appendChild(needsQuotes);
     needsQuotes.style.display = 'block';
     needsQuotes.scrollIntoView({behavior:'smooth',block:'center'});
