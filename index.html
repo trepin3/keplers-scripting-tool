@@ -2523,6 +2523,110 @@ body.edit-mode .fill-field {
           oninput="kepfeSetBeneficiary(this.value)">
       </div>
 
+      <!-- V4 Needs Analysis cards (shown when Who is in Charge is present) -->
+      <div id="v4-needs-analysis-cards" style="display:none;">
+
+        <!-- Written Plans -->
+        <div class="card">
+          <div class="card-header">Written Plans</div>
+          <div class="script-text">
+            <strong>Do you have any written plans for <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> to follow one day?</strong>
+          </div>
+          <div class="direction mt-8"><em>[Yes / No &mdash; note their answer]</em></div>
+        </div>
+
+        <!-- Burial or Cremation -->
+        <div class="card">
+          <div class="card-header">Burial or Cremation</div>
+          <div class="script-text">
+            <strong>And did you want a burial or a cremation?</strong>
+          </div>
+        </div>
+        <div class="coverage-toggle-group">
+          <button class="coverage-toggle" id="v4-btn-burial" onclick="showV4Coverage('burial')">Burial</button>
+          <button class="coverage-toggle" id="v4-btn-cremation" onclick="showV4Coverage('cremation')">Cremation</button>
+        </div>
+
+        <!-- Cost Awareness -->
+        <div class="card">
+          <div class="card-header">Cost Awareness (Contrast Anchoring)</div>
+          <div class="script-text">
+            <strong>Do you know how much that costs as of today?</strong>
+          </div>
+          <div id="v4-cost-default" class="direction mt-8">
+            <em>[Wait for their answer]</em><br>
+            <strong>Anchor high:</strong> &ldquo;Most people are shocked &mdash; the national average for a funeral right now is between $10,000 and $20,000. And that number goes up every year.&rdquo;
+          </div>
+          <div id="v4-cost-cremation" style="display:none;margin-top:8px;">
+            <div class="card-header" style="font-size:12px;margin-bottom:4px;">Cremation Selected</div>
+            <div class="script-text">
+              Even with cremation, people are paying between $3,000 and $9,000 once you factor in the urn, memorial service, and everything the family wants to do. It adds up fast.
+            </div>
+          </div>
+          <div id="v4-cost-burial" style="display:none;margin-top:8px;">
+            <div class="card-header" style="font-size:12px;margin-bottom:4px;">Burial Selected</div>
+            <div class="script-text">
+              With a burial, you&rsquo;re looking at $12,000 to $20,000 minimum &mdash; the plot, the casket, the headstone, the service, transportation. Most families don&rsquo;t realize how fast it adds up.
+            </div>
+          </div>
+          <div class="coaching-tip"><strong>Contrast principle:</strong> Anchor the high number first. When your quote comes in at $30&ndash;80/month later, it feels tiny by comparison.</div>
+        </div>
+
+        <!-- Immediate Funds -->
+        <div class="card" style="border-left: 4px solid var(--danger);">
+          <div class="card-header">Immediate Funds</div>
+          <div class="script-text">
+            <strong>Now if something happened to you this morning &mdash; does <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> have $15,000 or more sitting in the bank, immediately available, to handle all of this?</strong>
+          </div>
+          <div class="direction mt-8"><em>[Almost always &ldquo;no.&rdquo; Let the silence sit.]</em></div>
+          <div class="coaching-tip"><strong>Loss aversion:</strong> Making the financial gap concrete and immediate. The specific dollar amount + &ldquo;this morning&rdquo; creates visceral urgency.</div>
+        </div>
+
+        <!-- Difficulty Scale -->
+        <div class="card">
+          <div class="card-header">Difficulty Scale</div>
+          <div class="script-text">
+            On a scale of 1&ndash;5, five being extremely difficult, one being so easy they could do it in their sleep &mdash;
+            <br><br>
+            <strong>How difficult would it be for <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> to handle everything if something happened this morning?</strong>
+          </div>
+          <div style="display:flex;justify-content:center;gap:16px;margin-top:14px;">
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">1</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">2</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">3</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">4</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">5</span>
+          </div>
+        </div>
+
+        <!-- Importance Scale -->
+        <div class="card">
+          <div class="card-header">Importance Scale</div>
+          <div class="script-text">
+            And on a scale of 1&ndash;5, one being you don&rsquo;t care at all, five being very important &mdash;
+            <br><br>
+            <strong>How important is it to you to make sure <span class="fill-field" data-field="beneficiary" onclick="editField(this)">Beneficiary</span> never has to deal with any of this?</strong>
+          </div>
+          <div style="display:flex;justify-content:center;gap:16px;margin-top:14px;">
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">1</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">2</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">3</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">4</span>
+            <span class="coverage-toggle" onclick="this.classList.toggle('active')" style="min-width:40px;text-align:center;">5</span>
+          </div>
+        </div>
+
+        <!-- Trial Close -->
+        <div class="card" style="border-left: 4px solid var(--success);">
+          <div class="card-header">Trial Close</div>
+          <div class="script-text">
+            <strong><span class="fill-field" data-field="name" onclick="editField(this)">Name</span>, based on everything you just told me &mdash; is there any reason you wouldn&rsquo;t want to at least see what&rsquo;s available to get this completely handled today?</strong>
+          </div>
+          <div class="coaching-tip"><strong>Commitment escalation:</strong> After giving you 4s and 5s on difficulty and importance, saying &ldquo;no&rdquo; here creates cognitive dissonance. They&rsquo;ve already told you this matters.</div>
+        </div>
+
+      </div><!-- /v4-needs-analysis-cards -->
+
     </div><!-- /v4-needs-quotes -->
 
     <div id="v4-rebuttal-container">
@@ -4530,6 +4634,14 @@ function v4ShowRebuttal(type) {
   }
 }
 
+function showV4Coverage(type) {
+  document.getElementById('v4-cost-default').style.display = 'none';
+  document.getElementById('v4-cost-cremation').style.display = type === 'cremation' ? 'block' : 'none';
+  document.getElementById('v4-cost-burial').style.display = type === 'burial' ? 'block' : 'none';
+  document.getElementById('v4-btn-cremation').classList.toggle('active', type === 'cremation');
+  document.getElementById('v4-btn-burial').classList.toggle('active', type === 'burial');
+}
+
 function handleV4PolicyCount(type) {
   document.getElementById('v4-policy-btn-one').classList.toggle('active', type === 'one');
   document.getElementById('v4-policy-btn-more').classList.toggle('active', type === 'more');
@@ -4554,8 +4666,10 @@ function handleV4PolicyCount(type) {
       confirmCard.style.display = 'none';
     }
     document.getElementById('v4-who-in-charge').style.display = 'block';
+    document.getElementById('v4-needs-analysis-cards').style.display = 'block';
   } else {
     document.getElementById('v4-who-in-charge').style.display = 'none';
+    document.getElementById('v4-needs-analysis-cards').style.display = 'none';
     // Make sure What to Expect cards are inside v4-needs-quotes
     var nq = document.getElementById('v4-needs-quotes');
     var wteOne = document.getElementById('v4-what-to-expect-one');
@@ -4581,6 +4695,7 @@ function v4ResetAllRebuttals() {
   document.getElementById('v4-what-to-expect-one').style.display = 'none';
   document.getElementById('v4-what-to-expect-more').style.display = 'none';
   document.getElementById('v4-who-in-charge').style.display = 'none';
+  document.getElementById('v4-needs-analysis-cards').style.display = 'none';
   document.getElementById('v4-lockin-text-quotes').style.display = 'block';
   document.getElementById('v4-lockin-text-covered').style.display = 'none';
   var pOne = document.getElementById('v4-policy-btn-one');
