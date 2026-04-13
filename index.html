@@ -4671,18 +4671,21 @@ function handleV4PolicyCount(type) {
     var wteMoreCheck = document.getElementById('v4-what-to-expect-more');
     if (wteOneCheck.parentNode === nqCheck) wteOneCheck.style.display = 'none';
     if (wteMoreCheck.parentNode === nqCheck) wteMoreCheck.style.display = 'none';
-    // Move confirm details into v4-needs-quotes before who-in-charge
-    var nq = document.getElementById('v4-needs-quotes');
-    var whoCard = document.getElementById('v4-who-in-charge');
+    // Move cards into rebuttal container after Lock In / Spouse
+    var container = document.getElementById('v4-rebuttal-container');
     var confirmCard = document.getElementById('v4-confirm-details-quotes');
+    var whoCard = document.getElementById('v4-who-in-charge');
+    var needsCards = document.getElementById('v4-needs-analysis-cards');
     if (type === 'one') {
-      nq.insertBefore(confirmCard, whoCard);
+      container.appendChild(confirmCard);
       confirmCard.style.display = 'block';
     } else {
       confirmCard.style.display = 'none';
     }
-    document.getElementById('v4-who-in-charge').style.display = 'block';
-    document.getElementById('v4-needs-analysis-cards').style.display = 'block';
+    container.appendChild(whoCard);
+    container.appendChild(needsCards);
+    whoCard.style.display = 'block';
+    needsCards.style.display = 'block';
   } else {
     document.getElementById('v4-who-in-charge').style.display = 'none';
     document.getElementById('v4-needs-analysis-cards').style.display = 'none';
