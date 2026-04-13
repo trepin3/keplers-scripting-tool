@@ -2443,6 +2443,16 @@ body.edit-mode .fill-field {
       <div class="coaching-tip">Get 3 micro-yeses in a row. Each &ldquo;yes&rdquo; builds compliance momentum (consistency principle).</div>
     </div>
 
+    <!-- Coverage Status (shown after Yes → Confirm Details) -->
+    <div class="card" id="v4-yes-coverage-status" style="display:none;">
+      <div class="script-text">
+        Is that something you already got taken care of or do you still need the quotes?
+      </div>
+      <div class="coverage-toggle-group" style="margin-top:14px;">
+        <button class="coverage-toggle" id="v4-yes-btn-covered" onclick="handleV4YesPath('covered')">Already Covered</button>
+        <button class="coverage-toggle" id="v4-yes-btn-quotes" onclick="handleV4YesPath('quotes')">Needs Quotes</button>
+      </div>
+    </div>
 
     <!-- Needs Quotes (shown on No → Needs Quotes) -->
     <div id="v4-needs-quotes" style="display:none;">
@@ -4500,18 +4510,21 @@ function handleV4OpenerResponse(type) {
   document.getElementById('v4-opener-yes-card').style.display = type === 'yes' ? 'block' : 'none';
   document.getElementById('v4-opener-no-card').style.display = type === 'no' ? 'block' : 'none';
   document.getElementById('v4-confirm-details').style.display = type === 'yes' ? 'block' : 'none';
-  // Reset No sub-paths when switching
+  document.getElementById('v4-yes-coverage-status').style.display = type === 'yes' ? 'block' : 'none';
+  // Reset all sub-paths when switching
+  v4ResetAllRebuttals();
   document.getElementById('v4-reb-taken-care-of').style.display = 'none';
   document.getElementById('v4-needs-quotes').style.display = 'none';
   if (document.getElementById('v4-no-btn-covered')) document.getElementById('v4-no-btn-covered').classList.remove('active');
   if (document.getElementById('v4-no-btn-quotes')) document.getElementById('v4-no-btn-quotes').classList.remove('active');
+  if (document.getElementById('v4-yes-btn-covered')) document.getElementById('v4-yes-btn-covered').classList.remove('active');
+  if (document.getElementById('v4-yes-btn-quotes')) document.getElementById('v4-yes-btn-quotes').classList.remove('active');
 }
 
 function v4HandleSoundGood() {
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
-  var coveredBtn = document.getElementById('v4-no-btn-covered');
-  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  var isAlreadyCovered = v4IsAlreadyCovered();
   // Hide skeptical flow cards that appeared after What to Expect
   document.getElementById('v4-skeptical').style.display = 'none';
   if (!isAlreadyCovered) {
@@ -4563,8 +4576,7 @@ function v4HandleSoundGood() {
 function v4HandleSkeptical() {
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
-  var coveredBtn = document.getElementById('v4-no-btn-covered');
-  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  var isAlreadyCovered = v4IsAlreadyCovered();
   if (isAlreadyCovered) {
     document.getElementById('v4-needs-quotes').style.display = 'none';
   } else {
@@ -4582,8 +4594,7 @@ function v4HandleSkeptical() {
 function v4ShowLockIn() {
   var container = document.getElementById('v4-rebuttal-container');
   var needsQuotes = document.getElementById('v4-needs-quotes');
-  var coveredBtn = document.getElementById('v4-no-btn-covered');
-  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  var isAlreadyCovered = v4IsAlreadyCovered();
   document.getElementById('v4-lockin-text-quotes').style.display = isAlreadyCovered ? 'none' : 'block';
   document.getElementById('v4-lockin-text-covered').style.display = isAlreadyCovered ? 'block' : 'none';
   container.appendChild(needsQuotes);
@@ -4594,8 +4605,7 @@ function v4ShowLockIn() {
 function v4ShowConfirmDetails() {
   var container = document.getElementById('v4-rebuttal-container');
   var needsQuotes = document.getElementById('v4-needs-quotes');
-  var coveredBtn = document.getElementById('v4-no-btn-covered');
-  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  var isAlreadyCovered = v4IsAlreadyCovered();
   // Already Covered path (non-taken-care-of rebuttals)
   if (isAlreadyCovered && v4WteShown) {
     // Already saw What to Expect, go straight to Lock In
@@ -4662,8 +4672,7 @@ function handleV4PolicyCount(type) {
   document.getElementById('v4-policy-btn-one').classList.toggle('active', type === 'one');
   document.getElementById('v4-policy-btn-more').classList.toggle('active', type === 'more');
   document.getElementById('v4-spouse-card').style.display = type === 'more' ? 'block' : 'none';
-  var coveredBtn = document.getElementById('v4-no-btn-covered');
-  var isAlreadyCovered = coveredBtn && coveredBtn.classList.contains('active');
+  var isAlreadyCovered = v4IsAlreadyCovered();
   if (isAlreadyCovered) {
     // Only hide What to Expect if it's inside v4-needs-quotes (not shown standalone earlier)
     var nqCheck = document.getElementById('v4-needs-quotes');
@@ -4701,6 +4710,26 @@ function handleV4PolicyCount(type) {
 }
 
 var v4WteShown = false;
+
+function v4IsAlreadyCovered() {
+  var noBtn = document.getElementById('v4-no-btn-covered');
+  var yesBtn = document.getElementById('v4-yes-btn-covered');
+  return (noBtn && noBtn.classList.contains('active')) || (yesBtn && yesBtn.classList.contains('active'));
+}
+
+function handleV4YesPath(path) {
+  document.getElementById('v4-yes-btn-covered').classList.toggle('active', path === 'covered');
+  document.getElementById('v4-yes-btn-quotes').classList.toggle('active', path === 'quotes');
+  v4ResetAllRebuttals();
+  document.getElementById('v4-needs-quotes').style.display = path === 'quotes' ? 'block' : 'none';
+  if (path === 'covered') {
+    var takenCareOf = document.getElementById('v4-reb-taken-care-of');
+    var container = document.getElementById('v4-rebuttal-container');
+    container.appendChild(takenCareOf);
+    takenCareOf.style.display = 'block';
+    takenCareOf.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
 
 function v4ResetAllRebuttals() {
   v4WteShown = false;
