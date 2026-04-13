@@ -4549,9 +4549,13 @@ function v4HandleSoundGood() {
     var el = document.getElementById('v4-confirm-details-quotes');
     container.appendChild(el);
     el.style.display = 'block';
-    // Show needs analysis cards after confirm details on Needs Quotes path
-    document.getElementById('v4-who-in-charge').style.display = 'block';
-    document.getElementById('v4-needs-analysis-cards').style.display = 'block';
+    // Move needs analysis cards after confirm details in rebuttal container
+    var whoCard = document.getElementById('v4-who-in-charge');
+    var needsCards = document.getElementById('v4-needs-analysis-cards');
+    container.appendChild(whoCard);
+    container.appendChild(needsCards);
+    whoCard.style.display = 'block';
+    needsCards.style.display = 'block';
     el.scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
@@ -4618,9 +4622,13 @@ function v4ShowConfirmDetails() {
     var el = document.getElementById('v4-confirm-details-quotes');
     container.appendChild(el);
     el.style.display = 'block';
-    // Show needs analysis cards after confirm details
-    document.getElementById('v4-who-in-charge').style.display = 'block';
-    document.getElementById('v4-needs-analysis-cards').style.display = 'block';
+    // Move needs analysis cards after confirm details in rebuttal container
+    var whoCard = document.getElementById('v4-who-in-charge');
+    var needsCards = document.getElementById('v4-needs-analysis-cards');
+    container.appendChild(whoCard);
+    container.appendChild(needsCards);
+    whoCard.style.display = 'block';
+    needsCards.style.display = 'block';
     el.scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
