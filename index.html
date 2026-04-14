@@ -631,6 +631,19 @@ body {
 .script-version-toggle.tips-active .toggle-dot { background: var(--success); }
 .tips-hidden .coaching-tip { display: none !important; }
 
+/* HOVER PREVIEW */
+.hover-preview {
+  display:none; position:fixed; z-index:300; max-width:340px; max-height:260px;
+  overflow-y:auto; background:var(--card); border:1.5px solid var(--primary);
+  border-radius:var(--radius); padding:14px 16px; box-shadow:var(--shadow-lg);
+  font-size:14px; line-height:1.5; pointer-events:none; opacity:0.95;
+}
+.hover-preview .card-header { font-size:11px; margin-bottom:6px; }
+.hover-preview .script-text { font-size:14px; line-height:1.5; }
+.hover-preview .coaching-tip { display:none; }
+.hover-preview .coverage-toggle-group { display:none; }
+@media (hover:none) { .hover-preview { display:none !important; } }
+
 /* INOCULATION CARD */
 .inoculation-card {
   background: linear-gradient(135deg, rgba(0,113,227,0.06), rgba(48,209,88,0.06));
@@ -3893,6 +3906,8 @@ body.edit-mode .fill-field {
 </div>
 
 <!-- INPUT MODAL -->
+<div class="hover-preview" id="hoverPreview"></div>
+
 <div class="input-modal" id="inputModal">
   <div class="input-card">
     <label id="inputLabel">Enter value</label>
@@ -5747,6 +5762,64 @@ async function saveAndPush() {
 }
 
 // ============================================================
+// ============================================================
+// HOVER PREVIEW
+// ============================================================
+(function() {
+  var preview = document.getElementById('hoverPreview');
+  if (!preview) return;
+
+  // Map onclick patterns to target card IDs
+  var previewMap = {
+    "v4ShowRebuttal('send-info')": 'v4-reb-send-info',
+    "v4ShowRebuttal('talk-spouse')": 'v4-reb-talk-spouse',
+    "v4ShowRebuttal('how-long')": 'v4-reb-how-long',
+    "v4ShowRebuttal('no-trust')": 'v4-reb-no-trust',
+    "v4ShowRebuttal('just-number')": 'v4-reb-just-number',
+    "v4ShowRebuttal('cant-afford')": 'v4-reb-cant-afford',
+    "v4ShowRebuttal('already-insured')": 'v4-reb-already-insured',
+    "v4ShowRebuttal('taken-care-of')": 'v4-reb-taken-care-of',
+    "v4ShowConfirmDetails()": 'v4-confirm-details-quotes',
+    "v4ShowLockIn()": 'v4-reb-taken-care-of',
+    "handleV4NoPath('covered')": 'v4-reb-taken-care-of',
+    "handleV4YesPath('covered')": 'v4-reb-taken-care-of',
+  };
+
+  document.addEventListener('mouseenter', function(e) {
+    var btn = e.target.closest('.coverage-toggle');
+    if (!btn) return;
+    var onclick = btn.getAttribute('onclick');
+    if (!onclick) return;
+    var targetId = previewMap[onclick.trim()];
+    if (!targetId) return;
+    var target = document.getElementById(targetId);
+    if (!target) return;
+    // Clone content for preview
+    var content = target.cloneNode(true);
+    content.style.display = 'block';
+    content.removeAttribute('id');
+    preview.innerHTML = '';
+    preview.appendChild(content);
+    // Position near button
+    var rect = btn.getBoundingClientRect();
+    var previewH = 260;
+    var top = rect.top - previewH - 8;
+    if (top < 10) top = rect.bottom + 8;
+    var left = rect.left;
+    if (left + 340 > window.innerWidth) left = window.innerWidth - 350;
+    if (left < 10) left = 10;
+    preview.style.top = top + 'px';
+    preview.style.left = left + 'px';
+    preview.style.display = 'block';
+  }, true);
+
+  document.addEventListener('mouseleave', function(e) {
+    var btn = e.target.closest('.coverage-toggle');
+    if (!btn) return;
+    preview.style.display = 'none';
+  }, true);
+})();
+
 // INIT
 // ============================================================
 init();
