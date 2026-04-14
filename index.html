@@ -5755,6 +5755,7 @@ async function saveAndPush() {
 (function() {
   var hoverTarget = null;
   var hoverBtn = null;
+  var clicked = false;
 
   var previewMap = {
     // Opener buttons
@@ -5805,16 +5806,27 @@ async function saveAndPush() {
     if (!target) return;
     // Skip if card is already visible
     if (target.style.display === 'block') return;
+    clicked = false;
     hoverBtn = btn;
     hoverTarget = target;
     btn.classList.add('active');
     target.style.display = 'block';
   }, true);
 
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.coverage-toggle');
+    if (!btn || btn !== hoverBtn) return;
+    // Mark as clicked so mouseleave won't undo it
+    clicked = true;
+    hoverTarget = null;
+    hoverBtn = null;
+  }, true);
+
   document.addEventListener('mouseleave', function(e) {
     if (isTouchDevice()) return;
     var btn = e.target.closest('.coverage-toggle');
     if (!btn || btn !== hoverBtn) return;
+    if (clicked) { clicked = false; hoverBtn = null; hoverTarget = null; return; }
     if (hoverTarget) {
       hoverTarget.style.display = 'none';
       hoverTarget = null;
