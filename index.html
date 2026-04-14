@@ -5757,6 +5757,22 @@ async function saveAndPush() {
   var hoverBtn = null;
 
   var previewMap = {
+    // Opener buttons
+    "handleV4OpenerResponse('yes')": 'v4-opener-yes-card',
+    "handleV4OpenerResponse('no')": 'v4-opener-no-card',
+    // No path buttons
+    "handleV4NoPath('covered')": 'v4-reb-taken-care-of',
+    "handleV4NoPath('quotes')": 'v4-needs-quotes',
+    // Yes path buttons
+    "handleV4YesPath('covered')": 'v4-reb-taken-care-of',
+    "handleV4YesPath('quotes')": 'v4-needs-quotes',
+    // Policy count
+    "handleV4PolicyCount('one')": 'v4-what-to-expect-one',
+    "handleV4PolicyCount('more')": 'v4-spouse-card',
+    // Sounds Good / Skeptical
+    "v4HandleSoundGood()": 'v4-confirm-details-quotes',
+    "v4HandleSkeptical()": 'v4-skeptical',
+    // Rebuttal buttons
     "v4ShowRebuttal('send-info')": 'v4-reb-send-info',
     "v4ShowRebuttal('talk-spouse')": 'v4-reb-talk-spouse',
     "v4ShowRebuttal('how-long')": 'v4-reb-how-long',
@@ -5765,10 +5781,12 @@ async function saveAndPush() {
     "v4ShowRebuttal('cant-afford')": 'v4-reb-cant-afford',
     "v4ShowRebuttal('already-insured')": 'v4-reb-already-insured',
     "v4ShowRebuttal('taken-care-of')": 'v4-reb-taken-care-of',
+    // Back on Track
     "v4ShowConfirmDetails()": 'v4-confirm-details-quotes',
-    "v4ShowLockIn()": 'v4-reb-taken-care-of',
-    "handleV4NoPath('covered')": 'v4-reb-taken-care-of',
-    "handleV4YesPath('covered')": 'v4-reb-taken-care-of',
+    "v4ShowLockIn()": 'v4-needs-quotes',
+    // Burial / Cremation
+    "showV4Coverage('burial')": 'v4-cost-burial',
+    "showV4Coverage('cremation')": 'v4-cost-cremation',
   };
 
   function isTouchDevice() {
