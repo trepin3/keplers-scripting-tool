@@ -5855,6 +5855,21 @@ async function saveAndPush() {
               }
             });
           }
+          // If deselecting an opener button, hide its downstream cards
+          if (targetId === 'v4-opener-yes-card') {
+            document.getElementById('v4-confirm-details').style.display = 'none';
+            document.getElementById('v4-yes-coverage-status').style.display = 'none';
+            var yesCov = document.getElementById('v4-yes-btn-covered');
+            var yesQuo = document.getElementById('v4-yes-btn-quotes');
+            if (yesCov) yesCov.classList.remove('active');
+            if (yesQuo) yesQuo.classList.remove('active');
+          }
+          if (targetId === 'v4-opener-no-card') {
+            var noCov = document.getElementById('v4-no-btn-covered');
+            var noQuo = document.getElementById('v4-no-btn-quotes');
+            if (noCov) noCov.classList.remove('active');
+            if (noQuo) noQuo.classList.remove('active');
+          }
           // Also hide/reset needs-quotes and its children
           var nq = document.getElementById('v4-needs-quotes');
           if (nq && nq.style.display === 'block') {
@@ -5874,6 +5889,8 @@ async function saveAndPush() {
           document.getElementById('v4-needs-analysis-cards').style.display = 'none';
           document.getElementById('v4-confirm-details-quotes').style.display = 'none';
           document.getElementById('v4-skeptical').style.display = 'none';
+          document.querySelectorAll('[id^="v4-reb-"]').forEach(function(el){el.style.display='none';});
+          document.querySelectorAll('.v4-reb-clone').forEach(function(el){el.remove();});
           btn.classList.remove('active');
           window.v4SkipClick = true;
           setTimeout(function(){ window.v4SkipClick = false; }, 0);
