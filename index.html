@@ -4534,6 +4534,7 @@ function handleV3RequestResponse(type) {
 }
 
 function handleV4OpenerResponse(type) {
+  if (window.v4SkipClick) return;
   document.getElementById('v4-opener-btn-yes').classList.toggle('active', type === 'yes');
   document.getElementById('v4-opener-btn-no').classList.toggle('active', type === 'no');
   document.getElementById('v4-opener-yes-card').style.display = type === 'yes' ? 'block' : 'none';
@@ -4551,6 +4552,7 @@ function handleV4OpenerResponse(type) {
 }
 
 function v4HandleSoundGood() {
+  if (window.v4SkipClick) return;
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
   var isAlreadyCovered = v4IsAlreadyCovered();
@@ -4603,6 +4605,7 @@ function v4HandleSoundGood() {
 }
 
 function v4HandleSkeptical() {
+  if (window.v4SkipClick) return;
   document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.add('active');});
   document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
   var isAlreadyCovered = v4IsAlreadyCovered();
@@ -4621,6 +4624,7 @@ function v4HandleSkeptical() {
 }
 
 function v4ShowLockIn() {
+  if (window.v4SkipClick) return;
   var container = document.getElementById('v4-rebuttal-container');
   var needsQuotes = document.getElementById('v4-needs-quotes');
   var isAlreadyCovered = v4IsAlreadyCovered();
@@ -4632,6 +4636,7 @@ function v4ShowLockIn() {
 }
 
 function v4ShowConfirmDetails() {
+  if (window.v4SkipClick) return;
   var container = document.getElementById('v4-rebuttal-container');
   var needsQuotes = document.getElementById('v4-needs-quotes');
   var isAlreadyCovered = v4IsAlreadyCovered();
@@ -4673,6 +4678,7 @@ function v4ShowConfirmDetails() {
 }
 
 function v4ShowRebuttal(type) {
+  if (window.v4SkipClick) return;
   var el = document.getElementById('v4-reb-' + type);
   var container = document.getElementById('v4-rebuttal-container');
   if (el.style.display === 'block') {
@@ -4690,6 +4696,7 @@ function v4ShowRebuttal(type) {
 }
 
 function showV4Coverage(type) {
+  if (window.v4SkipClick) return;
   document.getElementById('v4-cost-default').style.display = 'none';
   document.getElementById('v4-cost-cremation').style.display = type === 'cremation' ? 'block' : 'none';
   document.getElementById('v4-cost-burial').style.display = type === 'burial' ? 'block' : 'none';
@@ -4698,6 +4705,7 @@ function showV4Coverage(type) {
 }
 
 function handleV4PolicyCount(type) {
+  if (window.v4SkipClick) return;
   document.getElementById('v4-policy-btn-one').classList.toggle('active', type === 'one');
   document.getElementById('v4-policy-btn-more').classList.toggle('active', type === 'more');
   document.getElementById('v4-spouse-card').style.display = type === 'more' ? 'block' : 'none';
@@ -4747,6 +4755,7 @@ function v4IsAlreadyCovered() {
 }
 
 function handleV4YesPath(path) {
+  if (window.v4SkipClick) return;
   document.getElementById('v4-yes-btn-covered').classList.toggle('active', path === 'covered');
   document.getElementById('v4-yes-btn-quotes').classList.toggle('active', path === 'quotes');
   v4ResetAllRebuttals();
@@ -4781,6 +4790,7 @@ function v4ResetAllRebuttals() {
 }
 
 function handleV4NoPath(path) {
+  if (window.v4SkipClick) return;
   document.getElementById('v4-no-btn-covered').classList.toggle('active', path === 'covered');
   document.getElementById('v4-no-btn-quotes').classList.toggle('active', path === 'quotes');
   v4ResetAllRebuttals();
@@ -5756,6 +5766,7 @@ async function saveAndPush() {
   var hoverTarget = null;
   var hoverBtn = null;
   var clicked = false;
+  window.v4SkipClick = false;
 
   var previewMap = {
     // Opener buttons
@@ -5825,8 +5836,8 @@ async function saveAndPush() {
           var target = document.getElementById(targetId);
           if (target) target.style.display = 'none';
           btn.classList.remove('active');
-          e.stopImmediatePropagation();
-          e.preventDefault();
+          window.v4SkipClick = true;
+          setTimeout(function(){ window.v4SkipClick = false; }, 0);
           return;
         }
       }
