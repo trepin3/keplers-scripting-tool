@@ -5835,6 +5835,45 @@ async function saveAndPush() {
         if (targetId) {
           var target = document.getElementById(targetId);
           if (target) target.style.display = 'none';
+          // Hide everything that came after the target in the rebuttal container
+          var container = document.getElementById('v4-rebuttal-container');
+          if (container && target.parentNode) {
+            var parent = target.parentNode;
+            var found = false;
+            var toHide = [];
+            Array.from(parent.children).forEach(function(el) {
+              if (el === target) { found = true; return; }
+              if (found && el.style.display === 'block') {
+                toHide.push(el);
+              }
+            });
+            toHide.forEach(function(el) {
+              if (el.classList && el.classList.contains('v4-reb-clone')) {
+                el.remove();
+              } else {
+                el.style.display = 'none';
+              }
+            });
+          }
+          // Also hide/reset needs-quotes and its children
+          var nq = document.getElementById('v4-needs-quotes');
+          if (nq && nq.style.display === 'block') {
+            nq.style.display = 'none';
+          }
+          // Reset button states for child buttons
+          document.querySelectorAll('.v4-sg-btn').forEach(function(b){b.classList.remove('active');});
+          document.querySelectorAll('.v4-sb-btn').forEach(function(b){b.classList.remove('active');});
+          var pOne = document.getElementById('v4-policy-btn-one');
+          var pMore = document.getElementById('v4-policy-btn-more');
+          if (pOne) pOne.classList.remove('active');
+          if (pMore) pMore.classList.remove('active');
+          document.getElementById('v4-what-to-expect-one').style.display = 'none';
+          document.getElementById('v4-what-to-expect-more').style.display = 'none';
+          document.getElementById('v4-spouse-card').style.display = 'none';
+          document.getElementById('v4-who-in-charge').style.display = 'none';
+          document.getElementById('v4-needs-analysis-cards').style.display = 'none';
+          document.getElementById('v4-confirm-details-quotes').style.display = 'none';
+          document.getElementById('v4-skeptical').style.display = 'none';
           btn.classList.remove('active');
           window.v4SkipClick = true;
           setTimeout(function(){ window.v4SkipClick = false; }, 0);
