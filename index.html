@@ -5815,7 +5815,23 @@ async function saveAndPush() {
 
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('.coverage-toggle');
-    if (!btn || btn !== hoverBtn) return;
+    if (!btn) return;
+    // If button is already active and has a preview target, deselect it
+    if (btn !== hoverBtn && btn.classList.contains('active')) {
+      var onclick = btn.getAttribute('onclick');
+      if (onclick) {
+        var targetId = previewMap[onclick.trim()];
+        if (targetId) {
+          var target = document.getElementById(targetId);
+          if (target) target.style.display = 'none';
+          btn.classList.remove('active');
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return;
+        }
+      }
+    }
+    if (btn !== hoverBtn) return;
     // Mark as clicked so mouseleave won't undo it
     clicked = true;
     hoverTarget = null;
